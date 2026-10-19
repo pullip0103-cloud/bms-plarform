@@ -1,0 +1,72 @@
+rules_version = '2';
+
+// 기본 전부 거부(deny-all), region/hq에만 명시적으로 읽기 허용.
+// 모든 쓰기(생성/수정/삭제)는 서버(API Route)가 Admin SDK로만 수행하며,
+// 클라이언트가 Firestore에 직접 쓰는 경로는 없다 — 그래서 쓰기 규칙은
+// 전부 false로 막아 "클라이언트의 직접 수정"을 원천 차단한다 (2차 방어선).
+//
+// 지점(토큰) 경로는 Firebase Auth 세션이 없으므로 이 규칙의 대상이 아니다 —
+// 반드시 서버의 토큰 검증(resolveBranchContext)을 거쳐 Admin SDK로만 접근한다.
+function isSignedIn() {
+  return request.auth != null;
+}
+
+function profile() {
+  return get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data;
+}
+
+function isHq() {
+  return isSignedIn() && profile().role == 'hq';
+}
+
+function isRegionOf(regionId) {
+  return isSignedIn() && profile().role == 'region' && profile().regionId == regionId;
+}
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /profiles/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    match /regions/{regionId} {
+      allow read: if isHq() || isRegionOf(regionId);
+      allow write: if false;
+    }
+
+    match /branches/{branchId} {
+      allow read: if isHq() || (isSignedIn() && profile().role == 'region' && profile().regionId == resource.data.regionId);
+      allow write: if false;
+    }
+
+    match /branchTokens/{tokenId} {
+      // 지점 토큰은 클라이언트에서 절대 조회하지 않는다 (서버 Admin SDK 전용).
+      allow read, write: if false;
+    }
+
+    match /rounds/{roundId} {
+      allow read: if isHq() || isSignedIn();
+      allow write: if false;
+    }
+
+    match /directiveCodes/{codeId} {
+      allow read: if isHq() || isSignedIn();
+      allow write: if false;
+    }
+
+    // items: 핵심 정책
+    // hq: 전체 무조건 read (상태/지역 무관) — "본사는 항상 전체를 본다" 원칙
+    // region: 자기 소속 지점의 전체 상태 read (대기/완료 가리지 않음)
+    match /items/{itemId} {
+      allow read: if isHq() || isRegionOf(resource.data.regionId);
+      allow write: if false;
+    }
+
+    match /itemStatusLog/{logId} {
+      allow read: if isHq() || isSignedIn();
+      allow write: if false;
+    }
+  }
+}

@@ -1,0 +1,2613 @@
+{
+  "강원지역본부": [
+    {
+      "name": "신춘천",
+      "branchType": "지점",
+      "rawName": "신춘천지점"
+    },
+    {
+      "name": "철원",
+      "branchType": "지점",
+      "rawName": "철원지점"
+    },
+    {
+      "name": "홍천",
+      "branchType": "지점",
+      "rawName": "홍천지점"
+    },
+    {
+      "name": "속초",
+      "branchType": "지점",
+      "rawName": "속초지점"
+    },
+    {
+      "name": "신강릉",
+      "branchType": "지점",
+      "rawName": "신강릉지점"
+    },
+    {
+      "name": "평창",
+      "branchType": "지점",
+      "rawName": "평창지점"
+    },
+    {
+      "name": "영월",
+      "branchType": "지점",
+      "rawName": "영월지점"
+    },
+    {
+      "name": "춘천",
+      "branchType": "지점",
+      "rawName": "춘천지점"
+    },
+    {
+      "name": "강릉",
+      "branchType": "지점",
+      "rawName": "강릉지점"
+    },
+    {
+      "name": "동해삼척",
+      "branchType": "지점",
+      "rawName": "동해삼척지점"
+    },
+    {
+      "name": "원주",
+      "branchType": "지점",
+      "rawName": "원주지점"
+    },
+    {
+      "name": "태백",
+      "branchType": "지점",
+      "rawName": "태백지점"
+    },
+    {
+      "name": "만천",
+      "branchType": "대리점",
+      "rawName": "만천 대리점"
+    },
+    {
+      "name": "이사부",
+      "branchType": "대리점",
+      "rawName": "이사부대리점"
+    },
+    {
+      "name": "청초",
+      "branchType": "대리점",
+      "rawName": "청초대리점"
+    },
+    {
+      "name": "율곡",
+      "branchType": "대리점",
+      "rawName": "율곡대리점"
+    },
+    {
+      "name": "서원",
+      "branchType": "대리점",
+      "rawName": "서원대리점"
+    },
+    {
+      "name": "새천년",
+      "branchType": "미확인",
+      "rawName": "새천년"
+    },
+    {
+      "name": "엘리트",
+      "branchType": "미확인",
+      "rawName": "엘리트"
+    },
+    {
+      "name": "모아",
+      "branchType": "대리점",
+      "rawName": "모아대리점"
+    },
+    {
+      "name": "기평",
+      "branchType": "대리점",
+      "rawName": "기평대리점"
+    },
+    {
+      "name": "태봉",
+      "branchType": "대리점",
+      "rawName": "태봉대리점"
+    },
+    {
+      "name": "동계",
+      "branchType": "대리점",
+      "rawName": "동계대리점"
+    },
+    {
+      "name": "대석",
+      "branchType": "대리점",
+      "rawName": "대석 대리점"
+    },
+    {
+      "name": "봄내",
+      "branchType": "대리점",
+      "rawName": "봄내대리점"
+    }
+  ],
+  "경기지역본부": [
+    {
+      "name": "군포",
+      "branchType": "지점",
+      "rawName": "군포지점"
+    },
+    {
+      "name": "평촌",
+      "branchType": "지점",
+      "rawName": "평촌지점"
+    },
+    {
+      "name": "용인",
+      "branchType": "지점",
+      "rawName": "용인지점"
+    },
+    {
+      "name": "신갈",
+      "branchType": "지점",
+      "rawName": "신갈지점"
+    },
+    {
+      "name": "안양",
+      "branchType": "지점",
+      "rawName": "안양지점"
+    },
+    {
+      "name": "수원",
+      "branchType": "지점",
+      "rawName": "수원지점"
+    },
+    {
+      "name": "의왕",
+      "branchType": "지점",
+      "rawName": "의왕지점"
+    },
+    {
+      "name": "이천",
+      "branchType": "지점",
+      "rawName": "이천지점"
+    },
+    {
+      "name": "안중",
+      "branchType": "지점",
+      "rawName": "안중지점"
+    },
+    {
+      "name": "동수원",
+      "branchType": "미확인",
+      "rawName": "동수원"
+    },
+    {
+      "name": "동탄",
+      "branchType": "지점",
+      "rawName": "동탄지점"
+    },
+    {
+      "name": "동탄역",
+      "branchType": "지점",
+      "rawName": "동탄역지점"
+    },
+    {
+      "name": "수지",
+      "branchType": "지점",
+      "rawName": "수지지점"
+    },
+    {
+      "name": "발안",
+      "branchType": "지점",
+      "rawName": "발안지점"
+    },
+    {
+      "name": "평택",
+      "branchType": "지점",
+      "rawName": "평택지점"
+    },
+    {
+      "name": "명성",
+      "branchType": "미확인",
+      "rawName": "명성"
+    },
+    {
+      "name": "남태령",
+      "branchType": "미확인",
+      "rawName": "남태령"
+    },
+    {
+      "name": "안평",
+      "branchType": "미확인",
+      "rawName": "안평"
+    },
+    {
+      "name": "풍덕천",
+      "branchType": "미확인",
+      "rawName": "풍덕천"
+    },
+    {
+      "name": "효원",
+      "branchType": "미확인",
+      "rawName": "효원"
+    },
+    {
+      "name": "인덕원역",
+      "branchType": "대리점",
+      "rawName": "인덕원역대리점"
+    },
+    {
+      "name": "친절",
+      "branchType": "미확인",
+      "rawName": "친절"
+    },
+    {
+      "name": "동백",
+      "branchType": "대리점",
+      "rawName": "동백대리점"
+    },
+    {
+      "name": "강남대",
+      "branchType": "미확인",
+      "rawName": "강남대"
+    },
+    {
+      "name": "호매실",
+      "branchType": "미확인",
+      "rawName": "호매실"
+    },
+    {
+      "name": "영광제일",
+      "branchType": "미확인",
+      "rawName": "영광제일"
+    },
+    {
+      "name": "성대",
+      "branchType": "미확인",
+      "rawName": "성대"
+    },
+    {
+      "name": "우리",
+      "branchType": "미확인",
+      "rawName": "우리"
+    },
+    {
+      "name": "여흥",
+      "branchType": "대리점",
+      "rawName": "여흥대리점"
+    },
+    {
+      "name": "남양",
+      "branchType": "미확인",
+      "rawName": "남양"
+    },
+    {
+      "name": "평촌중앙",
+      "branchType": "미확인",
+      "rawName": "평촌중앙"
+    },
+    {
+      "name": "서정",
+      "branchType": "미확인",
+      "rawName": "서정"
+    },
+    {
+      "name": "청솔",
+      "branchType": "미확인",
+      "rawName": "청솔"
+    },
+    {
+      "name": "원천",
+      "branchType": "대리점",
+      "rawName": "원천대리점"
+    },
+    {
+      "name": "한일",
+      "branchType": "대리점",
+      "rawName": "한일대리점"
+    },
+    {
+      "name": "신평",
+      "branchType": "대리점",
+      "rawName": "신평대리점"
+    },
+    {
+      "name": "노벨",
+      "branchType": "미확인",
+      "rawName": "노벨"
+    },
+    {
+      "name": "행복한",
+      "branchType": "미확인",
+      "rawName": "행복한"
+    },
+    {
+      "name": "산본",
+      "branchType": "미확인",
+      "rawName": "산본"
+    },
+    {
+      "name": "석수",
+      "branchType": "대리점",
+      "rawName": "석수대리점"
+    },
+    {
+      "name": "박달",
+      "branchType": "미확인",
+      "rawName": "박달"
+    },
+    {
+      "name": "봉담",
+      "branchType": "미확인",
+      "rawName": "봉담"
+    },
+    {
+      "name": "구성",
+      "branchType": "미확인",
+      "rawName": "구성"
+    },
+    {
+      "name": "병점",
+      "branchType": "미확인",
+      "rawName": "병점"
+    },
+    {
+      "name": "비룡",
+      "branchType": "대리점",
+      "rawName": "비룡대리점"
+    },
+    {
+      "name": "화서",
+      "branchType": "미확인",
+      "rawName": "화서"
+    }
+  ],
+  "경남지역본부": [
+    {
+      "name": "ㅇㅇ",
+      "branchType": "지점",
+      "rawName": "ㅇㅇ지점"
+    },
+    {
+      "name": "김해",
+      "branchType": "지점",
+      "rawName": "김해지점"
+    },
+    {
+      "name": "양산",
+      "branchType": "지점",
+      "rawName": "양산지점"
+    },
+    {
+      "name": "웅상",
+      "branchType": "지점",
+      "rawName": "웅상지점"
+    },
+    {
+      "name": "밀양",
+      "branchType": "지점",
+      "rawName": "밀양지점"
+    },
+    {
+      "name": "김해서부",
+      "branchType": "미확인",
+      "rawName": "김해서부"
+    },
+    {
+      "name": "마산",
+      "branchType": "지점",
+      "rawName": "마산지점"
+    },
+    {
+      "name": "창녕",
+      "branchType": "지점",
+      "rawName": "창녕지점"
+    },
+    {
+      "name": "창원중앙",
+      "branchType": "미확인",
+      "rawName": "창원중앙"
+    },
+    {
+      "name": "진해",
+      "branchType": "지점",
+      "rawName": "진해지점"
+    },
+    {
+      "name": "거제",
+      "branchType": "지점",
+      "rawName": "거제지점"
+    },
+    {
+      "name": "진주",
+      "branchType": "지점",
+      "rawName": "진주지점"
+    },
+    {
+      "name": "사천",
+      "branchType": "지점",
+      "rawName": "사천지점"
+    },
+    {
+      "name": "하동",
+      "branchType": "지점",
+      "rawName": "하동지점"
+    },
+    {
+      "name": "남해",
+      "branchType": "지점",
+      "rawName": "남해지점"
+    },
+    {
+      "name": "거창",
+      "branchType": "지점",
+      "rawName": "거창지점"
+    },
+    {
+      "name": "함양",
+      "branchType": "지점",
+      "rawName": "함양지점"
+    },
+    {
+      "name": "울산중앙",
+      "branchType": "지점",
+      "rawName": "울산중앙지점"
+    },
+    {
+      "name": "울산",
+      "branchType": "지점",
+      "rawName": "울산지점"
+    },
+    {
+      "name": "울산중부",
+      "branchType": "지점",
+      "rawName": "울산중부지점"
+    },
+    {
+      "name": "울산동부",
+      "branchType": "지점",
+      "rawName": "울산동부지점"
+    },
+    {
+      "name": "삼문",
+      "branchType": "대리점",
+      "rawName": "삼문대리점"
+    },
+    {
+      "name": "장유",
+      "branchType": "대리점",
+      "rawName": "장유대리점"
+    },
+    {
+      "name": "무학",
+      "branchType": "대리점",
+      "rawName": "무학대리점"
+    },
+    {
+      "name": "가고파",
+      "branchType": "대리점",
+      "rawName": "가고파대리점"
+    },
+    {
+      "name": "신기",
+      "branchType": "대리점",
+      "rawName": "신기대리점"
+    },
+    {
+      "name": "칠원",
+      "branchType": "대리점",
+      "rawName": "칠원대리점"
+    },
+    {
+      "name": "가음정",
+      "branchType": "대리점",
+      "rawName": "가음정대리점"
+    },
+    {
+      "name": "마창",
+      "branchType": "대리점",
+      "rawName": "마창대리점"
+    },
+    {
+      "name": "도계",
+      "branchType": "대리점",
+      "rawName": "도계대리점"
+    },
+    {
+      "name": "경화",
+      "branchType": "대리점",
+      "rawName": "경화대리점"
+    },
+    {
+      "name": "동창",
+      "branchType": "대리점",
+      "rawName": "동창대리점"
+    },
+    {
+      "name": "옥포",
+      "branchType": "대리점",
+      "rawName": "옥포대리점"
+    },
+    {
+      "name": "상동",
+      "branchType": "대리점",
+      "rawName": "상동대리점"
+    },
+    {
+      "name": "충무",
+      "branchType": "대리점",
+      "rawName": "충무대리점"
+    },
+    {
+      "name": "진성",
+      "branchType": "대리점",
+      "rawName": "진성대리점"
+    },
+    {
+      "name": "하대",
+      "branchType": "대리점",
+      "rawName": "하대대리점"
+    },
+    {
+      "name": "신평",
+      "branchType": "대리점",
+      "rawName": "신평대리점"
+    },
+    {
+      "name": "가나",
+      "branchType": "대리점",
+      "rawName": "가나대리점"
+    },
+    {
+      "name": "섬가람",
+      "branchType": "대리점",
+      "rawName": "섬가람대리점"
+    },
+    {
+      "name": "황강",
+      "branchType": "대리점",
+      "rawName": "황강대리점"
+    },
+    {
+      "name": "원지",
+      "branchType": "대리점",
+      "rawName": "원지대리점"
+    },
+    {
+      "name": "달동",
+      "branchType": "대리점",
+      "rawName": "달동대리점"
+    },
+    {
+      "name": "한신",
+      "branchType": "대리점",
+      "rawName": "한신대리점"
+    },
+    {
+      "name": "신정",
+      "branchType": "대리점",
+      "rawName": "신정대리점"
+    },
+    {
+      "name": "온산",
+      "branchType": "대리점",
+      "rawName": "온산대리점"
+    },
+    {
+      "name": "다운",
+      "branchType": "대리점",
+      "rawName": "다운대리점"
+    },
+    {
+      "name": "언양",
+      "branchType": "대리점",
+      "rawName": "언양대리점"
+    },
+    {
+      "name": "병영",
+      "branchType": "대리점",
+      "rawName": "병영대리점"
+    }
+  ],
+  "광주전남지역본부": [
+    {
+      "name": "용봉",
+      "branchType": "지점",
+      "rawName": "용봉지점"
+    },
+    {
+      "name": "서광주",
+      "branchType": "지점",
+      "rawName": "서광주지점"
+    },
+    {
+      "name": "하남갤러리",
+      "branchType": "지점",
+      "rawName": "하남갤러리지점"
+    },
+    {
+      "name": "화순",
+      "branchType": "지점",
+      "rawName": "화순지점"
+    },
+    {
+      "name": "나주",
+      "branchType": "지점",
+      "rawName": "나주지점"
+    },
+    {
+      "name": "목포",
+      "branchType": "지점",
+      "rawName": "목포지점"
+    },
+    {
+      "name": "해남",
+      "branchType": "지점",
+      "rawName": "해남지점"
+    },
+    {
+      "name": "순천",
+      "branchType": "지점",
+      "rawName": "순천지점"
+    },
+    {
+      "name": "여수",
+      "branchType": "지점",
+      "rawName": "여수지점"
+    },
+    {
+      "name": "여천",
+      "branchType": "지점",
+      "rawName": "여천지점"
+    },
+    {
+      "name": "신제주",
+      "branchType": "지점",
+      "rawName": "신제주지점"
+    },
+    {
+      "name": "제주",
+      "branchType": "지점",
+      "rawName": "제주지점"
+    },
+    {
+      "name": "서귀포",
+      "branchType": "지점",
+      "rawName": "서귀포지점"
+    },
+    {
+      "name": "한림",
+      "branchType": "지점",
+      "rawName": "한림지점"
+    },
+    {
+      "name": "양산제일",
+      "branchType": "미확인",
+      "rawName": "양산제일"
+    },
+    {
+      "name": "오치",
+      "branchType": "미확인",
+      "rawName": "오치"
+    },
+    {
+      "name": "무등",
+      "branchType": "미확인",
+      "rawName": "무등"
+    },
+    {
+      "name": "광남",
+      "branchType": "미확인",
+      "rawName": "광남"
+    },
+    {
+      "name": "무진",
+      "branchType": "미확인",
+      "rawName": "무진"
+    },
+    {
+      "name": "동림",
+      "branchType": "미확인",
+      "rawName": "동림"
+    },
+    {
+      "name": "신시청",
+      "branchType": "미확인",
+      "rawName": "신시청"
+    },
+    {
+      "name": "상무",
+      "branchType": "미확인",
+      "rawName": "상무"
+    },
+    {
+      "name": "예향",
+      "branchType": "미확인",
+      "rawName": "예향"
+    },
+    {
+      "name": "스마트",
+      "branchType": "미확인",
+      "rawName": "스마트"
+    },
+    {
+      "name": "광서",
+      "branchType": "미확인",
+      "rawName": "광서"
+    },
+    {
+      "name": "가나",
+      "branchType": "미확인",
+      "rawName": "가나"
+    },
+    {
+      "name": "빛고을",
+      "branchType": "미확인",
+      "rawName": "빛고을"
+    },
+    {
+      "name": "호남",
+      "branchType": "미확인",
+      "rawName": "호남"
+    },
+    {
+      "name": "굿모닝",
+      "branchType": "미확인",
+      "rawName": "굿모닝"
+    },
+    {
+      "name": "하당",
+      "branchType": "미확인",
+      "rawName": "하당"
+    },
+    {
+      "name": "청해",
+      "branchType": "미확인",
+      "rawName": "청해"
+    },
+    {
+      "name": "초당",
+      "branchType": "미확인",
+      "rawName": "초당"
+    },
+    {
+      "name": "탐진",
+      "branchType": "미확인",
+      "rawName": "탐진"
+    },
+    {
+      "name": "땅끝",
+      "branchType": "미확인",
+      "rawName": "땅끝"
+    },
+    {
+      "name": "연향",
+      "branchType": "미확인",
+      "rawName": "연향"
+    },
+    {
+      "name": "봉화",
+      "branchType": "미확인",
+      "rawName": "봉화"
+    },
+    {
+      "name": "벌교",
+      "branchType": "미확인",
+      "rawName": "벌교"
+    },
+    {
+      "name": "신광",
+      "branchType": "미확인",
+      "rawName": "신광"
+    },
+    {
+      "name": "중마",
+      "branchType": "미확인",
+      "rawName": "중마"
+    },
+    {
+      "name": "동명",
+      "branchType": "미확인",
+      "rawName": "동명"
+    },
+    {
+      "name": "문수",
+      "branchType": "미확인",
+      "rawName": "문수"
+    },
+    {
+      "name": "오케이",
+      "branchType": "미확인",
+      "rawName": "오케이"
+    },
+    {
+      "name": "한라",
+      "branchType": "미확인",
+      "rawName": "한라"
+    },
+    {
+      "name": "오성",
+      "branchType": "미확인",
+      "rawName": "오성"
+    },
+    {
+      "name": "삼화",
+      "branchType": "미확인",
+      "rawName": "삼화"
+    }
+  ],
+  "남부지역본부": [
+    {
+      "name": "가락",
+      "branchType": "지점",
+      "rawName": "가락지점"
+    },
+    {
+      "name": "강남영동",
+      "branchType": "지점",
+      "rawName": "강남영동지점"
+    },
+    {
+      "name": "강남",
+      "branchType": "지점",
+      "rawName": "강남지점"
+    },
+    {
+      "name": "경기광주",
+      "branchType": "지점",
+      "rawName": "경기광주지점"
+    },
+    {
+      "name": "교대역",
+      "branchType": "지점",
+      "rawName": "교대역지점"
+    },
+    {
+      "name": "금천",
+      "branchType": "지점",
+      "rawName": "금천지점"
+    },
+    {
+      "name": "대치",
+      "branchType": "지점",
+      "rawName": "대치지점"
+    },
+    {
+      "name": "대치갤러리",
+      "branchType": "지점",
+      "rawName": "대치갤러리지점"
+    },
+    {
+      "name": "도곡",
+      "branchType": "지점",
+      "rawName": "도곡지점"
+    },
+    {
+      "name": "미사",
+      "branchType": "지점",
+      "rawName": "미사지점"
+    },
+    {
+      "name": "반포",
+      "branchType": "지점",
+      "rawName": "반포지점"
+    },
+    {
+      "name": "방배",
+      "branchType": "지점",
+      "rawName": "방배지점"
+    },
+    {
+      "name": "분당",
+      "branchType": "지점",
+      "rawName": "분당지점"
+    },
+    {
+      "name": "분당중앙",
+      "branchType": "지점",
+      "rawName": "분당중앙지점"
+    },
+    {
+      "name": "사당",
+      "branchType": "지점",
+      "rawName": "사당지점"
+    },
+    {
+      "name": "서초남부",
+      "branchType": "지점",
+      "rawName": "서초남부지점"
+    },
+    {
+      "name": "서초",
+      "branchType": "지점",
+      "rawName": "서초지점"
+    },
+    {
+      "name": "성남",
+      "branchType": "지점",
+      "rawName": "성남지점"
+    },
+    {
+      "name": "송파",
+      "branchType": "지점",
+      "rawName": "송파지점"
+    },
+    {
+      "name": "압구정",
+      "branchType": "지점",
+      "rawName": "압구정지점"
+    },
+    {
+      "name": "오금",
+      "branchType": "지점",
+      "rawName": "오금지점"
+    },
+    {
+      "name": "위례",
+      "branchType": "지점",
+      "rawName": "위례지점"
+    },
+    {
+      "name": "잠실",
+      "branchType": "지점",
+      "rawName": "잠실지점"
+    },
+    {
+      "name": "대원",
+      "branchType": "미확인",
+      "rawName": "대원"
+    },
+    {
+      "name": "대림",
+      "branchType": "미확인",
+      "rawName": "대림"
+    },
+    {
+      "name": "독산",
+      "branchType": "미확인",
+      "rawName": "독산"
+    },
+    {
+      "name": "동서",
+      "branchType": "미확인",
+      "rawName": "동서"
+    },
+    {
+      "name": "삼전",
+      "branchType": "미확인",
+      "rawName": "삼전"
+    },
+    {
+      "name": "오리",
+      "branchType": "미확인",
+      "rawName": "오리"
+    },
+    {
+      "name": "태평역",
+      "branchType": "미확인",
+      "rawName": "태평역"
+    },
+    {
+      "name": "행복",
+      "branchType": "대리점",
+      "rawName": "행복대리점"
+    },
+    {
+      "name": "곤지암",
+      "branchType": "미확인",
+      "rawName": "곤지암"
+    },
+    {
+      "name": "동산로",
+      "branchType": "대리점",
+      "rawName": "동산로대리점"
+    },
+    {
+      "name": "샬롬",
+      "branchType": "대리점",
+      "rawName": "샬롬대리점"
+    },
+    {
+      "name": "역삼",
+      "branchType": "미확인",
+      "rawName": "역삼"
+    },
+    {
+      "name": "우리들",
+      "branchType": "미확인",
+      "rawName": "우리들"
+    },
+    {
+      "name": "탑",
+      "branchType": "미확인",
+      "rawName": "탑"
+    },
+    {
+      "name": "온누리",
+      "branchType": "미확인",
+      "rawName": "온누리"
+    },
+    {
+      "name": "서현",
+      "branchType": "미확인",
+      "rawName": "서현"
+    },
+    {
+      "name": "경안",
+      "branchType": "미확인",
+      "rawName": "경안"
+    },
+    {
+      "name": "가산",
+      "branchType": "미확인",
+      "rawName": "가산"
+    },
+    {
+      "name": "숭실대",
+      "branchType": "미확인",
+      "rawName": "숭실대"
+    },
+    {
+      "name": "토리",
+      "branchType": "미확인",
+      "rawName": "토리"
+    }
+  ],
+  "대구경북지역본부": [
+    {
+      "name": "포항남부",
+      "branchType": "미확인",
+      "rawName": "포항남부"
+    },
+    {
+      "name": "포항서부",
+      "branchType": "미확인",
+      "rawName": "포항서부"
+    },
+    {
+      "name": "포항",
+      "branchType": "미확인",
+      "rawName": "포항"
+    },
+    {
+      "name": "안동",
+      "branchType": "미확인",
+      "rawName": "안동"
+    },
+    {
+      "name": "신월성",
+      "branchType": "미확인",
+      "rawName": "신월성"
+    },
+    {
+      "name": "대구",
+      "branchType": "미확인",
+      "rawName": "대구"
+    },
+    {
+      "name": "황금",
+      "branchType": "미확인",
+      "rawName": "황금"
+    },
+    {
+      "name": "영천",
+      "branchType": "미확인",
+      "rawName": "영천"
+    },
+    {
+      "name": "김천",
+      "branchType": "미확인",
+      "rawName": "김천"
+    },
+    {
+      "name": "문경",
+      "branchType": "미확인",
+      "rawName": "문경"
+    },
+    {
+      "name": "영덕",
+      "branchType": "미확인",
+      "rawName": "영덕"
+    },
+    {
+      "name": "영주",
+      "branchType": "미확인",
+      "rawName": "영주"
+    },
+    {
+      "name": "경주",
+      "branchType": "미확인",
+      "rawName": "경주"
+    },
+    {
+      "name": "복현",
+      "branchType": "미확인",
+      "rawName": "복현"
+    },
+    {
+      "name": "경산",
+      "branchType": "미확인",
+      "rawName": "경산"
+    },
+    {
+      "name": "화원",
+      "branchType": "미확인",
+      "rawName": "화원"
+    },
+    {
+      "name": "성서",
+      "branchType": "미확인",
+      "rawName": "성서"
+    },
+    {
+      "name": "구미",
+      "branchType": "미확인",
+      "rawName": "구미"
+    },
+    {
+      "name": "대구강북",
+      "branchType": "미확인",
+      "rawName": "대구강북"
+    },
+    {
+      "name": "동대구",
+      "branchType": "미확인",
+      "rawName": "동대구"
+    },
+    {
+      "name": "상주",
+      "branchType": "미확인",
+      "rawName": "상주"
+    },
+    {
+      "name": "김천부곡",
+      "branchType": "미확인",
+      "rawName": "김천부곡"
+    },
+    {
+      "name": "영포",
+      "branchType": "미확인",
+      "rawName": "영포"
+    },
+    {
+      "name": "형산",
+      "branchType": "미확인",
+      "rawName": "형산"
+    },
+    {
+      "name": "인동",
+      "branchType": "미확인",
+      "rawName": "인동"
+    },
+    {
+      "name": "충효",
+      "branchType": "미확인",
+      "rawName": "충효"
+    },
+    {
+      "name": "시청앞",
+      "branchType": "미확인",
+      "rawName": "시청앞"
+    },
+    {
+      "name": "아름다운",
+      "branchType": "미확인",
+      "rawName": "아름다운"
+    },
+    {
+      "name": "한동",
+      "branchType": "미확인",
+      "rawName": "한동"
+    },
+    {
+      "name": "대한",
+      "branchType": "미확인",
+      "rawName": "대한"
+    },
+    {
+      "name": "영화",
+      "branchType": "미확인",
+      "rawName": "영화"
+    },
+    {
+      "name": "성암",
+      "branchType": "미확인",
+      "rawName": "성암"
+    },
+    {
+      "name": "죽전역",
+      "branchType": "미확인",
+      "rawName": "죽전역"
+    },
+    {
+      "name": "비산",
+      "branchType": "미확인",
+      "rawName": "비산"
+    },
+    {
+      "name": "구미공단",
+      "branchType": "미확인",
+      "rawName": "구미공단"
+    },
+    {
+      "name": "금오산",
+      "branchType": "미확인",
+      "rawName": "금오산"
+    },
+    {
+      "name": "용산",
+      "branchType": "미확인",
+      "rawName": "용산"
+    },
+    {
+      "name": "대명",
+      "branchType": "미확인",
+      "rawName": "대명"
+    },
+    {
+      "name": "학정",
+      "branchType": "미확인",
+      "rawName": "학정"
+    },
+    {
+      "name": "동진",
+      "branchType": "미확인",
+      "rawName": "동진"
+    },
+    {
+      "name": "동서변",
+      "branchType": "미확인",
+      "rawName": "동서변"
+    },
+    {
+      "name": "경안",
+      "branchType": "미확인",
+      "rawName": "경안"
+    }
+  ],
+  "대전지역본부": [
+    {
+      "name": "대전",
+      "branchType": "지점",
+      "rawName": "대전지점"
+    },
+    {
+      "name": "북유성",
+      "branchType": "지점",
+      "rawName": "북유성지점"
+    },
+    {
+      "name": "대전중구",
+      "branchType": "지점",
+      "rawName": "대전중구지점"
+    },
+    {
+      "name": "둔산",
+      "branchType": "지점",
+      "rawName": "둔산지점"
+    },
+    {
+      "name": "세종시청갤러리",
+      "branchType": "지점",
+      "rawName": "세종시청갤러리지점"
+    },
+    {
+      "name": "유성",
+      "branchType": "지점",
+      "rawName": "유성지점"
+    },
+    {
+      "name": "테크노밸리",
+      "branchType": "지점",
+      "rawName": "테크노밸리지점"
+    },
+    {
+      "name": "공주",
+      "branchType": "지점",
+      "rawName": "공주지점"
+    },
+    {
+      "name": "논산",
+      "branchType": "지점",
+      "rawName": "논산지점"
+    },
+    {
+      "name": "서천",
+      "branchType": "지점",
+      "rawName": "서천지점"
+    },
+    {
+      "name": "세종",
+      "branchType": "지점",
+      "rawName": "세종지점"
+    },
+    {
+      "name": "예산",
+      "branchType": "지점",
+      "rawName": "예산지점"
+    },
+    {
+      "name": "홍성",
+      "branchType": "지점",
+      "rawName": "홍성지점"
+    },
+    {
+      "name": "대천",
+      "branchType": "지점",
+      "rawName": "대천지점"
+    },
+    {
+      "name": "당진",
+      "branchType": "지점",
+      "rawName": "당진지점"
+    },
+    {
+      "name": "서산",
+      "branchType": "지점",
+      "rawName": "서산지점"
+    },
+    {
+      "name": "옥천",
+      "branchType": "지점",
+      "rawName": "옥천지점"
+    },
+    {
+      "name": "칠갑",
+      "branchType": "대리점",
+      "rawName": "칠갑대리점"
+    },
+    {
+      "name": "대룡",
+      "branchType": "대리점",
+      "rawName": "대룡대리점"
+    },
+    {
+      "name": "보청",
+      "branchType": "대리점",
+      "rawName": "보청대리점"
+    },
+    {
+      "name": "한서",
+      "branchType": "대리점",
+      "rawName": "한서대리점"
+    },
+    {
+      "name": "송악",
+      "branchType": "미확인",
+      "rawName": "송악"
+    },
+    {
+      "name": "용문역",
+      "branchType": "미확인",
+      "rawName": "용문역"
+    },
+    {
+      "name": "관성",
+      "branchType": "대리점",
+      "rawName": "관성대리점"
+    },
+    {
+      "name": "금삼",
+      "branchType": "대리점",
+      "rawName": "금삼대리점"
+    },
+    {
+      "name": "서령",
+      "branchType": "대리점",
+      "rawName": "서령대리점"
+    },
+    {
+      "name": "도원",
+      "branchType": "대리점",
+      "rawName": "도원대리점"
+    },
+    {
+      "name": "서해",
+      "branchType": "대리점",
+      "rawName": "서해대리점"
+    },
+    {
+      "name": "일등",
+      "branchType": "대리점",
+      "rawName": "일등대리점"
+    },
+    {
+      "name": "유승",
+      "branchType": "대리점",
+      "rawName": "유승 대리점"
+    },
+    {
+      "name": "신관",
+      "branchType": "대리점",
+      "rawName": "신관대리점"
+    },
+    {
+      "name": "열린",
+      "branchType": "대리점",
+      "rawName": "열린대리점"
+    },
+    {
+      "name": "신세계",
+      "branchType": "대리점",
+      "rawName": "신세계대리점"
+    },
+    {
+      "name": "한밭",
+      "branchType": "대리점",
+      "rawName": "한밭대리점"
+    },
+    {
+      "name": "예당",
+      "branchType": "대리점",
+      "rawName": "예당대리점"
+    },
+    {
+      "name": "관저",
+      "branchType": "대리점",
+      "rawName": "관저대리점"
+    },
+    {
+      "name": "도마",
+      "branchType": "대리점",
+      "rawName": "도마대리점"
+    },
+    {
+      "name": "해나루",
+      "branchType": "대리점",
+      "rawName": "해나루대리점"
+    },
+    {
+      "name": "홍주",
+      "branchType": "대리점",
+      "rawName": "홍주대리점"
+    },
+    {
+      "name": "판암",
+      "branchType": "대리점",
+      "rawName": "판암대리점"
+    },
+    {
+      "name": "백제",
+      "branchType": "대리점",
+      "rawName": "백제대리점"
+    }
+  ],
+  "동부지역본부": [
+    {
+      "name": "구리",
+      "branchType": "지점",
+      "rawName": "구리지점"
+    },
+    {
+      "name": "별내센트럴",
+      "branchType": "지점",
+      "rawName": "별내센트럴지점"
+    },
+    {
+      "name": "성동",
+      "branchType": "지점",
+      "rawName": "성동지점"
+    },
+    {
+      "name": "성북중앙",
+      "branchType": "지점",
+      "rawName": "성북중앙지점"
+    },
+    {
+      "name": "신내",
+      "branchType": "지점",
+      "rawName": "신내지점"
+    },
+    {
+      "name": "길동",
+      "branchType": "지점",
+      "rawName": "길동지점"
+    },
+    {
+      "name": "양주",
+      "branchType": "지점",
+      "rawName": "양주지점"
+    },
+    {
+      "name": "남대문",
+      "branchType": "지점",
+      "rawName": "남대문지점"
+    },
+    {
+      "name": "포천",
+      "branchType": "지점",
+      "rawName": "포천지점"
+    },
+    {
+      "name": "구의",
+      "branchType": "지점",
+      "rawName": "구의지점"
+    },
+    {
+      "name": "의정부동부",
+      "branchType": "미확인",
+      "rawName": "의정부동부"
+    },
+    {
+      "name": "성수",
+      "branchType": "지점",
+      "rawName": "성수지점"
+    },
+    {
+      "name": "강북",
+      "branchType": "미확인",
+      "rawName": "강북"
+    },
+    {
+      "name": "강동",
+      "branchType": "지점",
+      "rawName": "강동지점"
+    },
+    {
+      "name": "다산갤러리",
+      "branchType": "미확인",
+      "rawName": "다산갤러리"
+    },
+    {
+      "name": "광진",
+      "branchType": "지점",
+      "rawName": "광진지점"
+    },
+    {
+      "name": "양평",
+      "branchType": "지점",
+      "rawName": "양평지점"
+    },
+    {
+      "name": "왕십리",
+      "branchType": "미확인",
+      "rawName": "왕십리"
+    },
+    {
+      "name": "상계",
+      "branchType": "지점",
+      "rawName": "상계지점"
+    },
+    {
+      "name": "창동",
+      "branchType": "지점",
+      "rawName": "창동지점"
+    },
+    {
+      "name": "의정부",
+      "branchType": "지점",
+      "rawName": "의정부지점"
+    },
+    {
+      "name": "가능",
+      "branchType": "대리점",
+      "rawName": "가능대리점"
+    },
+    {
+      "name": "고덕",
+      "branchType": "대리점",
+      "rawName": "고덕대리점"
+    },
+    {
+      "name": "교문",
+      "branchType": "대리점",
+      "rawName": "교문대리점"
+    },
+    {
+      "name": "내행",
+      "branchType": "미확인",
+      "rawName": "내행"
+    },
+    {
+      "name": "돈암",
+      "branchType": "대리점",
+      "rawName": "돈암대리점"
+    },
+    {
+      "name": "마들",
+      "branchType": "대리점",
+      "rawName": "마들대리점"
+    },
+    {
+      "name": "마석",
+      "branchType": "대리점",
+      "rawName": "마석대리점"
+    },
+    {
+      "name": "명일",
+      "branchType": "대리점",
+      "rawName": "명일대리점"
+    },
+    {
+      "name": "묵동",
+      "branchType": "미확인",
+      "rawName": "묵동"
+    },
+    {
+      "name": "방학",
+      "branchType": "대리점",
+      "rawName": "방학대리점"
+    },
+    {
+      "name": "상봉",
+      "branchType": "대리점",
+      "rawName": "상봉대리점"
+    },
+    {
+      "name": "쌍문",
+      "branchType": "대리점",
+      "rawName": "쌍문대리점"
+    },
+    {
+      "name": "수유",
+      "branchType": "대리점",
+      "rawName": "수유대리점"
+    },
+    {
+      "name": "송산",
+      "branchType": "미확인",
+      "rawName": "송산"
+    },
+    {
+      "name": "송우",
+      "branchType": "미확인",
+      "rawName": "송우"
+    },
+    {
+      "name": "영파",
+      "branchType": "대리점",
+      "rawName": "영파대리점"
+    },
+    {
+      "name": "오남",
+      "branchType": "대리점",
+      "rawName": "오남대리점"
+    },
+    {
+      "name": "우이",
+      "branchType": "대리점",
+      "rawName": "우이대리점"
+    },
+    {
+      "name": "을지로",
+      "branchType": "대리점",
+      "rawName": "을지로대리점"
+    },
+    {
+      "name": "인창",
+      "branchType": "대리점",
+      "rawName": "인창대리점"
+    },
+    {
+      "name": "장위",
+      "branchType": "대리점",
+      "rawName": "장위대리점"
+    },
+    {
+      "name": "장충",
+      "branchType": "미확인",
+      "rawName": "장충"
+    },
+    {
+      "name": "전곡",
+      "branchType": "대리점",
+      "rawName": "전곡대리점"
+    },
+    {
+      "name": "정릉",
+      "branchType": "대리점",
+      "rawName": "정릉대리점"
+    },
+    {
+      "name": "진건",
+      "branchType": "대리점",
+      "rawName": "진건대리점"
+    },
+    {
+      "name": "중곡",
+      "branchType": "미확인",
+      "rawName": "중곡"
+    },
+    {
+      "name": "좋은차",
+      "branchType": "대리점",
+      "rawName": "좋은차대리점"
+    },
+    {
+      "name": "청평",
+      "branchType": "대리점",
+      "rawName": "청평대리점"
+    },
+    {
+      "name": "하계",
+      "branchType": "대리점",
+      "rawName": "하계대리점"
+    },
+    {
+      "name": "한마음",
+      "branchType": "미확인",
+      "rawName": "한마음"
+    },
+    {
+      "name": "회천",
+      "branchType": "대리점",
+      "rawName": "회천대리점"
+    }
+  ],
+  "부산지역본부": [
+    {
+      "name": "ㅇㅇ",
+      "branchType": "지점",
+      "rawName": "ㅇㅇ지점"
+    },
+    {
+      "name": "남산",
+      "branchType": "지점",
+      "rawName": "남산지점"
+    },
+    {
+      "name": "가야",
+      "branchType": "지점",
+      "rawName": "가야지점"
+    },
+    {
+      "name": "대연",
+      "branchType": "지점",
+      "rawName": "대연지점"
+    },
+    {
+      "name": "부산중앙",
+      "branchType": "지점",
+      "rawName": "부산중앙지점"
+    },
+    {
+      "name": "부산시청갤러리",
+      "branchType": "지점",
+      "rawName": "부산시청갤러리지점"
+    },
+    {
+      "name": "해운대",
+      "branchType": "지점",
+      "rawName": "해운대지점"
+    },
+    {
+      "name": "사상",
+      "branchType": "지점",
+      "rawName": "사상지점"
+    },
+    {
+      "name": "금정",
+      "branchType": "지점",
+      "rawName": "금정지점"
+    },
+    {
+      "name": "서면",
+      "branchType": "지점",
+      "rawName": "서면지점"
+    },
+    {
+      "name": "동부산",
+      "branchType": "지점",
+      "rawName": "동부산지점"
+    },
+    {
+      "name": "동래",
+      "branchType": "지점",
+      "rawName": "동래지점"
+    },
+    {
+      "name": "강서명지",
+      "branchType": "지점",
+      "rawName": "강서명지지점"
+    },
+    {
+      "name": "구포",
+      "branchType": "지점",
+      "rawName": "구포지점"
+    },
+    {
+      "name": "장림",
+      "branchType": "지점",
+      "rawName": "장림지점"
+    },
+    {
+      "name": "부암",
+      "branchType": "대리점",
+      "rawName": "부암대리점"
+    },
+    {
+      "name": "연산",
+      "branchType": "대리점",
+      "rawName": "연산대리점"
+    },
+    {
+      "name": "구명역",
+      "branchType": "대리점",
+      "rawName": "구명역대리점"
+    },
+    {
+      "name": "낙동",
+      "branchType": "대리점",
+      "rawName": "낙동대리점"
+    },
+    {
+      "name": "강변",
+      "branchType": "대리점",
+      "rawName": "강변대리점"
+    },
+    {
+      "name": "낙민",
+      "branchType": "대리점",
+      "rawName": "낙민대리점"
+    },
+    {
+      "name": "엄궁",
+      "branchType": "대리점",
+      "rawName": "엄궁대리점"
+    },
+    {
+      "name": "거제",
+      "branchType": "대리점",
+      "rawName": "거제대리점"
+    },
+    {
+      "name": "대신",
+      "branchType": "대리점",
+      "rawName": "대신대리점"
+    },
+    {
+      "name": "광복로",
+      "branchType": "대리점",
+      "rawName": "광복로대리점"
+    },
+    {
+      "name": "부곡",
+      "branchType": "대리점",
+      "rawName": "부곡대리점"
+    },
+    {
+      "name": "노포",
+      "branchType": "대리점",
+      "rawName": "노포대리점"
+    },
+    {
+      "name": "에덴",
+      "branchType": "대리점",
+      "rawName": "에덴대리점"
+    },
+    {
+      "name": "용호",
+      "branchType": "대리점",
+      "rawName": "용호대리점"
+    },
+    {
+      "name": "송정역",
+      "branchType": "대리점",
+      "rawName": "송정역 대리점"
+    }
+  ],
+  "서부지역본부": [
+    {
+      "name": "DMC",
+      "branchType": "미확인",
+      "rawName": "DMC"
+    },
+    {
+      "name": "가양",
+      "branchType": "지점",
+      "rawName": "가양지점"
+    },
+    {
+      "name": "개봉",
+      "branchType": "지점",
+      "rawName": "개봉지점"
+    },
+    {
+      "name": "고양",
+      "branchType": "지점",
+      "rawName": "고양지점"
+    },
+    {
+      "name": "공항",
+      "branchType": "지점",
+      "rawName": "공항지점"
+    },
+    {
+      "name": "구파발역",
+      "branchType": "지점",
+      "rawName": "구파발역지점"
+    },
+    {
+      "name": "당산",
+      "branchType": "지점",
+      "rawName": "당산지점"
+    },
+    {
+      "name": "마곡센트럴",
+      "branchType": "지점",
+      "rawName": "마곡센트럴지점"
+    },
+    {
+      "name": "마포",
+      "branchType": "지점",
+      "rawName": "마포지점"
+    },
+    {
+      "name": "목동",
+      "branchType": "지점",
+      "rawName": "목동지점"
+    },
+    {
+      "name": "백석",
+      "branchType": "지점",
+      "rawName": "백석지점"
+    },
+    {
+      "name": "삼송",
+      "branchType": "지점",
+      "rawName": "삼송지점"
+    },
+    {
+      "name": "상암",
+      "branchType": "지점",
+      "rawName": "상암지점"
+    },
+    {
+      "name": "신구로",
+      "branchType": "지점",
+      "rawName": "신구로지점"
+    },
+    {
+      "name": "신길",
+      "branchType": "지점",
+      "rawName": "신길지점"
+    },
+    {
+      "name": "신월",
+      "branchType": "지점",
+      "rawName": "신월지점"
+    },
+    {
+      "name": "신풍",
+      "branchType": "지점",
+      "rawName": "신풍지점"
+    },
+    {
+      "name": "여의도",
+      "branchType": "지점",
+      "rawName": "여의도지점"
+    },
+    {
+      "name": "영등포",
+      "branchType": "지점",
+      "rawName": "영등포지점"
+    },
+    {
+      "name": "용산",
+      "branchType": "지점",
+      "rawName": "용산지점"
+    },
+    {
+      "name": "운정중앙",
+      "branchType": "지점",
+      "rawName": "운정중앙지점"
+    },
+    {
+      "name": "운정",
+      "branchType": "지점",
+      "rawName": "운정지점"
+    },
+    {
+      "name": "은평갤러리",
+      "branchType": "지점",
+      "rawName": "은평갤러리지점"
+    },
+    {
+      "name": "일산",
+      "branchType": "지점",
+      "rawName": "일산지점"
+    },
+    {
+      "name": "원",
+      "branchType": "대리점",
+      "rawName": "원대리점"
+    },
+    {
+      "name": "서강",
+      "branchType": "대리점",
+      "rawName": "서강대리점"
+    },
+    {
+      "name": "벽제",
+      "branchType": "대리점",
+      "rawName": "벽제대리점"
+    },
+    {
+      "name": "증산",
+      "branchType": "대리점",
+      "rawName": "증산대리점"
+    },
+    {
+      "name": "연신내",
+      "branchType": "대리점",
+      "rawName": "연신내대리점"
+    },
+    {
+      "name": "문화촌",
+      "branchType": "대리점",
+      "rawName": "문화촌대리점"
+    },
+    {
+      "name": "이태원",
+      "branchType": "대리점",
+      "rawName": "이태원대리점"
+    },
+    {
+      "name": "선유로",
+      "branchType": "대리점",
+      "rawName": "선유로대리점"
+    },
+    {
+      "name": "양화",
+      "branchType": "대리점",
+      "rawName": "양화대리점"
+    },
+    {
+      "name": "선진",
+      "branchType": "대리점",
+      "rawName": "선진대리점"
+    },
+    {
+      "name": "다온",
+      "branchType": "대리점",
+      "rawName": "다온대리점"
+    },
+    {
+      "name": "가리봉테크노",
+      "branchType": "미확인",
+      "rawName": "가리봉테크노"
+    },
+    {
+      "name": "구로역",
+      "branchType": "대리점",
+      "rawName": "구로역대리점"
+    },
+    {
+      "name": "보라매",
+      "branchType": "대리점",
+      "rawName": "보라매대리점"
+    },
+    {
+      "name": "서광",
+      "branchType": "대리점",
+      "rawName": "서광대리점"
+    },
+    {
+      "name": "양서",
+      "branchType": "대리점",
+      "rawName": "양서대리점"
+    },
+    {
+      "name": "남부법원",
+      "branchType": "대리점",
+      "rawName": "남부법원대리점"
+    },
+    {
+      "name": "신정",
+      "branchType": "대리점",
+      "rawName": "신정대리점"
+    },
+    {
+      "name": "신화",
+      "branchType": "대리점",
+      "rawName": "신화대리점"
+    },
+    {
+      "name": "정발산",
+      "branchType": "대리점",
+      "rawName": "정발산대리점"
+    },
+    {
+      "name": "탄현",
+      "branchType": "대리점",
+      "rawName": "탄현대리점"
+    },
+    {
+      "name": "창조",
+      "branchType": "대리점",
+      "rawName": "창조대리점"
+    },
+    {
+      "name": "은빛",
+      "branchType": "대리점",
+      "rawName": "은빛대리점"
+    },
+    {
+      "name": "능곡",
+      "branchType": "대리점",
+      "rawName": "능곡대리점"
+    },
+    {
+      "name": "통일",
+      "branchType": "대리점",
+      "rawName": "통일대리점"
+    },
+    {
+      "name": "봉일천",
+      "branchType": "대리점",
+      "rawName": "봉일천대리점"
+    },
+    {
+      "name": "교하",
+      "branchType": "대리점",
+      "rawName": "교하대리점"
+    },
+    {
+      "name": "금촌제일",
+      "branchType": "대리점",
+      "rawName": "금촌제일대리점"
+    },
+    {
+      "name": "백마",
+      "branchType": "대리점",
+      "rawName": "백마대리점"
+    }
+  ],
+  "인천지역본부": [
+    {
+      "name": "부천",
+      "branchType": "지점",
+      "rawName": "부천지점"
+    },
+    {
+      "name": "청라루원",
+      "branchType": "지점",
+      "rawName": "청라루원지점"
+    },
+    {
+      "name": "김포",
+      "branchType": "지점",
+      "rawName": "김포지점"
+    },
+    {
+      "name": "인천",
+      "branchType": "지점",
+      "rawName": "인천지점"
+    },
+    {
+      "name": "송도국제",
+      "branchType": "지점",
+      "rawName": "송도국제지점"
+    },
+    {
+      "name": "중동",
+      "branchType": "지점",
+      "rawName": "중동지점"
+    },
+    {
+      "name": "안산",
+      "branchType": "지점",
+      "rawName": "안산지점"
+    },
+    {
+      "name": "광명",
+      "branchType": "지점",
+      "rawName": "광명지점"
+    },
+    {
+      "name": "안산고잔",
+      "branchType": "지점",
+      "rawName": "안산고잔지점"
+    },
+    {
+      "name": "안산선부",
+      "branchType": "지점",
+      "rawName": "안산선부지점"
+    },
+    {
+      "name": "인천남동",
+      "branchType": "지점",
+      "rawName": "인천남동지점"
+    },
+    {
+      "name": "부평",
+      "branchType": "지점",
+      "rawName": "부평지점"
+    },
+    {
+      "name": "역곡",
+      "branchType": "지점",
+      "rawName": "역곡지점"
+    },
+    {
+      "name": "시흥",
+      "branchType": "지점",
+      "rawName": "시흥지점"
+    },
+    {
+      "name": "남주안",
+      "branchType": "미확인",
+      "rawName": "남주안"
+    },
+    {
+      "name": "영종",
+      "branchType": "미확인",
+      "rawName": "영종"
+    },
+    {
+      "name": "산곡",
+      "branchType": "미확인",
+      "rawName": "산곡"
+    },
+    {
+      "name": "검단",
+      "branchType": "미확인",
+      "rawName": "검단"
+    },
+    {
+      "name": "학익",
+      "branchType": "미확인",
+      "rawName": "학익"
+    },
+    {
+      "name": "계향",
+      "branchType": "미확인",
+      "rawName": "계향"
+    },
+    {
+      "name": "송도",
+      "branchType": "미확인",
+      "rawName": "송도"
+    },
+    {
+      "name": "간석",
+      "branchType": "미확인",
+      "rawName": "간석"
+    },
+    {
+      "name": "금파",
+      "branchType": "미확인",
+      "rawName": "금파"
+    },
+    {
+      "name": "양촌",
+      "branchType": "미확인",
+      "rawName": "양촌"
+    },
+    {
+      "name": "여월",
+      "branchType": "미확인",
+      "rawName": "여월"
+    },
+    {
+      "name": "송내",
+      "branchType": "미확인",
+      "rawName": "송내"
+    },
+    {
+      "name": "소하",
+      "branchType": "미확인",
+      "rawName": "소하"
+    },
+    {
+      "name": "비제이",
+      "branchType": "미확인",
+      "rawName": "비제이"
+    },
+    {
+      "name": "대경중앙",
+      "branchType": "미확인",
+      "rawName": "대경중앙"
+    },
+    {
+      "name": "상록수",
+      "branchType": "미확인",
+      "rawName": "상록수"
+    },
+    {
+      "name": "축복",
+      "branchType": "미확인",
+      "rawName": "축복"
+    },
+    {
+      "name": "남광",
+      "branchType": "미확인",
+      "rawName": "남광"
+    }
+  ],
+  "전북지역본부": [
+    {
+      "name": "익산",
+      "branchType": "지점",
+      "rawName": "익산 지점"
+    },
+    {
+      "name": "익산영등",
+      "branchType": "미확인",
+      "rawName": "익산영등"
+    },
+    {
+      "name": "김제",
+      "branchType": "지점",
+      "rawName": "김제지점"
+    },
+    {
+      "name": "효천",
+      "branchType": "지점",
+      "rawName": "효천지점"
+    },
+    {
+      "name": "군산수송",
+      "branchType": "지점",
+      "rawName": "군산수송지점"
+    },
+    {
+      "name": "진안",
+      "branchType": "지점",
+      "rawName": "진안지점"
+    },
+    {
+      "name": "전주",
+      "branchType": "지점",
+      "rawName": "전주지점"
+    },
+    {
+      "name": "송천",
+      "branchType": "지점",
+      "rawName": "송천지점"
+    },
+    {
+      "name": "전주서부",
+      "branchType": "지점",
+      "rawName": "전주서부지점"
+    },
+    {
+      "name": "전주중부",
+      "branchType": "지점",
+      "rawName": "전주중부지점"
+    },
+    {
+      "name": "군산",
+      "branchType": "지점",
+      "rawName": "군산지점"
+    },
+    {
+      "name": "정읍",
+      "branchType": "지점",
+      "rawName": "정읍지점"
+    },
+    {
+      "name": "정주",
+      "branchType": "대리점",
+      "rawName": "정주대리점"
+    },
+    {
+      "name": "호남",
+      "branchType": "대리점",
+      "rawName": "호남대리점"
+    },
+    {
+      "name": "광한루",
+      "branchType": "대리점",
+      "rawName": "광한루대리점"
+    },
+    {
+      "name": "금강",
+      "branchType": "대리점",
+      "rawName": "금강 대리점"
+    },
+    {
+      "name": "드림",
+      "branchType": "대리점",
+      "rawName": "드림 대리점"
+    },
+    {
+      "name": "마한",
+      "branchType": "대리점",
+      "rawName": "마한 대리점"
+    },
+    {
+      "name": "부송",
+      "branchType": "미확인",
+      "rawName": "부송"
+    },
+    {
+      "name": "사랑",
+      "branchType": "대리점",
+      "rawName": "사랑 대리점"
+    },
+    {
+      "name": "서신",
+      "branchType": "대리점",
+      "rawName": "서신 대리점"
+    },
+    {
+      "name": "선운",
+      "branchType": "대리점",
+      "rawName": "선운 대리점"
+    },
+    {
+      "name": "신동",
+      "branchType": "대리점",
+      "rawName": "신동 대리점"
+    },
+    {
+      "name": "아중",
+      "branchType": "미확인",
+      "rawName": "아중"
+    },
+    {
+      "name": "전일",
+      "branchType": "대리점",
+      "rawName": "전일 대리점"
+    },
+    {
+      "name": "지평선",
+      "branchType": "대리점",
+      "rawName": "지평선 대리점"
+    },
+    {
+      "name": "차사랑",
+      "branchType": "미확인",
+      "rawName": "차사랑"
+    },
+    {
+      "name": "출세",
+      "branchType": "대리점",
+      "rawName": "출세 대리점"
+    },
+    {
+      "name": "덕유",
+      "branchType": "미확인",
+      "rawName": "덕유"
+    },
+    {
+      "name": "새만금",
+      "branchType": "미확인",
+      "rawName": "새만금"
+    }
+  ],
+  "충청지역본부": [
+    {
+      "name": "청주",
+      "branchType": "지점",
+      "rawName": "청주지점"
+    },
+    {
+      "name": "서청주",
+      "branchType": "지점",
+      "rawName": "서청주지점"
+    },
+    {
+      "name": "남청주",
+      "branchType": "지점",
+      "rawName": "남청주지점"
+    },
+    {
+      "name": "청주강서",
+      "branchType": "지점",
+      "rawName": "청주강서지점"
+    },
+    {
+      "name": "음성",
+      "branchType": "지점",
+      "rawName": "음성지점"
+    },
+    {
+      "name": "충주",
+      "branchType": "지점",
+      "rawName": "충주지점"
+    },
+    {
+      "name": "오창",
+      "branchType": "지점",
+      "rawName": "오창지점"
+    },
+    {
+      "name": "제천",
+      "branchType": "지점",
+      "rawName": "제천지점"
+    },
+    {
+      "name": "천안서부",
+      "branchType": "지점",
+      "rawName": "천안서부지점"
+    },
+    {
+      "name": "천안동부",
+      "branchType": "지점",
+      "rawName": "천안동부지점"
+    },
+    {
+      "name": "아산",
+      "branchType": "지점",
+      "rawName": "아산지점"
+    },
+    {
+      "name": "천안남부",
+      "branchType": "지점",
+      "rawName": "천안남부지점"
+    },
+    {
+      "name": "직지",
+      "branchType": "대리점",
+      "rawName": "직지대리점"
+    },
+    {
+      "name": "하나",
+      "branchType": "대리점",
+      "rawName": "하나대리점"
+    },
+    {
+      "name": "내덕",
+      "branchType": "대리점",
+      "rawName": "내덕대리점"
+    },
+    {
+      "name": "조은",
+      "branchType": "대리점",
+      "rawName": "조은대리점"
+    },
+    {
+      "name": "서원",
+      "branchType": "대리점",
+      "rawName": "서원대리점"
+    },
+    {
+      "name": "가경",
+      "branchType": "대리점",
+      "rawName": "가경대리점"
+    },
+    {
+      "name": "봉명",
+      "branchType": "대리점",
+      "rawName": "봉명대리점"
+    },
+    {
+      "name": "금왕혁신",
+      "branchType": "대리점",
+      "rawName": "금왕혁신대리점"
+    },
+    {
+      "name": "중원",
+      "branchType": "대리점",
+      "rawName": "중원대리점"
+    },
+    {
+      "name": "의림",
+      "branchType": "대리점",
+      "rawName": "의림대리점"
+    },
+    {
+      "name": "도전",
+      "branchType": "대리점",
+      "rawName": "도전대리점"
+    },
+    {
+      "name": "두정",
+      "branchType": "대리점",
+      "rawName": "두정대리점"
+    },
+    {
+      "name": "천일",
+      "branchType": "대리점",
+      "rawName": "천일대리점"
+    },
+    {
+      "name": "도솔",
+      "branchType": "대리점",
+      "rawName": "도솔대리점"
+    },
+    {
+      "name": "온천",
+      "branchType": "대리점",
+      "rawName": "온천대리점"
+    },
+    {
+      "name": "번영로",
+      "branchType": "대리점",
+      "rawName": "번영로대리점"
+    },
+    {
+      "name": "일봉",
+      "branchType": "대리점",
+      "rawName": "일봉대리점"
+    }
+  ]
+}

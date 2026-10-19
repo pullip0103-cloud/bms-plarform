@@ -6,9 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:regions": "dotenv -e .env.local -- node scripts/seedRegions.mjs",
+    "seed:branches": "dotenv -e .env.local -- node scripts/seedBranches.mjs",
+    "create:account": "dotenv -e .env.local -- node scripts/createAccount.mjs"
   },
   "dependencies": {
+    "browser-image-compression": "^2.0.2",
+    "cloudinary": "^2.11.0",
+    "firebase": "^13.0.0",
+    "firebase-admin": "^14.5.0",
     "next": "16.4.1",
     "react": "19.3.0",
     "react-dom": "19.3.0"
@@ -18,9 +25,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "adm-zip": "^0.6.1",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.1",
+    "playwright": "^1.64.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unzipper": "^0.12.5"
   }
 }

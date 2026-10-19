@@ -32,9 +32,14 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.local.example
 
 # vercel
 .vercel
+
+# 샘플 데이터 시드용 원본 이미지(PPT에서 추출, Cloudinary에 이미 업로드됨) —
+# 용량이 커서 git에는 포함하지 않는다. 재시딩 필요 시 scripts/extractNambuItems.mjs 재실행.
+scripts/nambu_images/
 
 # typescript
 *.tsbuildinfo

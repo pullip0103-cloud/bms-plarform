@@ -1,0 +1,1640 @@
+[
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image9.jpeg",
+    "sourceSlide": "slide1.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image10.jpeg",
+    "sourceSlide": "slide1.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image11.jpeg",
+    "sourceSlide": "slide1.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image12.jpeg",
+    "sourceSlide": "slide1.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image13.jpeg",
+    "sourceSlide": "slide2.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image14.jpeg",
+    "sourceSlide": "slide2.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image15.jpeg",
+    "sourceSlide": "slide2.xml"
+  },
+  {
+    "branchName": "가락",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image16.jpeg",
+    "sourceSlide": "slide2.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image17.jpeg",
+    "sourceSlide": "slide3.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image18.jpeg",
+    "sourceSlide": "slide3.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image19.jpeg",
+    "sourceSlide": "slide3.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image20.jpeg",
+    "sourceSlide": "slide3.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image21.jpeg",
+    "sourceSlide": "slide4.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image22.jpeg",
+    "sourceSlide": "slide4.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image23.jpeg",
+    "sourceSlide": "slide4.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image24.jpeg",
+    "sourceSlide": "slide4.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image25.jpeg",
+    "sourceSlide": "slide5.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image26.jpeg",
+    "sourceSlide": "slide5.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image27.jpeg",
+    "sourceSlide": "slide5.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image28.jpeg",
+    "sourceSlide": "slide6.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image29.jpeg",
+    "sourceSlide": "slide6.xml"
+  },
+  {
+    "branchName": "강남영동",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image30.jpeg",
+    "sourceSlide": "slide6.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image32.png",
+    "sourceSlide": "slide7.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image33.png",
+    "sourceSlide": "slide7.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image34.png",
+    "sourceSlide": "slide7.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image35.png",
+    "sourceSlide": "slide7.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image36.png",
+    "sourceSlide": "slide8.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image37.png",
+    "sourceSlide": "slide8.xml"
+  },
+  {
+    "branchName": "강남",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image38.png",
+    "sourceSlide": "slide8.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image39.jpeg",
+    "sourceSlide": "slide9.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image40.jpeg",
+    "sourceSlide": "slide9.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image41.jpeg",
+    "sourceSlide": "slide9.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image42.jpeg",
+    "sourceSlide": "slide9.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image43.jpeg",
+    "sourceSlide": "slide10.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image44.jpeg",
+    "sourceSlide": "slide10.xml"
+  },
+  {
+    "branchName": "경기광주",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image45.jpeg",
+    "sourceSlide": "slide10.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image46.jpeg",
+    "sourceSlide": "slide13.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image47.jpeg",
+    "sourceSlide": "slide13.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image48.jpeg",
+    "sourceSlide": "slide13.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image49.jpeg",
+    "sourceSlide": "slide13.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image50.jpeg",
+    "sourceSlide": "slide14.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image51.jpeg",
+    "sourceSlide": "slide14.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image52.jpeg",
+    "sourceSlide": "slide14.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image53.jpeg",
+    "sourceSlide": "slide14.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image55.jpeg",
+    "sourceSlide": "slide15.xml"
+  },
+  {
+    "branchName": "교대역",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image56.jpeg",
+    "sourceSlide": "slide15.xml"
+  },
+  {
+    "branchName": "금천",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image58.png",
+    "sourceSlide": "slide18.xml"
+  },
+  {
+    "branchName": "금천",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image59.png",
+    "sourceSlide": "slide18.xml"
+  },
+  {
+    "branchName": "금천",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image60.png",
+    "sourceSlide": "slide18.xml"
+  },
+  {
+    "branchName": "대치",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image62.png",
+    "sourceSlide": "slide19.xml"
+  },
+  {
+    "branchName": "대치",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image63.png",
+    "sourceSlide": "slide19.xml"
+  },
+  {
+    "branchName": "대치",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image64.png",
+    "sourceSlide": "slide19.xml"
+  },
+  {
+    "branchName": "대치",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image65.png",
+    "sourceSlide": "slide19.xml"
+  },
+  {
+    "branchName": "대치갤러리",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image66.jpeg",
+    "sourceSlide": "slide20.xml"
+  },
+  {
+    "branchName": "대치갤러리",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image67.jpeg",
+    "sourceSlide": "slide20.xml"
+  },
+  {
+    "branchName": "대치갤러리",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image68.jpeg",
+    "sourceSlide": "slide20.xml"
+  },
+  {
+    "branchName": "대치갤러리",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image69.jpeg",
+    "sourceSlide": "slide20.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image70.jpeg",
+    "sourceSlide": "slide21.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image71.jpeg",
+    "sourceSlide": "slide21.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image72.jpeg",
+    "sourceSlide": "slide21.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image73.jpeg",
+    "sourceSlide": "slide21.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image74.jpeg",
+    "sourceSlide": "slide22.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image75.jpeg",
+    "sourceSlide": "slide22.xml"
+  },
+  {
+    "branchName": "도곡",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image76.jpeg",
+    "sourceSlide": "slide22.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image77.jpeg",
+    "sourceSlide": "slide23.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image78.jpeg",
+    "sourceSlide": "slide23.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image79.jpeg",
+    "sourceSlide": "slide23.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image80.jpeg",
+    "sourceSlide": "slide23.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image81.jpeg",
+    "sourceSlide": "slide24.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image82.jpeg",
+    "sourceSlide": "slide24.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image83.jpeg",
+    "sourceSlide": "slide24.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image84.jpeg",
+    "sourceSlide": "slide24.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image85.jpeg",
+    "sourceSlide": "slide25.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image86.jpeg",
+    "sourceSlide": "slide25.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image87.jpeg",
+    "sourceSlide": "slide25.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image89.jpeg",
+    "sourceSlide": "slide26.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image90.jpeg",
+    "sourceSlide": "slide26.xml"
+  },
+  {
+    "branchName": "미사",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image91.jpeg",
+    "sourceSlide": "slide26.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image92.emf",
+    "sourceSlide": "slide27.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image93.emf",
+    "sourceSlide": "slide27.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image94.emf",
+    "sourceSlide": "slide27.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image95.emf",
+    "sourceSlide": "slide27.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image96.emf",
+    "sourceSlide": "slide28.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image97.emf",
+    "sourceSlide": "slide28.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image98.emf",
+    "sourceSlide": "slide28.xml"
+  },
+  {
+    "branchName": "반포",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image99.png",
+    "sourceSlide": "slide28.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image100.jpeg",
+    "sourceSlide": "slide29.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image101.jpeg",
+    "sourceSlide": "slide29.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image102.jpeg",
+    "sourceSlide": "slide29.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image103.jpeg",
+    "sourceSlide": "slide29.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image104.jpeg",
+    "sourceSlide": "slide30.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image105.jpeg",
+    "sourceSlide": "slide30.xml"
+  },
+  {
+    "branchName": "방배",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image106.jpeg",
+    "sourceSlide": "slide30.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image107.png",
+    "sourceSlide": "slide31.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image108.png",
+    "sourceSlide": "slide31.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image109.png",
+    "sourceSlide": "slide31.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image110.png",
+    "sourceSlide": "slide31.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image111.png",
+    "sourceSlide": "slide32.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image112.png",
+    "sourceSlide": "slide32.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image113.png",
+    "sourceSlide": "slide32.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image114.png",
+    "sourceSlide": "slide32.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image115.png",
+    "sourceSlide": "slide33.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image116.png",
+    "sourceSlide": "slide33.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image117.png",
+    "sourceSlide": "slide33.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image118.png",
+    "sourceSlide": "slide33.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image119.png",
+    "sourceSlide": "slide34.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image120.png",
+    "sourceSlide": "slide34.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image121.png",
+    "sourceSlide": "slide34.xml"
+  },
+  {
+    "branchName": "분당",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image122.png",
+    "sourceSlide": "slide34.xml"
+  },
+  {
+    "branchName": "분당중앙",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image123.png",
+    "sourceSlide": "slide35.xml"
+  },
+  {
+    "branchName": "분당중앙",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image124.png",
+    "sourceSlide": "slide35.xml"
+  },
+  {
+    "branchName": "분당중앙",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image125.png",
+    "sourceSlide": "slide35.xml"
+  },
+  {
+    "branchName": "분당중앙",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image126.png",
+    "sourceSlide": "slide35.xml"
+  },
+  {
+    "branchName": "분당중앙",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image127.png",
+    "sourceSlide": "slide36.xml"
+  },
+  {
+    "branchName": "분당중앙",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image128.png",
+    "sourceSlide": "slide36.xml"
+  },
+  {
+    "branchName": "사당",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image131.jpeg",
+    "sourceSlide": "slide37.xml"
+  },
+  {
+    "branchName": "사당",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image132.jpeg",
+    "sourceSlide": "slide37.xml"
+  },
+  {
+    "branchName": "사당",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image133.jpeg",
+    "sourceSlide": "slide37.xml"
+  },
+  {
+    "branchName": "사당",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image134.jpeg",
+    "sourceSlide": "slide37.xml"
+  },
+  {
+    "branchName": "서초남부",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image135.jpeg",
+    "sourceSlide": "slide38.xml"
+  },
+  {
+    "branchName": "서초남부",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image136.jpeg",
+    "sourceSlide": "slide38.xml"
+  },
+  {
+    "branchName": "서초남부",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image137.jpeg",
+    "sourceSlide": "slide38.xml"
+  },
+  {
+    "branchName": "서초남부",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image138.jpeg",
+    "sourceSlide": "slide38.xml"
+  },
+  {
+    "branchName": "서초남부",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image139.jpeg",
+    "sourceSlide": "slide39.xml"
+  },
+  {
+    "branchName": "서초남부",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image140.jpeg",
+    "sourceSlide": "slide39.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image143.jpeg",
+    "sourceSlide": "slide40.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image144.jpeg",
+    "sourceSlide": "slide40.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image145.jpeg",
+    "sourceSlide": "slide40.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image146.jpeg",
+    "sourceSlide": "slide40.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image147.jpeg",
+    "sourceSlide": "slide41.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image148.jpeg",
+    "sourceSlide": "slide41.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image149.jpeg",
+    "sourceSlide": "slide41.xml"
+  },
+  {
+    "branchName": "서초",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image150.jpeg",
+    "sourceSlide": "slide41.xml"
+  },
+  {
+    "branchName": "성남",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image151.png",
+    "sourceSlide": "slide42.xml"
+  },
+  {
+    "branchName": "성남",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image152.png",
+    "sourceSlide": "slide42.xml"
+  },
+  {
+    "branchName": "성남",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image153.png",
+    "sourceSlide": "slide42.xml"
+  },
+  {
+    "branchName": "성남",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image154.png",
+    "sourceSlide": "slide42.xml"
+  },
+  {
+    "branchName": "송파",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image156.jpeg",
+    "sourceSlide": "slide43.xml"
+  },
+  {
+    "branchName": "송파",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image157.jpeg",
+    "sourceSlide": "slide43.xml"
+  },
+  {
+    "branchName": "송파",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image158.jpeg",
+    "sourceSlide": "slide43.xml"
+  },
+  {
+    "branchName": "송파",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image159.jpeg",
+    "sourceSlide": "slide43.xml"
+  },
+  {
+    "branchName": "송파",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image160.jpeg",
+    "sourceSlide": "slide44.xml"
+  },
+  {
+    "branchName": "송파",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image161.jpeg",
+    "sourceSlide": "slide44.xml"
+  },
+  {
+    "branchName": "압구정",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image162.jpeg",
+    "sourceSlide": "slide45.xml"
+  },
+  {
+    "branchName": "압구정",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image163.jpeg",
+    "sourceSlide": "slide45.xml"
+  },
+  {
+    "branchName": "압구정",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image164.jpeg",
+    "sourceSlide": "slide45.xml"
+  },
+  {
+    "branchName": "압구정",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image165.jpeg",
+    "sourceSlide": "slide45.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image167.png",
+    "sourceSlide": "slide46.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image168.jpeg",
+    "sourceSlide": "slide46.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image169.jpeg",
+    "sourceSlide": "slide46.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image170.jpeg",
+    "sourceSlide": "slide46.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image171.jpeg",
+    "sourceSlide": "slide47.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image172.jpeg",
+    "sourceSlide": "slide47.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image173.jpeg",
+    "sourceSlide": "slide47.xml"
+  },
+  {
+    "branchName": "오금",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image174.jpeg",
+    "sourceSlide": "slide47.xml"
+  },
+  {
+    "branchName": "위례",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image177.jpeg",
+    "sourceSlide": "slide48.xml"
+  },
+  {
+    "branchName": "위례",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image178.jpeg",
+    "sourceSlide": "slide48.xml"
+  },
+  {
+    "branchName": "위례",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image179.jpeg",
+    "sourceSlide": "slide48.xml"
+  },
+  {
+    "branchName": "위례",
+    "branchType": "지점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image180.jpeg",
+    "sourceSlide": "slide48.xml"
+  },
+  {
+    "branchName": "잠실",
+    "branchType": "지점",
+    "itemType": "스펙보드",
+    "imageFile": "image181.png",
+    "sourceSlide": "slide49.xml"
+  },
+  {
+    "branchName": "잠실",
+    "branchType": "지점",
+    "itemType": "기타",
+    "imageFile": "image182.png",
+    "sourceSlide": "slide49.xml"
+  },
+  {
+    "branchName": "잠실",
+    "branchType": "지점",
+    "itemType": "현수막",
+    "imageFile": "image183.png",
+    "sourceSlide": "slide49.xml"
+  },
+  {
+    "branchName": "잠실",
+    "branchType": "지점",
+    "itemType": "포스터",
+    "imageFile": "image184.png",
+    "sourceSlide": "slide49.xml"
+  },
+  {
+    "branchName": "잠실",
+    "branchType": "지점",
+    "itemType": "배너",
+    "imageFile": "image185.png",
+    "sourceSlide": "slide50.xml"
+  },
+  {
+    "branchName": "잠실",
+    "branchType": "지점",
+    "itemType": "POP",
+    "imageFile": "image186.png",
+    "sourceSlide": "slide50.xml"
+  },
+  {
+    "branchName": "대원",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image189.jpeg",
+    "sourceSlide": "slide51.xml"
+  },
+  {
+    "branchName": "대원",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image190.jpeg",
+    "sourceSlide": "slide51.xml"
+  },
+  {
+    "branchName": "대원",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image191.jpeg",
+    "sourceSlide": "slide51.xml"
+  },
+  {
+    "branchName": "대원",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image192.jpeg",
+    "sourceSlide": "slide51.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image193.jpeg",
+    "sourceSlide": "slide52.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image194.jpeg",
+    "sourceSlide": "slide52.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image195.jpeg",
+    "sourceSlide": "slide52.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image196.jpeg",
+    "sourceSlide": "slide52.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image197.jpeg",
+    "sourceSlide": "slide53.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image198.jpeg",
+    "sourceSlide": "slide53.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image199.jpeg",
+    "sourceSlide": "slide53.xml"
+  },
+  {
+    "branchName": "대림",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image200.jpeg",
+    "sourceSlide": "slide53.xml"
+  },
+  {
+    "branchName": "독산",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image201.jpeg",
+    "sourceSlide": "slide54.xml"
+  },
+  {
+    "branchName": "동서",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image205.jpeg",
+    "sourceSlide": "slide55.xml"
+  },
+  {
+    "branchName": "동서",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image206.jpeg",
+    "sourceSlide": "slide55.xml"
+  },
+  {
+    "branchName": "동서",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image207.jpeg",
+    "sourceSlide": "slide55.xml"
+  },
+  {
+    "branchName": "동서",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image208.jpeg",
+    "sourceSlide": "slide55.xml"
+  },
+  {
+    "branchName": "삼전",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image209.png",
+    "sourceSlide": "slide56.xml"
+  },
+  {
+    "branchName": "삼전",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image210.png",
+    "sourceSlide": "slide56.xml"
+  },
+  {
+    "branchName": "오리",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image211.jpeg",
+    "sourceSlide": "slide57.xml"
+  },
+  {
+    "branchName": "오리",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image212.jpeg",
+    "sourceSlide": "slide57.xml"
+  },
+  {
+    "branchName": "오리",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image213.jpeg",
+    "sourceSlide": "slide57.xml"
+  },
+  {
+    "branchName": "오리",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image214.jpeg",
+    "sourceSlide": "slide57.xml"
+  },
+  {
+    "branchName": "오리",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image215.jpeg",
+    "sourceSlide": "slide58.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image217.jpeg",
+    "sourceSlide": "slide59.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image218.jpeg",
+    "sourceSlide": "slide59.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image219.jpeg",
+    "sourceSlide": "slide59.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image220.jpeg",
+    "sourceSlide": "slide59.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image224.jpeg",
+    "sourceSlide": "slide60.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image225.jpeg",
+    "sourceSlide": "slide60.xml"
+  },
+  {
+    "branchName": "태평역",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image226.jpeg",
+    "sourceSlide": "slide60.xml"
+  },
+  {
+    "branchName": "행복",
+    "branchType": "대리점",
+    "itemType": "현수막",
+    "imageFile": "image227.jpeg",
+    "sourceSlide": "slide61.xml"
+  },
+  {
+    "branchName": "행복",
+    "branchType": "대리점",
+    "itemType": "포스터",
+    "imageFile": "image228.jpeg",
+    "sourceSlide": "slide61.xml"
+  },
+  {
+    "branchName": "행복",
+    "branchType": "대리점",
+    "itemType": "배너",
+    "imageFile": "image229.jpeg",
+    "sourceSlide": "slide61.xml"
+  },
+  {
+    "branchName": "행복",
+    "branchType": "대리점",
+    "itemType": "POP",
+    "imageFile": "image230.jpeg",
+    "sourceSlide": "slide61.xml"
+  },
+  {
+    "branchName": "곤지암",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image231.jpeg",
+    "sourceSlide": "slide62.xml"
+  },
+  {
+    "branchName": "곤지암",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image232.jpeg",
+    "sourceSlide": "slide62.xml"
+  },
+  {
+    "branchName": "곤지암",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image233.jpeg",
+    "sourceSlide": "slide62.xml"
+  },
+  {
+    "branchName": "곤지암",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image234.jpeg",
+    "sourceSlide": "slide62.xml"
+  },
+  {
+    "branchName": "동산로",
+    "branchType": "대리점",
+    "itemType": "포스터",
+    "imageFile": "image237.jpeg",
+    "sourceSlide": "slide63.xml"
+  },
+  {
+    "branchName": "동산로",
+    "branchType": "대리점",
+    "itemType": "배너",
+    "imageFile": "image238.jpeg",
+    "sourceSlide": "slide63.xml"
+  },
+  {
+    "branchName": "동산로",
+    "branchType": "대리점",
+    "itemType": "POP",
+    "imageFile": "image239.jpeg",
+    "sourceSlide": "slide63.xml"
+  },
+  {
+    "branchName": "샬롬",
+    "branchType": "대리점",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image241.jpeg",
+    "sourceSlide": "slide64.xml"
+  },
+  {
+    "branchName": "역삼",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image243.jpeg",
+    "sourceSlide": "slide65.xml"
+  },
+  {
+    "branchName": "역삼",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image244.jpeg",
+    "sourceSlide": "slide65.xml"
+  },
+  {
+    "branchName": "역삼",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image245.jpeg",
+    "sourceSlide": "slide65.xml"
+  },
+  {
+    "branchName": "역삼",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image246.jpeg",
+    "sourceSlide": "slide65.xml"
+  },
+  {
+    "branchName": "우리들",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image247.jpeg",
+    "sourceSlide": "slide66.xml"
+  },
+  {
+    "branchName": "우리들",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image248.jpeg",
+    "sourceSlide": "slide66.xml"
+  },
+  {
+    "branchName": "탑",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image253.jpeg",
+    "sourceSlide": "slide67.xml"
+  },
+  {
+    "branchName": "탑",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image254.jpeg",
+    "sourceSlide": "slide67.xml"
+  },
+  {
+    "branchName": "탑",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image255.jpeg",
+    "sourceSlide": "slide67.xml"
+  },
+  {
+    "branchName": "서현",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image258.png",
+    "sourceSlide": "slide69.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image259.jpeg",
+    "sourceSlide": "slide70.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image260.jpeg",
+    "sourceSlide": "slide70.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image261.jpeg",
+    "sourceSlide": "slide70.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image264.jpeg",
+    "sourceSlide": "slide71.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image265.jpeg",
+    "sourceSlide": "slide71.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image266.jpeg",
+    "sourceSlide": "slide71.xml"
+  },
+  {
+    "branchName": "경안",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image267.jpeg",
+    "sourceSlide": "slide71.xml"
+  },
+  {
+    "branchName": "가산",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image269.png",
+    "sourceSlide": "slide72.xml"
+  },
+  {
+    "branchName": "가산",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image270.png",
+    "sourceSlide": "slide72.xml"
+  },
+  {
+    "branchName": "가산",
+    "branchType": "미확인",
+    "itemType": "POP",
+    "imageFile": "image271.png",
+    "sourceSlide": "slide72.xml"
+  },
+  {
+    "branchName": "숭실대",
+    "branchType": "미확인",
+    "itemType": "전단 및 인쇄물",
+    "imageFile": "image272.png",
+    "sourceSlide": "slide73.xml"
+  },
+  {
+    "branchName": "숭실대",
+    "branchType": "미확인",
+    "itemType": "스펙보드",
+    "imageFile": "image273.png",
+    "sourceSlide": "slide73.xml"
+  },
+  {
+    "branchName": "숭실대",
+    "branchType": "미확인",
+    "itemType": "기타",
+    "imageFile": "image274.png",
+    "sourceSlide": "slide73.xml"
+  },
+  {
+    "branchName": "토리",
+    "branchType": "미확인",
+    "itemType": "현수막",
+    "imageFile": "image275.jpeg",
+    "sourceSlide": "slide74.xml"
+  },
+  {
+    "branchName": "토리",
+    "branchType": "미확인",
+    "itemType": "포스터",
+    "imageFile": "image276.jpeg",
+    "sourceSlide": "slide74.xml"
+  },
+  {
+    "branchName": "토리",
+    "branchType": "미확인",
+    "itemType": "배너",
+    "imageFile": "image277.jpeg",
+    "sourceSlide": "slide74.xml"
+  }
+]
