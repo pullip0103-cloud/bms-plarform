@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { TACTILE_BUTTON } from "@/lib/tactileButton";
+
+// 현재는 남부지역본부 기준으로만 운영한다 (다른 지역본부 확장은 추후 작업).
+const NAMBU_REGION_ID = "DldQXEtf1cYJyUAtoVgx";
 
 export default function Home() {
   return (
@@ -6,19 +10,17 @@ export default function Home() {
       <div className="text-center space-y-4">
         <h1 className="text-xl font-bold">BMS 전수조사 시스템</h1>
         <p className="text-gray-500 text-sm">
-          지점/대리점 직원분은 아래 링크에서 소속 지역본부와 지점/대리점을 선택해주세요.
+          지점/대리점 직원분은 아래 링크에서 매장을 선택해주세요.
         </p>
         <Link
-          href="/s"
-          className="inline-block bg-gray-900 text-white rounded-lg px-6 py-2 font-medium"
+          href={`/s/${NAMBU_REGION_ID}`}
+          className={`${TACTILE_BUTTON} inline-block bg-gray-900 text-white px-8 py-4 text-base`}
         >
           지점/대리점 바로가기
         </Link>
-        <div>
-          <Link href="/login" className="text-sm text-blue-600 underline">
-            지역본부 · 본사 로그인
-          </Link>
-        </div>
+        <p className="text-xs text-gray-400 pt-4">
+          지역본부·본사 담당자는 각자 전달받은 전용 링크로 접속해주세요.
+        </p>
       </div>
     </div>
   );

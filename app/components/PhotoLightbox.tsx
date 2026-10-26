@@ -16,16 +16,17 @@ export default function PhotoLightbox({
   size?: "sm" | "md";
 }) {
   const [open, setOpen] = useState(false);
-  const thumbClass = size === "sm" ? "w-20 h-20" : "w-28 h-28 md:w-36 md:h-36";
+  const thumbClass = size === "sm" ? "w-28 h-28" : "w-36 h-36 md:w-44 md:h-44";
 
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} className="flex-shrink-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={photoUrl(path, 400)}
+          src={photoUrl(path, 600)}
           alt=""
-          className={`${thumbClass} object-cover rounded border cursor-zoom-in`}
+          style={{ maxWidth: "none" }}
+          className={`${thumbClass} object-contain bg-gray-50 rounded border cursor-zoom-in`}
         />
       </button>
 

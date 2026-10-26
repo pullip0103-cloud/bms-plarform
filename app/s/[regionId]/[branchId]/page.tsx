@@ -6,9 +6,12 @@ export const instant = false;
 
 export default async function BranchPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ regionId: string; branchId: string }>;
+  searchParams: Promise<{ roundId?: string }>;
 }) {
   const { regionId, branchId } = await params;
-  return <BranchClient regionId={regionId} branchId={branchId} />;
+  const { roundId } = await searchParams;
+  return <BranchClient regionId={regionId} branchId={branchId} roundId={roundId ?? null} />;
 }

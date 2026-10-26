@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireHq } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
 
 export async function POST(req: NextRequest) {
-  try {
-    await requireHq();
-  } catch {
-    return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 403 });
-  }
 
   const body = await req.json().catch(() => null);
   const name = (body?.name as string | undefined)?.trim();
@@ -34,11 +28,6 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  try {
-    await requireHq();
-  } catch {
-    return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 403 });
-  }
   const snap = await adminDb.collection("rounds").orderBy("createdAt", "desc").get();
   const rounds = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
   return NextResponse.json({ rounds });

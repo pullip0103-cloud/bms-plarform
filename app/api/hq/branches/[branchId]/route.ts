@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireHq } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 
 // 지점/대리점 구분 보정(PPT 추출 시 접미사가 생략되어 needsTypeReview=true로 들어온 건)
@@ -9,11 +8,6 @@ export async function PATCH(
   { params }: { params: Promise<{ branchId: string }> }
 ) {
   const { branchId } = await params;
-  try {
-    await requireHq();
-  } catch {
-    return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 403 });
-  }
 
   const body = await req.json().catch(() => null);
   const update: Record<string, unknown> = {};

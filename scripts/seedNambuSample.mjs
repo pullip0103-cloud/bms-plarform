@@ -106,7 +106,6 @@ for (const item of items) {
       note: null,
       status: "SUBMITTED",
       directiveCodeId: null,
-      regionRejectReason: null,
       actionPhotoPath: null,
       hqRejectReason: null,
       createdAt: Timestamp.now(),

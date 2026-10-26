@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireHq } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
 
@@ -9,11 +8,6 @@ type Row = { name: string; regionName: string; branchType?: string };
 // 토큰 발급은 필요 없음 — 등록 즉시 지역본부 선택 -> 지점 목록에 노출된다.
 // 지역본부명은 기존 regions 컬렉션의 name과 매칭하며, 없으면 해당 행은 오류로 보고한다.
 export async function POST(req: NextRequest) {
-  try {
-    await requireHq();
-  } catch {
-    return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 403 });
-  }
 
   const body = await req.json().catch(() => null);
   const rows = body?.rows as Row[] | undefined;

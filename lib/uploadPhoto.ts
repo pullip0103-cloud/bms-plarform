@@ -3,9 +3,12 @@ import imageCompression from "browser-image-compression";
 /**
  * 모바일 카메라 원본(3~8MB)을 그대로 올리면 1,000명 규모 동시 업로드 시
  * 트래픽/용량이 급격히 늘어난다. 전송 전 브라우저에서 가로 1600px급으로
- * 리사이즈/압축한 뒤, 서버에서 발급받은 서명(signature)으로 Cloudinary에
- * 직접 전송한다 (Next.js 서버 함수를 거치지 않음 — 대량 동시 업로드에도
- * 서버가 막히지 않도록).
+ * 리사이즈/압축한 뒤, Next.js 서버를 거쳐 Cloudinary에 업로드한다.
+ *
+ * (서버를 거치지 않고 브라우저가 Cloudinary에 직접 업로드하던 이전 방식은
+ * 회사 PC/망의 SSL 인증서 폐지 확인 정책이 api.cloudinary.com 직접 연결을
+ * 차단해 "Failed to fetch"로 실패했다 — lib/cloudinary.ts 주석 참고. 사진이
+ * 이미 압축된 상태로만 서버를 거치므로 서버 부담은 크지 않다.)
  */
 export async function compressAndUpload(
   file: File,
@@ -20,22 +23,11 @@ export async function compressAndUpload(
     initialQuality: 0.7,
   });
 
-  const signRes = await fetch(`/api/branch/${branchId}/upload-url`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ kind }),
-  });
-  if (!signRes.ok) throw new Error("업로드 준비에 실패했습니다. 다시 시도해주세요.");
-  const { timestamp, signature, apiKey, cloudName, folder } = await signRes.json();
-
   const form = new FormData();
   form.append("file", compressed);
-  form.append("timestamp", String(timestamp));
-  form.append("signature", signature);
-  form.append("api_key", apiKey);
-  form.append("folder", folder);
+  form.append("kind", kind);
 
-  const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+  const uploadRes = await fetch(`/api/branch/${branchId}/upload`, {
     method: "POST",
     body: form,
   });

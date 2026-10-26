@@ -3,7 +3,10 @@ import { resolveBranchContext } from "@/lib/branchAuth";
 import { adminDb } from "@/lib/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
 
-// 지역본부 반려(REGION_REJECTED) 건을 지점이 사진/비고를 고쳐 다시 제출 -> SUBMITTED로 복귀
+// 지점이 이미 등록한 제작물의 비고를 고친다. 사진은 한꺼번에 갤러리에서
+// 올리고 비고는 필요한 건만 나중에 따로 채우는 사용 흐름을 지원하기 위함.
+// 신규 등록과 같은 잠금 규칙을 쓴다 — 지역본부가 제작물 전송을 마감했거나
+// 본사가 마감한 뒤에는 더 이상 고칠 수 없다.
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ branchId: string; itemId: string }> }
@@ -13,41 +16,32 @@ export async function PATCH(
   if (!ctx) {
     return NextResponse.json({ error: "INVALID_BRANCH_OR_NO_ACTIVE_ROUND" }, { status: 404 });
   }
-  // 지역본부가 제출을 완료했거나 본사가 마감한 뒤에는 재제출을 받지 않는다.
-  if (ctx.isRegionSubmitted || ctx.isRegionClosed) {
+  if (ctx.submissionRegionClosed || ctx.submissionHqClosed || ctx.submissionCompleted) {
     return NextResponse.json({ error: "REGION_LOCKED" }, { status: 409 });
+  }
+
+  const body = await req.json().catch(() => null);
+  const update: Record<string, unknown> = {};
+
+  if (body?.note !== undefined) {
+    update.note = (body.note as string).trim() || null;
+  }
+  if (Object.keys(update).length === 0) {
+    return NextResponse.json({ error: "NO_FIELDS" }, { status: 400 });
   }
 
   const itemRef = adminDb.collection("items").doc(itemId);
   const existing = await itemRef.get();
-  if (!existing.exists || existing.data()!.branchId !== ctx.branchId) {
+  if (
+    !existing.exists ||
+    existing.data()!.branchId !== ctx.branchId ||
+    existing.data()!.roundId !== ctx.roundId
+  ) {
     return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
   }
-  if (existing.data()!.status !== "REGION_REJECTED") {
-    return NextResponse.json({ error: "NOT_EDITABLE" }, { status: 409 });
-  }
 
-  const body = await req.json().catch(() => null);
-  const photoPath = body?.photoPath as string | undefined;
-  const note = body?.note as string | undefined;
-
-  const update: Record<string, unknown> = {
-    status: "SUBMITTED",
-    regionRejectReason: null,
-    updatedAt: Timestamp.now(),
-  };
-  if (photoPath) update.photoPath = photoPath;
-  if (note !== undefined) update.note = note;
-
+  update.updatedAt = Timestamp.now();
   await itemRef.update(update);
-
-  await adminDb.collection("itemStatusLog").add({
-    itemId,
-    fromStatus: "REGION_REJECTED",
-    toStatus: "SUBMITTED",
-    actorRole: "branch",
-    createdAt: Timestamp.now(),
-  });
 
   const updated = await itemRef.get();
   return NextResponse.json({ item: { id: itemId, ...updated.data() } });

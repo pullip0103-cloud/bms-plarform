@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireHq } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
 
 export async function GET(req: NextRequest) {
-  try {
-    await requireHq();
-  } catch {
-    return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 403 });
-  }
   const roundId = req.nextUrl.searchParams.get("roundId");
   if (!roundId) return NextResponse.json({ error: "ROUND_ID_REQUIRED" }, { status: 400 });
 
@@ -22,11 +16,6 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  try {
-    await requireHq();
-  } catch {
-    return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 403 });
-  }
 
   const body = await req.json().catch(() => null);
   const roundId = body?.roundId as string | undefined;
