@@ -47,10 +47,10 @@ export default async function RegionPage({
         directivePublished: false,
       };
   const completedSubmissionIds = selectedRound
-    ? await getCompletedBranchIds(selectedRound.id, "submission")
+    ? await getCompletedBranchIds(selectedRound.id, regionId, "submission")
     : new Set<string>();
   const completedActionIds = selectedRound
-    ? await getCompletedBranchIds(selectedRound.id, "action")
+    ? await getCompletedBranchIds(selectedRound.id, regionId, "action")
     : new Set<string>();
 
   // regionId만으로 조회한 뒤 roundId는 메모리에서 거른다 — regionId+roundId

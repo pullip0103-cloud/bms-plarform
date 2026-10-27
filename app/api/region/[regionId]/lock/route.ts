@@ -55,7 +55,7 @@ export async function POST(
       .where("regionId", "==", regionId)
       .where("isActive", "==", true)
       .get();
-    const completedIds = await getCompletedBranchIds(roundId, process);
+    const completedIds = await getCompletedBranchIds(roundId, regionId, process);
     const incomplete = branchesSnap.docs.filter((d) => !completedIds.has(d.id));
     if (incomplete.length > 0) {
       return NextResponse.json(

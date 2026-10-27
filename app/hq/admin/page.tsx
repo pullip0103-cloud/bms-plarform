@@ -54,8 +54,8 @@ export default async function AdminPage() {
     // 입력 두 프로세스 각각 마감했는지를 본사가 한눈에 볼 수 있어야 한다
     // (펼치면 전체 목록이 마감/미마감 뱃지로 보임).
     const [completedSubmissionIds, completedActionIds] = await Promise.all([
-      getCompletedBranchIds(activeRound.id, "submission"),
-      getCompletedBranchIds(activeRound.id, "action"),
+      getCompletedBranchIds(activeRound.id, null, "submission"),
+      getCompletedBranchIds(activeRound.id, null, "action"),
     ]);
     const activeBranches = branches.filter((b) => b.isActive);
     regionStatuses = await Promise.all(
