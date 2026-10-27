@@ -197,13 +197,11 @@ export default function BranchClient({
           </p>
         )}
 
-        {/* 단계별로 필요한 버튼 하나만 보여준다 — 조치가 필요한 지침이
-            배정된 건이 하나라도 있으면(hasActionItem) 이제부터는 조치결과
-            입력 단계이므로 제작물 전송 섹션은 완전히 숨기고, 아니면 아직
-            제작물 전송 단계이므로 조치결과 입력 섹션을 숨긴다. 두 버튼이
-            동시에 보이면 지금 뭘 해야 하는지 헷갈린다는 사용자 피드백으로
-            단계 분리(2026-10-27). */}
-        {!ctx.isPastRound && !hasActionItem && (
+        {/* 제작물 전송 섹션은 항상 보인다 — 조치결과 단계가 시작된 뒤에도
+            새 제작물이 추가로 등록될 수 있어서 누적으로 남겨둔다. 조치결과
+            섹션은 본사가 조치 지침을 배포해 조치가 필요한 건이 생긴
+            시점부터(hasActionItem) 추가로 나타난다(2026-10-27). */}
+        {!ctx.isPastRound && (
           <div className="flex flex-wrap gap-2">
             {ctx.submissionHqClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
@@ -252,26 +250,22 @@ export default function BranchClient({
       </header>
 
       <main className="px-4 md:px-6 py-4">
-        {!hasActionItem && (
-          <>
-            {ctx.submissionHqClosed ? (
-              <p className="text-base text-gray-600 bg-gray-100 border rounded-lg p-3 mb-3">
-                본사가 제작물 전송을 마감했습니다. 더 이상 등록/수정이 불가합니다.
-              </p>
-            ) : ctx.submissionRegionClosed ? (
-              <p className="text-base text-gray-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
-                지역본부에서 제작물 전송을 마감했습니다. 새 제작물은 추가할 수 없습니다.
-              </p>
-            ) : ctx.submissionCompleted ? (
-              <p className="text-base text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
-                제작물 전송이 마감 처리되었습니다. 더 등록할 내용이 있으면 위의 &quot;제작물 전송 수정&quot; 버튼을 눌러주세요.
-              </p>
-            ) : (
-              <p className="text-base text-gray-600 mb-3">
-                매장 내 제작물 사진을 아래 빈 칸의 버튼을 눌러 등록해주세요. 등록을 마치면 &quot;제작물 전송 마감&quot; 버튼을 눌러주세요.
-              </p>
-            )}
-          </>
+        {ctx.submissionHqClosed ? (
+          <p className="text-base text-gray-600 bg-gray-100 border rounded-lg p-3 mb-3">
+            본사가 제작물 전송을 마감했습니다. 더 이상 등록/수정이 불가합니다.
+          </p>
+        ) : ctx.submissionRegionClosed ? (
+          <p className="text-base text-gray-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
+            지역본부에서 제작물 전송을 마감했습니다. 새 제작물은 추가할 수 없습니다.
+          </p>
+        ) : ctx.submissionCompleted ? (
+          <p className="text-base text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+            제작물 전송이 마감 처리되었습니다. 더 등록할 내용이 있으면 위의 &quot;제작물 전송 수정&quot; 버튼을 눌러주세요.
+          </p>
+        ) : (
+          <p className="text-base text-gray-600 mb-3">
+            매장 내 제작물 사진을 아래 빈 칸의 버튼을 눌러 등록해주세요. 등록을 마치면 &quot;제작물 전송 마감&quot; 버튼을 눌러주세요.
+          </p>
         )}
 
         {/* 조치가 필요한 지침이 배정된 건이 하나도 없으면(= 조치결과 입력

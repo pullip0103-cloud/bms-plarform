@@ -87,6 +87,11 @@ export default function RegionBoard({
   const incompleteAction = branches.filter((b) => !b.actionCompleted);
   const allSubmissionComplete = incompleteSubmission.length === 0;
   const allActionComplete = incompleteAction.length === 0;
+  // 본사가 조치 지침을 배포해 조치가 필요한 건이 하나라도 생기면 그때부터
+  // 조치결과 입력 버튼/경고를 "추가로" 보여준다. 제작물 전송 버튼은 조치
+  // 단계가 시작된 뒤에도 계속 보인다 — 조치결과 단계에서도 새 제작물이
+  // 등록될 수 있기 때문(지점/대리점용과 같은 원칙, 2026-10-27).
+  const hasActionItem = items.some((i) => i.directiveCode?.requiresAction);
 
   const branchesForFilter =
     branchTypeFilter === "ALL" ? branches : branches.filter((b) => b.branchType === branchTypeFilter);
@@ -230,6 +235,9 @@ export default function RegionBoard({
           </p>
         )}
 
+        {/* 제작물 전송 버튼은 항상 보인다 — 조치 단계가 시작된 뒤에도 새
+            제작물이 추가로 등록될 수 있어서 누적으로 남겨둔다. 조치결과
+            버튼은 조치가 필요한 지침이 배포된 시점부터 추가로 나타난다. */}
         {activeRoundName && !isPastRound && (
           <div className="flex flex-wrap gap-2">
             {lock.submissionHqClosed ? (
@@ -253,7 +261,10 @@ export default function RegionBoard({
                   : `제작물 전송 지역본부 마감 (${branches.length - incompleteSubmission.length}/${branches.length})`}
               </button>
             )}
-
+          </div>
+        )}
+        {activeRoundName && !isPastRound && hasActionItem && (
+          <div className="flex flex-wrap gap-2">
             {lock.actionHqClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
                 본사 조치결과 마감됨
@@ -289,7 +300,7 @@ export default function RegionBoard({
           </div>
         )}
 
-        {!isPastRound && !lock.actionHqClosed && !lock.actionRegionClosed && incompleteAction.length > 0 && (
+        {!isPastRound && hasActionItem && !lock.actionHqClosed && !lock.actionRegionClosed && incompleteAction.length > 0 && (
           <div className="border border-amber-200 bg-amber-50 rounded-lg p-3">
             <p className="text-base font-medium text-amber-800 mb-1">
               아직 조치결과 입력을 마감하지 않은 지점/대리점 ({incompleteAction.length}곳)
