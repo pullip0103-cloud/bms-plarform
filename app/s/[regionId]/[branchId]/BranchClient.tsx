@@ -250,7 +250,12 @@ export default function BranchClient({
       </header>
 
       <main className="px-4 md:px-6 py-4">
-        {ctx.submissionHqClosed ? (
+        {/* 본사가 조치 지침을 배포한 뒤에는(hasActionItem) "본사가 제작물
+            전송을 마감했습니다" 같은 제작물 전송 단계 안내문이 더 이상
+            의미가 없으므로 숨기고, 조치결과 단계 안내문만 보여준다. 단,
+            지역본부 단계의 제작물 전송 마감 안내(submissionRegionClosed)는
+            본사 지침 배포와 무관하게 여전히 유효한 정보라 계속 보여준다. */}
+        {!hasActionItem && ctx.submissionHqClosed ? (
           <p className="text-base text-gray-600 bg-gray-100 border rounded-lg p-3 mb-3">
             본사가 제작물 전송을 마감했습니다. 더 이상 등록/수정이 불가합니다.
           </p>
@@ -258,15 +263,15 @@ export default function BranchClient({
           <p className="text-base text-gray-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
             지역본부에서 제작물 전송을 마감했습니다. 새 제작물은 추가할 수 없습니다.
           </p>
-        ) : ctx.submissionCompleted ? (
+        ) : !hasActionItem && ctx.submissionCompleted ? (
           <p className="text-base text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
             제작물 전송이 마감 처리되었습니다. 더 등록할 내용이 있으면 위의 &quot;제작물 전송 수정&quot; 버튼을 눌러주세요.
           </p>
-        ) : (
+        ) : !hasActionItem ? (
           <p className="text-base text-gray-600 mb-3">
             매장 내 제작물 사진을 아래 빈 칸의 버튼을 눌러 등록해주세요. 등록을 마치면 &quot;제작물 전송 마감&quot; 버튼을 눌러주세요.
           </p>
-        )}
+        ) : null}
 
         {/* 조치가 필요한 지침이 배정된 건이 하나도 없으면(= 조치결과 입력
             자체가 이 지점에 해당 없음) 안내문을 보여주지 않는다. */}
@@ -286,7 +291,7 @@ export default function BranchClient({
               </p>
             ) : (
               <p className="text-base text-gray-600 mb-3">
-                조치가 필요한 항목에 조치결과 사진을 올려주세요. 올리기를 마치면 &quot;조치결과 입력 마감&quot; 버튼을 눌러주세요.
+                본사에서 조치지침을 배포했습니다. 조치가 필요한 항목에 조치결과 사진을 올려주세요. 조치결과 사진을 모두 올린 후 &quot;조치결과 입력 마감&quot; 버튼을 눌러주세요(조치결과 사진을 모두 올리지 않으면 마감 버튼이 눌러지지 않습니다).
               </p>
             )}
           </>
