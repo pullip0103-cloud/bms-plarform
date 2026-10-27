@@ -87,11 +87,14 @@ export default function RegionBoard({
   const incompleteAction = branches.filter((b) => !b.actionCompleted);
   const allSubmissionComplete = incompleteSubmission.length === 0;
   const allActionComplete = incompleteAction.length === 0;
-  // 본사가 조치 지침을 배포해 조치가 필요한 건이 하나라도 생기면 그때부터
-  // 조치결과 입력 버튼/경고를 "추가로" 보여준다. 제작물 전송 버튼은 조치
-  // 단계가 시작된 뒤에도 계속 보인다 — 조치결과 단계에서도 새 제작물이
-  // 등록될 수 있기 때문(지점/대리점용과 같은 원칙, 2026-10-27).
-  const hasActionItem = items.some((i) => i.directiveCode?.requiresAction);
+  // 본사가 조치 지침을 배정하면(directiveCode가 보이면) 그때부터 조치결과
+  // 입력 버튼/경고를 "추가로" 보여준다 — 전부 "유지"처럼 조치가 필요 없는
+  // 지침이어도 소속 지점/대리점이 조치결과 입력을 마감할 수 있어야 하므로
+  // 조치가 "필요한" 항목 존재 여부가 아니라 지침 배정 자체로 판단한다.
+  // 제작물 전송 버튼은 조치 단계가 시작된 뒤에도 계속 보인다 — 조치결과
+  // 단계에서도 새 제작물이 등록될 수 있기 때문(지점/대리점용과 같은
+  // 원칙, 2026-10-27).
+  const directiveStageStarted = items.some((i) => i.directiveCode !== null);
 
   const branchesForFilter =
     branchTypeFilter === "ALL" ? branches : branches.filter((b) => b.branchType === branchTypeFilter);
@@ -263,7 +266,7 @@ export default function RegionBoard({
             )}
           </div>
         )}
-        {activeRoundName && !isPastRound && hasActionItem && (
+        {activeRoundName && !isPastRound && directiveStageStarted && (
           <div className="flex flex-wrap gap-2">
             {lock.actionHqClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
@@ -300,7 +303,7 @@ export default function RegionBoard({
           </div>
         )}
 
-        {!isPastRound && hasActionItem && !lock.actionHqClosed && !lock.actionRegionClosed && incompleteAction.length > 0 && (
+        {!isPastRound && directiveStageStarted && !lock.actionHqClosed && !lock.actionRegionClosed && incompleteAction.length > 0 && (
           <div className="border border-amber-200 bg-amber-50 rounded-lg p-3">
             <p className="text-base font-medium text-amber-800 mb-1">
               아직 조치결과 입력을 마감하지 않은 지점/대리점 ({incompleteAction.length}곳)
