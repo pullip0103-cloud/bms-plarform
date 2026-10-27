@@ -10,7 +10,7 @@ import { getFirestore } from "firebase-admin/firestore";
 const OUT_PATH =
   "C:\\Onedrive_260729\\Hyundai Motor and Kia\\국내마케팅2팀 - AutoDocs\\35.리테일CX\\10.BMS 관리(판매채널)\\10.현장점검\\전수조사 플랫폼\\전수조사 플랫폼 링크 모음.pptx";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://bms-plarform-1.onrender.com";
 
 const FONT_BOLD = "기아 시그니처 OTF Bold";
 const FONT_REGULAR = "기아 시그니처 OTF Regular";
@@ -134,7 +134,7 @@ function linkRows(urlBuilder) {
     }
   );
   slide.addText(
-    "※ 현재는 로컬 테스트 서버(http://localhost:3000)에서만 접속 가능합니다. 이 PC에서 서버를 켜둔 상태에서만 아래 링크들이 동작합니다.\n※ 로그인은 없습니다 — 링크 자체가 접근 권한입니다 (추후 더 정교한 보안 방식으로 교체 예정).",
+    "※ 인터넷 어디서든(PC·모바일) 접속 가능합니다 — Render.com에 배포되어 있습니다.\n※ 로그인은 없습니다 — 링크 자체가 접근 권한입니다. 지역본부/지점용 링크는 역할별로 따로 전달해주세요.",
     {
       x: 0.8,
       y: 5.2,
@@ -199,19 +199,23 @@ function linkRows(urlBuilder) {
   const slide = pptx.addSlide();
   addHeader(slide, "3. 본사(마케팅팀)용 링크 및 화면별 요약");
 
-  const hqRegionUrl = regions[0] ? `${BASE_URL}/hq/${regions[0].id}` : `${BASE_URL}/hq`;
+  const hqRegionUrl = regions[0] ? `${BASE_URL}/hq/${regions[0].id}` : `${BASE_URL}/hq/admin`;
   slide.addText(
     [
-      { text: "지역본부 선택(랜딩): ", options: { fontFace: FONT_BOLD, fontSize: 13, color: DARK } },
+      { text: "관리 설정(본사 유일 진입점): ", options: { fontFace: FONT_BOLD, fontSize: 13, color: DARK } },
       {
-        text: `${BASE_URL}/hq`,
+        text: `${BASE_URL}/hq/admin`,
         options: {
           fontFace: FONT_REGULAR,
           fontSize: 13,
           color: "1155CC",
           underline: true,
-          hyperlink: { url: `${BASE_URL}/hq` },
+          hyperlink: { url: `${BASE_URL}/hq/admin` },
         },
+      },
+      {
+        text: "  (반기 라운드 / 처리지침 코드 / 지점 관리 / 지역본부별 마감 현황 / 공유 링크 발급)",
+        options: { fontFace: FONT_REGULAR, fontSize: 11, color: GRAY },
       },
     ],
     { x: 0.5, y: 1.5, w: 12, h: 0.35 }
@@ -233,28 +237,8 @@ function linkRows(urlBuilder) {
     { x: 0.5, y: 1.9, w: 12, h: 0.35 }
   );
   slide.addText(
-    [
-      { text: "관리 설정: ", options: { fontFace: FONT_BOLD, fontSize: 13, color: DARK } },
-      {
-        text: `${BASE_URL}/hq/admin`,
-        options: {
-          fontFace: FONT_REGULAR,
-          fontSize: 13,
-          color: "1155CC",
-          underline: true,
-          hyperlink: { url: `${BASE_URL}/hq/admin` },
-        },
-      },
-      {
-        text: "  (반기 라운드 / 처리지침 코드 / 지점 관리 / 링크 발급) — 추후 작업",
-        options: { fontFace: FONT_REGULAR, fontSize: 11, color: GRAY },
-      },
-    ],
-    { x: 0.5, y: 2.3, w: 12, h: 0.35 }
-  );
-  slide.addText(
-    "본사는 /hq에서 지역본부를 먼저 선택한 뒤 그 지역본부의 전체 현황으로 들어갑니다. 지역본부 확인 여부와 무관하게 항상 전체 건이 표시됩니다.",
-    { x: 0.5, y: 2.75, w: 12, h: 0.4, fontFace: FONT_REGULAR, fontSize: 11, color: GRAY }
+    "본사는 /hq/admin(관리 설정)에서 지역본부별 현황을 확인하고, 지역본부명을 눌러 그 지역본부의 전체 현황으로 들어갑니다. 지역본부 확인 여부와 무관하게 항상 전체 건이 표시됩니다.",
+    { x: 0.5, y: 2.4, w: 12, h: 0.4, fontFace: FONT_REGULAR, fontSize: 11, color: GRAY }
   );
 
   const rows = [
@@ -366,7 +350,7 @@ function linkRows(urlBuilder) {
     "지점/대리점용 화면 버튼을 크고 입체감 있게(눌리는 느낌) 변경, PC는 지역본부·본사와 동일한 표 양식, 모바일은 사진 찍기 쉬운 카드형",
     "처리 지침 코드를 실제 지침 문서의 ①~⑦ 7종 그대로 재시딩 완료",
     "현재는 본사·지역본부·지점/대리점 전체 프로세스를 남부지역본부 하나로만 한정해 다듬는 중 (다른 지역본부 확장, /hq/admin 재구성은 추후)",
-    "아직 실제 인터넷 배포 전 — 로컬 PC에서 서버를 켜둔 상태에서만 접속 가능 (배포 시 회사 PC·모바일 모두 접속 가능하도록 Railway 호스팅 사전 체크 완료)",
+    "실제 인터넷 배포 완료(2026-10-27, Render.com) — PC·모바일 어디서든 접속 가능. 지점/대리점용은 모바일 접속이 핵심이라 모바일 카드형 레이아웃으로 확인 완료, 지역본부/본사용은 PC 위주로 운영.",
   ];
   slide.addText(
     bullets.map((b) => ({ text: b, options: { bullet: { code: "2022" }, breakLine: true } })),
