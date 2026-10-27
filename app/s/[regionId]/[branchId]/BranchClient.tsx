@@ -103,6 +103,16 @@ export default function BranchClient({
     setItems((prev) => prev.map((i) => (i.id === itemId ? { ...i, ...item } : i)));
   }
 
+  async function deleteItem(itemId: string) {
+    if (!confirm("이 제작물을 삭제할까요? 되돌릴 수 없습니다.")) return;
+    const res = await fetch(`/api/branch/${branchId}/items/${itemId}`, { method: "DELETE" });
+    if (!res.ok) {
+      alert("삭제에 실패했습니다. 다시 시도해주세요.");
+      return;
+    }
+    setItems((prev) => prev.filter((i) => i.id !== itemId));
+  }
+
   async function toggleLock(process: "submission" | "action") {
     const setBusy = process === "submission" ? setSubmissionBusy : setActionBusy;
     setBusy(true);
@@ -163,7 +173,7 @@ export default function BranchClient({
             </select>
             <button
               onClick={() => load()}
-              className="text-sm text-gray-500 border rounded px-3 py-1.5 whitespace-nowrap"
+              className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap`}
             >
               새로고침
             </button>
@@ -270,6 +280,7 @@ export default function BranchClient({
               key={item.id}
               item={item}
               onPatch={(body) => patchItem(item.id, body)}
+              onDelete={() => deleteItem(item.id)}
               fullyLocked={submissionLocked || ctx.submissionCompleted}
               actionLocked={actionLocked || ctx.actionCompleted}
               onPickAction={() => setActionTarget(item.id)}
@@ -292,7 +303,8 @@ export default function BranchClient({
                 <th className="text-left px-4 py-3 font-semibold border-r">비고</th>
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">처리 지침</th>
                 <th className="text-left px-4 py-3 font-semibold border-r">처리 결과</th>
-                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap">상태</th>
+                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">상태</th>
+                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap"></th>
               </tr>
             </thead>
             <tbody>
@@ -304,6 +316,7 @@ export default function BranchClient({
                   branchName={ctx.branchName}
                   branchType={ctx.branchType}
                   onPatch={(body) => patchItem(item.id, body)}
+                  onDelete={() => deleteItem(item.id)}
                   fullyLocked={submissionLocked || ctx.submissionCompleted}
                   actionLocked={actionLocked || ctx.actionCompleted}
                   onPickAction={() => setActionTarget(item.id)}
@@ -319,7 +332,7 @@ export default function BranchClient({
               )}
               {!canAddNew && items.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="text-center text-gray-400 py-10">
+                  <td colSpan={8} className="text-center text-gray-400 py-10">
                     등록된 제작물이 없습니다.
                   </td>
                 </tr>
@@ -428,12 +441,14 @@ function StateBadge({ item }: { item: Item }) {
 function ItemCard({
   item,
   onPatch,
+  onDelete,
   fullyLocked,
   actionLocked,
   onPickAction,
 }: {
   item: Item;
   onPatch: (body: Record<string, unknown>) => Promise<void>;
+  onDelete: () => void;
   fullyLocked: boolean;
   actionLocked: boolean;
   onPickAction: () => void;
@@ -442,8 +457,13 @@ function ItemCard({
 
   return (
     <div className="bg-white rounded-lg border p-3 space-y-2">
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
         <StateBadge item={item} />
+        {!fullyLocked && (
+          <button onClick={onDelete} className="text-sm text-red-600">
+            삭제
+          </button>
+        )}
       </div>
 
       <PhotoThumb path={item.photoPath} />
@@ -505,6 +525,7 @@ function ItemRow({
   branchName,
   branchType,
   onPatch,
+  onDelete,
   fullyLocked,
   actionLocked,
   onPickAction,
@@ -514,6 +535,7 @@ function ItemRow({
   branchName: string;
   branchType: string;
   onPatch: (body: Record<string, unknown>) => Promise<void>;
+  onDelete: () => void;
   fullyLocked: boolean;
   actionLocked: boolean;
   onPickAction: () => void;
@@ -554,8 +576,15 @@ function ItemRow({
           </button>
         )}
       </td>
-      <td className="px-4 py-4 whitespace-nowrap">
+      <td className="px-4 py-4 whitespace-nowrap border-r">
         <StateBadge item={item} />
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap">
+        {!fullyLocked && (
+          <button onClick={onDelete} className="text-sm text-red-600">
+            삭제
+          </button>
+        )}
       </td>
     </tr>
   );
@@ -589,6 +618,7 @@ function AddItemRow({
           등록
         </button>
       </td>
+      <td className="px-4 py-4 border-r text-gray-300">-</td>
       <td className="px-4 py-4 border-r text-gray-300">-</td>
       <td className="px-4 py-4 border-r text-gray-300">-</td>
       <td className="px-4 py-4 border-r text-gray-300">-</td>
@@ -662,20 +692,40 @@ function NewItemForm({
 
         <div>
           <p className="text-base font-medium mb-1">사진</p>
-          <label className="block">
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              className="hidden"
-              onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
-            />
-            <span
-              className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
-            >
-              {files.length > 0 ? `${files.length}장 선택됨 (다시 선택)` : "사진 촬영 또는 갤러리에서 선택"}
-            </span>
-          </label>
+          <div className="flex gap-2">
+            <label className="flex-1">
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                multiple
+                className="hidden"
+                onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
+              />
+              <span
+                className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
+              >
+                사진 촬영
+              </span>
+            </label>
+            <label className="flex-1">
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
+              />
+              <span
+                className={`${TACTILE_BUTTON} inline-block w-full text-center bg-white border text-blue-700 py-4 text-base`}
+              >
+                갤러리에서 선택
+              </span>
+            </label>
+          </div>
+          {files.length > 0 && (
+            <p className="text-sm text-gray-500 mt-1">{files.length}장 선택됨</p>
+          )}
           {files.length > 1 && (
             <p className="text-sm text-gray-400 mt-1">
               선택한 {files.length}장 모두 같은 비고로 등록됩니다. 등록 후 각 사진마다 표에서 따로 고칠 수 있습니다.
@@ -758,19 +808,36 @@ function ActionPhotoForm({
 
         <div>
           <p className="text-base font-medium mb-1">사진</p>
-          <label className="block">
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-            />
-            <span
-              className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
-            >
-              {file ? "1장 선택됨 (다시 선택)" : "사진 촬영 또는 갤러리에서 선택"}
-            </span>
-          </label>
+          <div className="flex gap-2">
+            <label className="flex-1">
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                className="hidden"
+                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+              />
+              <span
+                className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
+              >
+                사진 촬영
+              </span>
+            </label>
+            <label className="flex-1">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+              />
+              <span
+                className={`${TACTILE_BUTTON} inline-block w-full text-center bg-white border text-blue-700 py-4 text-base`}
+              >
+                갤러리에서 선택
+              </span>
+            </label>
+          </div>
+          {file && <p className="text-sm text-gray-500 mt-1">1장 선택됨</p>}
         </div>
 
         <div>

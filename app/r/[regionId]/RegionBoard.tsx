@@ -121,6 +121,16 @@ export default function RegionBoard({
     setItems((prev) => prev.map((i) => (i.id === itemId ? { ...i, ...item } : i)));
   }
 
+  async function deleteItem(itemId: string) {
+    if (!confirm("이 제작물을 삭제할까요? 되돌릴 수 없습니다.")) return;
+    const res = await fetch(`/api/region/${regionId}/items/${itemId}`, { method: "DELETE" });
+    if (!res.ok) {
+      alert("삭제에 실패했습니다. 다시 시도해주세요.");
+      return;
+    }
+    setItems((prev) => prev.filter((i) => i.id !== itemId));
+  }
+
   // 마감: 소속 활성 지점 전원이 해당 프로세스를 마감해야만 켤 수 있다(서버에서도
   // 검증). 끄는(마감 해제) 것은 전원완료 여부와 무관하게 항상 가능.
   async function toggleLock(process: "submission" | "action") {
@@ -182,7 +192,7 @@ export default function RegionBoard({
             </select>
             <button
               onClick={() => location.reload()}
-              className="text-sm text-gray-500 border rounded px-3 py-1.5 whitespace-nowrap"
+              className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap`}
             >
               새로고침
             </button>
@@ -313,13 +323,14 @@ export default function RegionBoard({
                 <th className="text-left px-4 py-3 font-semibold border-r">비고</th>
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">처리 지침</th>
                 <th className="text-left px-4 py-3 font-semibold border-r">처리 결과</th>
-                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap">상태</th>
+                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">상태</th>
+                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap"></th>
               </tr>
             </thead>
             <tbody>
               {visible.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="text-center text-gray-400 py-10">
+                  <td colSpan={8} className="text-center text-gray-400 py-10">
                     표시할 항목이 없습니다.
                   </td>
                 </tr>
@@ -337,6 +348,7 @@ export default function RegionBoard({
                     regionName={regionName}
                     groupHeader={showGroupHeader ? branchType(item.branchId) : null}
                     onPatch={(body) => patchItem(item.id, body)}
+                    onDelete={() => deleteItem(item.id)}
                     disabled={isPastRound || lock.submissionHqClosed}
                     submissionCompleted={branchInfo?.submissionCompleted ?? false}
                     actionCompleted={branchInfo?.actionCompleted ?? false}
@@ -385,6 +397,7 @@ function ItemRow({
   regionName,
   groupHeader,
   onPatch,
+  onDelete,
   disabled,
   submissionCompleted,
   actionCompleted,
@@ -393,6 +406,7 @@ function ItemRow({
   regionName: string;
   groupHeader: string | null;
   onPatch: (body: Record<string, unknown>) => Promise<void>;
+  onDelete: () => void;
   disabled: boolean;
   submissionCompleted: boolean;
   actionCompleted: boolean;
@@ -402,7 +416,7 @@ function ItemRow({
     <>
       {groupHeader && (
         <tr className="bg-gray-100">
-          <td colSpan={7} className="px-4 py-1.5 text-sm font-bold text-gray-500">
+          <td colSpan={8} className="px-4 py-1.5 text-sm font-bold text-gray-500">
             {groupHeader}
           </td>
         </tr>
@@ -445,7 +459,7 @@ function ItemRow({
             <span className="text-gray-300">-</span>
           )}
         </td>
-        <td className="px-4 py-4 whitespace-nowrap space-y-1">
+        <td className="px-4 py-4 whitespace-nowrap space-y-1 border-r">
           {state && (
             <span className={`block w-fit text-sm font-medium px-3 py-1.5 rounded ${DERIVED_STATE_BADGE_COLOR[state]}`}>
               {DERIVED_STATE_LABEL[state]}
@@ -460,6 +474,13 @@ function ItemRow({
             <span className="block w-fit text-xs font-medium px-2 py-1 rounded bg-gray-500 text-white">
               {item.branch?.branchType ?? "지점"} 처리결과 입력 마감
             </span>
+          )}
+        </td>
+        <td className="px-4 py-4 whitespace-nowrap">
+          {!disabled && (
+            <button onClick={onDelete} className="text-sm text-red-600">
+              삭제
+            </button>
           )}
         </td>
       </tr>

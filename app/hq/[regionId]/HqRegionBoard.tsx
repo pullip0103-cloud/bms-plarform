@@ -91,6 +91,16 @@ export default function HqRegionBoard({
     );
   }
 
+  async function deleteItem(itemId: string) {
+    if (!confirm("이 제작물을 삭제할까요? 되돌릴 수 없습니다.")) return;
+    const res = await fetch(`/api/hq/items/${itemId}`, { method: "DELETE" });
+    if (!res.ok) {
+      alert("삭제에 실패했습니다. 다시 시도해주세요.");
+      return;
+    }
+    setItems((prev) => prev.filter((i) => i.id !== itemId));
+  }
+
   async function toggleLock(process: "submission" | "action" | "directive") {
     setBusyProcess(process);
     try {
@@ -143,7 +153,7 @@ export default function HqRegionBoard({
           </div>
           <button
             onClick={() => location.reload()}
-            className="text-sm text-gray-500 border rounded px-3 py-1.5 whitespace-nowrap"
+            className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap`}
           >
             새로고침
           </button>
@@ -214,12 +224,13 @@ export default function HqRegionBoard({
                 <th className="text-left px-3 py-2 font-medium whitespace-nowrap">처리 지침</th>
                 <th className="text-left px-3 py-2 font-medium">처리 결과</th>
                 <th className="text-left px-3 py-2 font-medium whitespace-nowrap">상태</th>
+                <th className="text-left px-3 py-2 font-medium whitespace-nowrap"></th>
               </tr>
             </thead>
             <tbody>
               {visible.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="text-center text-gray-400 py-10">
+                  <td colSpan={7} className="text-center text-gray-400 py-10">
                     표시할 항목이 없습니다.
                   </td>
                 </tr>
@@ -231,6 +242,7 @@ export default function HqRegionBoard({
                   directiveCodes={directiveCodes}
                   directivePublished={lock.directivePublished}
                   assignDirective={assignDirective}
+                  onDelete={() => deleteItem(item.id)}
                 />
               ))}
             </tbody>
@@ -246,11 +258,13 @@ function ItemTableRow({
   directiveCodes,
   directivePublished,
   assignDirective,
+  onDelete,
 }: {
   item: HqItem;
   directiveCodes: DirectiveCodeOption[];
   directivePublished: boolean;
   assignDirective: (itemId: string, directiveCodeId: string) => void;
+  onDelete: () => void;
 }) {
   const state = deriveItemState(item);
   return (
@@ -317,6 +331,11 @@ function ItemTableRow({
         ) : (
           <span className="text-gray-300">-</span>
         )}
+      </td>
+      <td className="px-3 py-3 whitespace-nowrap">
+        <button onClick={onDelete} className="text-xs text-red-600">
+          삭제
+        </button>
       </td>
     </tr>
   );

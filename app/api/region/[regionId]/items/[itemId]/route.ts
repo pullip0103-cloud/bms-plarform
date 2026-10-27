@@ -51,3 +51,34 @@ export async function PATCH(
   const updated = await itemRef.get();
   return NextResponse.json({ item: { id: itemId, ...updated.data() } });
 }
+
+// 지역본부가 소속 지점의 제작물을 삭제한다. 비고 수정(PATCH)과 같은
+// 잠금 규칙 — 본사가 제작물 전송을 마감한 뒤에는 지울 수 없다.
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ regionId: string; itemId: string }> }
+) {
+  const { regionId, itemId } = await params;
+  const region = await resolveRegion(regionId);
+  if (!region) {
+    return NextResponse.json({ error: "INVALID_REGION" }, { status: 404 });
+  }
+
+  const itemRef = adminDb.collection("items").doc(itemId);
+  const existing = await itemRef.get();
+  if (!existing.exists || existing.data()!.regionId !== regionId) {
+    return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
+  }
+
+  const activeRoundSnap = await adminDb.collection("rounds").where("status", "==", "진행중").limit(1).get();
+  const activeRoundId = activeRoundSnap.empty ? null : activeRoundSnap.docs[0].id;
+  if (!activeRoundId || existing.data()!.roundId !== activeRoundId) {
+    return NextResponse.json({ error: "PAST_ROUND" }, { status: 409 });
+  }
+  if (await isHqClosedForItem(regionId, "submission")) {
+    return NextResponse.json({ error: "REGION_CLOSED" }, { status: 409 });
+  }
+
+  await itemRef.delete();
+  return NextResponse.json({ ok: true });
+}

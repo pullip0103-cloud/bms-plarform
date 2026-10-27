@@ -46,3 +46,32 @@ export async function PATCH(
   const updated = await itemRef.get();
   return NextResponse.json({ item: { id: itemId, ...updated.data() } });
 }
+
+// 지점이 이미 등록한 제작물을 삭제한다. 수정(PATCH)과 같은 잠금 규칙을
+// 쓴다 — 지역본부/본사가 제작물 전송을 마감한 뒤에는 지울 수 없다.
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ branchId: string; itemId: string }> }
+) {
+  const { branchId, itemId } = await params;
+  const ctx = await resolveBranchContext(branchId);
+  if (!ctx) {
+    return NextResponse.json({ error: "INVALID_BRANCH_OR_NO_ACTIVE_ROUND" }, { status: 404 });
+  }
+  if (ctx.submissionRegionClosed || ctx.submissionHqClosed || ctx.submissionCompleted) {
+    return NextResponse.json({ error: "REGION_LOCKED" }, { status: 409 });
+  }
+
+  const itemRef = adminDb.collection("items").doc(itemId);
+  const existing = await itemRef.get();
+  if (
+    !existing.exists ||
+    existing.data()!.branchId !== ctx.branchId ||
+    existing.data()!.roundId !== ctx.roundId
+  ) {
+    return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
+  }
+
+  await itemRef.delete();
+  return NextResponse.json({ ok: true });
+}
