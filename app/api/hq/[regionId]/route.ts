@@ -35,6 +35,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ reg
     actionNote: string | null;
     branchId: string;
     directiveCodeId?: string;
+    directiveComment?: string | null;
   };
   const rawItems = itemsSnap
     ? itemsSnap.docs.map((d) => {
@@ -77,6 +78,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ reg
             requiresAction: codeById.get(item.directiveCodeId)!.requiresAction as boolean,
           }
         : null,
+    directiveComment: item.directiveComment ?? null,
   }));
 
   const branches = activeBranchesSnap.docs.map((d) => ({

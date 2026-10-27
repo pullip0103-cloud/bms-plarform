@@ -6,7 +6,7 @@ import { regionLockDocId } from "@/lib/regionLock";
 import { getCompletedBranchIds, type LockProcess } from "@/lib/branchLock";
 
 /**
- * 지역본부가 특정 프로세스(제작물 전송/처리결과 입력, body.process)를
+ * 지역본부가 특정 프로세스(제작물 전송/조치결과 입력, body.process)를
  * "마감"한다. 소속 활성 지점이 하나라도 그 프로세스를 "마감"하지 않았으면
  * 켤 수 없다(409). 다시 누르면(마감 해제) 지점이 다시 등록/수정할 수 있게
  * 된다 — 해제는 전원완료 여부와 무관하게 항상 가능하다. 본사가 해당

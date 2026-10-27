@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DERIVED_STATE_LABEL, DERIVED_STATE_BADGE_COLOR } from "@/lib/constants";
 import { deriveItemState } from "@/lib/itemProgress";
@@ -17,6 +17,7 @@ export type HqItem = {
   branchId: string;
   branch: { name: string; branchType: string } | null;
   directiveCode: { id: string; label: string; description: string | null; requiresAction: boolean } | null;
+  directiveComment: string | null;
 };
 
 export type DirectiveCodeOption = {
@@ -126,6 +127,21 @@ export default function HqRegionBoard({
     );
   }
 
+  // 조치 지침 코멘트(현장 전달용 자유 텍스트) — 지침 코드와 독립적으로
+  // 저장/수정된다. 코드를 안 바꿔도 코멘트만 고칠 수 있어야 해서 별도 함수.
+  async function saveDirectiveComment(itemId: string, directiveComment: string) {
+    const res = await fetch(`/api/hq/items/${itemId}/directive`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ directiveComment }),
+    });
+    if (!res.ok) {
+      alert("코멘트 저장에 실패했습니다.");
+      return;
+    }
+    setItems((prev) => prev.map((i) => (i.id === itemId ? { ...i, directiveComment: directiveComment.trim() || null } : i)));
+  }
+
   async function deleteItem(itemId: string) {
     if (!confirm("이 제작물을 삭제할까요? 되돌릴 수 없습니다.")) return;
     const res = await fetch(`/api/hq/items/${itemId}`, { method: "DELETE" });
@@ -147,7 +163,7 @@ export default function HqRegionBoard({
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         if (data.error === "SUBMISSION_NOT_CLOSED") {
-          alert("제작물 전송을 먼저 마감해야 처리 지침을 배포할 수 있습니다.");
+          alert("제작물 전송을 먼저 마감해야 조치 지침을 배포할 수 있습니다.");
         } else {
           alert("처리에 실패했습니다.");
         }
@@ -181,7 +197,7 @@ export default function HqRegionBoard({
               )}
               {lock.actionRegionClosed && !lock.actionHqClosed && (
                 <span className="text-xs font-medium px-2 py-1 rounded bg-blue-100 text-blue-800">
-                  지역본부 처리결과 입력 마감
+                  지역본부 조치결과 입력 마감
                 </span>
               )}
             </div>
@@ -217,7 +233,7 @@ export default function HqRegionBoard({
                   : "bg-blue-600 text-white"
             }`}
           >
-            {lock.directivePublished ? "처리 지침 배포 취소" : "처리 지침 배포"}
+            {lock.directivePublished ? "조치 지침 배포 취소" : "조치 지침 배포"}
           </button>
           <button
             onClick={() => toggleLock("action")}
@@ -226,7 +242,7 @@ export default function HqRegionBoard({
               lock.actionHqClosed ? "bg-gray-700 text-white" : "bg-red-50 text-red-700 border border-red-200"
             }`}
           >
-            {lock.actionHqClosed ? "처리결과 마감 해제" : "처리결과 마감"}
+            {lock.actionHqClosed ? "조치결과 마감 해제" : "조치결과 마감"}
           </button>
 
           <div className="flex items-center gap-2 ml-auto">
@@ -263,7 +279,7 @@ export default function HqRegionBoard({
 
         {!lock.directivePublished && (
           <p className="text-sm text-gray-400">
-            처리 지침은 아직 배포되지 않았습니다 — 지역본부/지점 화면에는 보이지 않고, 여기서 입력한 내용은 초안으로만 저장됩니다.
+            조치 지침은 아직 배포되지 않았습니다 — 지역본부/지점 화면에는 보이지 않고, 여기서 입력한 내용은 초안으로만 저장됩니다.
           </p>
         )}
       </header>
@@ -276,8 +292,8 @@ export default function HqRegionBoard({
                 <th className="text-left px-3 py-2 font-medium whitespace-nowrap">거점명</th>
                 <th className="text-left px-3 py-2 font-medium">제작물 사진</th>
                 <th className="text-left px-3 py-2 font-medium">비고</th>
-                <th className="text-left px-3 py-2 font-medium whitespace-nowrap">처리 지침</th>
-                <th className="text-left px-3 py-2 font-medium">처리 결과</th>
+                <th className="text-left px-3 py-2 font-medium whitespace-nowrap">조치 지침</th>
+                <th className="text-left px-3 py-2 font-medium">조치 결과</th>
                 <th className="text-left px-3 py-2 font-medium whitespace-nowrap">상태</th>
                 <th className="text-left px-3 py-2 font-medium whitespace-nowrap"></th>
               </tr>
@@ -297,6 +313,7 @@ export default function HqRegionBoard({
                   directiveCodes={directiveCodes}
                   directivePublished={lock.directivePublished}
                   assignDirective={assignDirective}
+                  onSaveComment={(comment) => saveDirectiveComment(item.id, comment)}
                   onDelete={() => deleteItem(item.id)}
                 />
               ))}
@@ -313,12 +330,14 @@ function ItemTableRow({
   directiveCodes,
   directivePublished,
   assignDirective,
+  onSaveComment,
   onDelete,
 }: {
   item: HqItem;
   directiveCodes: DirectiveCodeOption[];
   directivePublished: boolean;
   assignDirective: (itemId: string, directiveCodeId: string) => void;
+  onSaveComment: (comment: string) => Promise<void>;
   onDelete: () => void;
 }) {
   const state = deriveItemState(item);
@@ -334,7 +353,7 @@ function ItemTableRow({
       <td className="px-3 py-3 text-gray-600">{item.note ?? "-"}</td>
       <td className="px-3 py-3">
         {/*
-          본사는 건의 조치결과 진행 여부나 마감 상태와 무관하게 처리지침을
+          본사는 건의 조치결과 진행 여부나 마감 상태와 무관하게 조치지침을
           언제든 입력/변경할 수 있다 — 입력 여부 자체가 본사의 선택이라
           프로세스로 막을 이유가 없다. 버튼은 라벨만 한 줄로 나열하고
           (스크롤 없이 한눈에), 설명은 공간을 쓰지 않도록 title 속성으로
@@ -367,6 +386,7 @@ function ItemTableRow({
             );
           })}
         </div>
+        <DirectiveCommentInput value={item.directiveComment} onSave={onSaveComment} />
       </td>
       <td className="px-3 py-3">
         {item.actionPhotoPath ? (
@@ -393,5 +413,34 @@ function ItemTableRow({
         </button>
       </td>
     </tr>
+  );
+}
+
+// 조치 지침 코멘트 입력칸 — 현장(지역본부/지점)에 특별히 전달할 말이 있을
+// 때만 채운다(선택 사항). onBlur에만 저장해 타이핑마다 요청을 보내지
+// 않는다. 지침 코드 변경과 별개로 언제든 고칠 수 있다.
+function DirectiveCommentInput({
+  value,
+  onSave,
+}: {
+  value: string | null;
+  onSave: (comment: string) => Promise<void>;
+}) {
+  const [text, setText] = useState(value ?? "");
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 서버에서 새로 불러온 값으로 입력칸을 동기화해야 함
+    setText(value ?? "");
+  }, [value]);
+
+  return (
+    <input
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      onBlur={() => {
+        if (text !== (value ?? "")) onSave(text);
+      }}
+      placeholder="현장에 전달할 코멘트 (선택)"
+      className="mt-2 w-full border rounded px-2 py-1 text-xs"
+    />
   );
 }

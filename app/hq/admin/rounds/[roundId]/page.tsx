@@ -42,6 +42,7 @@ export default async function RoundArchivePage({
       actionPhotoPath: string | null;
       actionNote: string | null;
       directiveCodeId?: string;
+      directiveComment?: string | null;
     };
   });
 
@@ -75,6 +76,7 @@ export default async function RoundArchivePage({
         actionPhotoPath: item.actionPhotoPath,
         actionNote: item.actionNote ?? null,
         directiveLabel: code?.label ?? null,
+        directiveComment: item.directiveComment ?? null,
       };
     })
     .sort((a, b) => a.regionName.localeCompare(b.regionName, "ko") || a.branchName.localeCompare(b.branchName, "ko"));
@@ -98,8 +100,8 @@ export default async function RoundArchivePage({
                 <th className="text-left px-3 py-2 font-medium whitespace-nowrap">거점명</th>
                 <th className="text-left px-3 py-2 font-medium">제작물 사진</th>
                 <th className="text-left px-3 py-2 font-medium">비고</th>
-                <th className="text-left px-3 py-2 font-medium whitespace-nowrap">처리 지침</th>
-                <th className="text-left px-3 py-2 font-medium">처리 결과</th>
+                <th className="text-left px-3 py-2 font-medium whitespace-nowrap">조치 지침</th>
+                <th className="text-left px-3 py-2 font-medium">조치 결과</th>
               </tr>
             </thead>
             <tbody>
@@ -121,7 +123,12 @@ export default async function RoundArchivePage({
                     <PhotoLightbox path={item.photoPath} size="sm" />
                   </td>
                   <td className="px-3 py-3 text-gray-600">{item.note ?? "-"}</td>
-                  <td className="px-3 py-3">{item.directiveLabel ?? <span className="text-gray-300">-</span>}</td>
+                  <td className="px-3 py-3">
+                    {item.directiveLabel ?? <span className="text-gray-300">-</span>}
+                    {item.directiveComment && (
+                      <p className="text-sm font-bold text-red-600 mt-1">{item.directiveComment}</p>
+                    )}
+                  </td>
                   <td className="px-3 py-3">
                     {item.actionPhotoPath ? (
                       <>

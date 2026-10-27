@@ -3,7 +3,7 @@ import { adminDb } from "@/lib/firebase/admin";
 export type LockProcess = "submission" | "action";
 
 /**
- * 라운드별·지점별, 프로세스별(제작물 전송/처리결과 입력) "마감" 상태.
+ * 라운드별·지점별, 프로세스별(제작물 전송/조치결과 입력) "마감" 상태.
  * 지점이 등록을 마쳤다고 스스로 표시하는 용도이며, 지역본부/본사가 아직
  * 잠그지 않았다면 "수정" 버튼으로 언제든 되돌릴 수 있다 (lib/regionLock.ts의
  * 지역본부/본사 마감과 같은 구조, 문서 ID만 `${roundId}_${branchId}`로 지점 단위).

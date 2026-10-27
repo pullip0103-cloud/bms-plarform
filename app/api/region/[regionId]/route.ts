@@ -75,6 +75,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ regi
     actionNote: string | null;
     branchId: string;
     directiveCodeId?: string;
+    directiveComment?: string | null;
   };
   const rawItems = itemsSnap
     ? itemsSnap.docs.map((d) => {
@@ -107,6 +108,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ regi
             requiresAction: codeById.get(item.directiveCodeId)!.requiresAction as boolean,
           }
         : null,
+    directiveComment: (lock.directivePublished || isPastRound) ? item.directiveComment ?? null : null,
   }));
 
   return NextResponse.json({

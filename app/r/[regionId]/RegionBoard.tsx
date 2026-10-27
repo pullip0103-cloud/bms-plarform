@@ -17,6 +17,7 @@ export type RegionItem = {
   branchId: string;
   branch: { name: string; branchType: string } | null;
   directiveCode: { label: string; description: string | null; requiresAction: boolean } | null;
+  directiveComment: string | null;
 };
 
 export type RegionBranch = {
@@ -255,7 +256,7 @@ export default function RegionBoard({
 
             {lock.actionHqClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
-                본사 처리결과 마감됨
+                본사 조치결과 마감됨
               </span>
             ) : (
               <button
@@ -270,8 +271,8 @@ export default function RegionBoard({
                 }`}
               >
                 {lock.actionRegionClosed
-                  ? "처리결과 입력 지역본부 마감 해제"
-                  : `처리결과 입력 지역본부 마감 (${branches.length - incompleteAction.length}/${branches.length})`}
+                  ? "조치결과 입력 지역본부 마감 해제"
+                  : `조치결과 입력 지역본부 마감 (${branches.length - incompleteAction.length}/${branches.length})`}
               </button>
             )}
           </div>
@@ -291,7 +292,7 @@ export default function RegionBoard({
         {!isPastRound && !lock.actionHqClosed && !lock.actionRegionClosed && incompleteAction.length > 0 && (
           <div className="border border-amber-200 bg-amber-50 rounded-lg p-3">
             <p className="text-base font-medium text-amber-800 mb-1">
-              아직 처리결과 입력을 마감하지 않은 지점/대리점 ({incompleteAction.length}곳)
+              아직 조치결과 입력을 마감하지 않은 지점/대리점 ({incompleteAction.length}곳)
             </p>
             <p className="text-sm text-amber-700">
               {incompleteAction.map((b) => b.name).join(", ")}
@@ -345,8 +346,8 @@ export default function RegionBoard({
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">거점명</th>
                 <th className="text-left px-4 py-3 font-semibold border-r">제작물 사진</th>
                 <th className="text-left px-4 py-3 font-semibold border-r">비고</th>
-                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">처리 지침</th>
-                <th className="text-left px-4 py-3 font-semibold border-r">처리 결과</th>
+                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">조치 지침</th>
+                <th className="text-left px-4 py-3 font-semibold border-r">조치 결과</th>
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">상태</th>
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap"></th>
               </tr>
@@ -468,6 +469,9 @@ function ItemRow({
               {item.directiveCode.description && (
                 <p className="text-sm text-gray-700 mt-0.5">{item.directiveCode.description}</p>
               )}
+              {item.directiveComment && (
+                <p className="text-sm font-bold text-red-600 mt-1">{item.directiveComment}</p>
+              )}
             </div>
           ) : (
             <span className="text-gray-300">-</span>
@@ -496,7 +500,7 @@ function ItemRow({
           )}
           {actionCompleted && (
             <span className="block w-fit text-xs font-medium px-2 py-1 rounded bg-gray-500 text-white">
-              {item.branch?.branchType ?? "지점"} 처리결과 입력 마감
+              {item.branch?.branchType ?? "지점"} 조치결과 입력 마감
             </span>
           )}
         </td>

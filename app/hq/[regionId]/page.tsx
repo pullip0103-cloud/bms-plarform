@@ -45,6 +45,7 @@ export default async function HqRegionPage({
     actionNote: string | null;
     branchId: string;
     directiveCodeId?: string;
+    directiveComment?: string | null;
   };
   const rawItems = itemsSnap
     ? itemsSnap.docs.map((d) => {
@@ -91,6 +92,7 @@ export default async function HqRegionPage({
           requiresAction: codeById.get(item.directiveCodeId)!.requiresAction as boolean,
         }
       : null,
+    directiveComment: item.directiveComment ?? null,
   }));
 
   let activeCodes: DirectiveCodeOption[] = [];

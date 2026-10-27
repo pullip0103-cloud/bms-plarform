@@ -121,7 +121,7 @@ export default function AdminBoard({
   }
 
   async function deleteCode(id: string) {
-    if (!confirm("이 처리지침 코드를 삭제할까요?")) return;
+    if (!confirm("이 조치지침 코드를 삭제할까요?")) return;
     const res = await fetch(`/api/hq/directive-codes/${id}`, { method: "DELETE" });
     if (!res.ok) {
       alert("삭제에 실패했습니다.");
@@ -194,7 +194,7 @@ export default function AdminBoard({
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b px-6 py-4">
         <h1 className="text-lg font-bold">본사 관리 설정</h1>
-        <p className="text-sm text-gray-500">반기 라운드 · 처리지침 코드 · 지점 관리</p>
+        <p className="text-sm text-gray-500">반기 라운드 · 조치지침 코드 · 지점 관리</p>
       </header>
 
       <main className="px-6 py-4 space-y-8 max-w-5xl">
@@ -244,9 +244,9 @@ export default function AdminBoard({
           </ul>
         </section>
 
-        {/* 처리지침 코드 */}
+        {/* 조치지침 코드 */}
         <section className="bg-white border rounded-lg p-4 space-y-3">
-          <h2 className="font-bold">처리지침 코드 (현재 라운드)</h2>
+          <h2 className="font-bold">조치지침 코드 (현재 라운드)</h2>
           {!activeRound && <p className="text-sm text-gray-400">진행중인 라운드가 없습니다.</p>}
           {activeRound && (
             <>
@@ -497,7 +497,7 @@ function RegionStatusSection({ regionStatuses }: { regionStatuses: RegionStatus[
                     )}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-400">처리결과</span>
+                    <span className="text-xs text-gray-400">조치결과</span>
                     <span className="text-sm text-gray-500">
                       {r.actionCompletedBranches}/{r.totalBranches} 마감
                     </span>
@@ -552,7 +552,7 @@ function RegionStatusSection({ regionStatuses }: { regionStatuses: RegionStatus[
                                   b.isActionCompleted ? "text-green-700" : "text-amber-700"
                                 }`}
                               >
-                                처리결과 {b.isActionCompleted ? "마감" : "미마감"}
+                                조치결과 {b.isActionCompleted ? "마감" : "미마감"}
                               </span>
                             </span>
                           ))}

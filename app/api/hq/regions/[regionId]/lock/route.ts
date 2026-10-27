@@ -3,10 +3,10 @@ import { adminDb } from "@/lib/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
 import { regionLockDocId, getRegionLockStatus } from "@/lib/regionLock";
 
-// 본사가 특정 지역본부의 프로세스(제작물 전송/처리결과 입력/처리지침 배포,
-// body.process)를 토글한다. 다시 누르면 해제된다. 제작물전송/처리결과
+// 본사가 특정 지역본부의 프로세스(제작물 전송/조치결과 입력/조치지침 배포,
+// body.process)를 토글한다. 다시 누르면 해제된다. 제작물전송/조치결과
 // 마감이 켜지면 그 프로세스에 대한 지역본부의 토글과 지점의 쓰기가 모두
-// 막힌다. "처리 지침 배포"는 제작물 전송이 마감된 뒤에만 켤 수 있다 —
+// 막힌다. "조치 지침 배포"는 제작물 전송이 마감된 뒤에만 켤 수 있다 —
 // 본사가 최종 항목 목록을 확정한 뒤에 지침을 공개한다는 순서를 강제한다.
 export async function POST(
   req: NextRequest,

@@ -50,7 +50,7 @@ export default async function AdminPage() {
       return { id: d.id, orderNo: data.orderNo, label: data.label, description: data.description ?? null, requiresAction: data.requiresAction };
     });
 
-    // 지역본부별 마감 현황 — 지점/대리점 하나하나가 제작물 전송·처리결과
+    // 지역본부별 마감 현황 — 지점/대리점 하나하나가 제작물 전송·조치결과
     // 입력 두 프로세스 각각 마감했는지를 본사가 한눈에 볼 수 있어야 한다
     // (펼치면 전체 목록이 마감/미마감 뱃지로 보임).
     const [completedSubmissionIds, completedActionIds] = await Promise.all([

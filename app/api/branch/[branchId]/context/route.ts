@@ -27,7 +27,10 @@ export async function GET(
 
   const directiveCodeIds = new Set<string>();
   const items = itemsSnap.docs.map((doc) => {
-    const data = doc.data() as Record<string, unknown> & { directiveCodeId?: string };
+    const data = doc.data() as Record<string, unknown> & {
+      directiveCodeId?: string;
+      directiveComment?: string | null;
+    };
     if (showDirective && data.directiveCodeId) directiveCodeIds.add(data.directiveCodeId);
     return { id: doc.id, ...data };
   });
@@ -46,6 +49,7 @@ export async function GET(
   const itemsWithCodes = items.map((item) => ({
     ...item,
     directiveCode: showDirective && item.directiveCodeId ? codesById[item.directiveCodeId] ?? null : null,
+    directiveComment: showDirective ? (item.directiveComment as string | null | undefined) ?? null : null,
   }));
 
   const roundsSnap = await adminDb.collection("rounds").orderBy("createdAt", "desc").get();

@@ -6,7 +6,7 @@ import { Timestamp } from "firebase-admin/firestore";
 // 지점이 조치결과 사진을 올린다(최초 제출/재촬영 모두 같은 라우트 — 승인/
 // 반려 단계가 없으므로 언제든 다시 찍어 덮어쓸 수 있다). 조건: 그 항목에
 // 배포된(directivePublished) 조치필요(requiresAction) 지침이 있어야 하고,
-// 처리결과 입력 프로세스가 지역본부/본사에 의해 마감되지 않았어야 한다.
+// 조치결과 입력 프로세스가 지역본부/본사에 의해 마감되지 않았어야 한다.
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ branchId: string; itemId: string }> }

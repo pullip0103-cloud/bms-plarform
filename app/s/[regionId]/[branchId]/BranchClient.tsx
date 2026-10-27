@@ -17,6 +17,7 @@ type Item = {
   actionPhotoPath: string | null;
   actionNote: string | null;
   directiveCode: { label: string; description: string | null; requiresAction: boolean } | null;
+  directiveComment: string | null;
 };
 
 type Ctx = {
@@ -107,7 +108,12 @@ export default function BranchClient({
     if (!confirm("이 제작물을 삭제할까요? 되돌릴 수 없습니다.")) return;
     const res = await fetch(`/api/branch/${branchId}/items/${itemId}`, { method: "DELETE" });
     if (!res.ok) {
-      alert("삭제에 실패했습니다. 다시 시도해주세요.");
+      const data = await res.json().catch(() => ({}));
+      if (data.error === "DIRECTIVE_ASSIGNED") {
+        alert("조치 지침이 배정된 제작물은 삭제할 수 없습니다.");
+      } else {
+        alert("삭제에 실패했습니다. 다시 시도해주세요.");
+      }
       return;
     }
     setItems((prev) => prev.filter((i) => i.id !== itemId));
@@ -123,7 +129,12 @@ export default function BranchClient({
         body: JSON.stringify({ process }),
       });
       if (!res.ok) {
-        alert("처리에 실패했습니다.");
+        const data = await res.json().catch(() => ({}));
+        if (data.error === "ACTION_INCOMPLETE") {
+          alert("조치가 안된 제작물이 있습니다. 모든 조치결과 사진을 올린 후 마감 버튼을 눌러주세요");
+        } else {
+          alert("처리에 실패했습니다.");
+        }
         return;
       }
       const { completed } = await res.json();
@@ -186,7 +197,13 @@ export default function BranchClient({
           </p>
         )}
 
-        {!ctx.isPastRound && (
+        {/* 단계별로 필요한 버튼 하나만 보여준다 — 조치가 필요한 지침이
+            배정된 건이 하나라도 있으면(hasActionItem) 이제부터는 조치결과
+            입력 단계이므로 제작물 전송 섹션은 완전히 숨기고, 아니면 아직
+            제작물 전송 단계이므로 조치결과 입력 섹션을 숨긴다. 두 버튼이
+            동시에 보이면 지금 뭘 해야 하는지 헷갈린다는 사용자 피드백으로
+            단계 분리(2026-10-27). */}
+        {!ctx.isPastRound && !hasActionItem && (
           <div className="flex flex-wrap gap-2">
             {ctx.submissionHqClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
@@ -207,13 +224,17 @@ export default function BranchClient({
                 {ctx.submissionCompleted ? "제작물 전송 수정" : "제작물 전송 마감"}
               </button>
             )}
+          </div>
+        )}
+        {!ctx.isPastRound && hasActionItem && (
+          <div className="flex flex-wrap gap-2">
             {ctx.actionHqClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
-                본사 처리결과 입력 마감됨
+                본사 조치결과 입력 마감됨
               </span>
             ) : ctx.actionRegionClosed ? (
               <span className="inline-block text-sm px-4 py-2 rounded bg-gray-200 text-gray-500">
-                지역본부 처리결과 입력 마감됨
+                지역본부 조치결과 입력 마감됨
               </span>
             ) : (
               <button
@@ -223,7 +244,7 @@ export default function BranchClient({
                   ctx.actionCompleted ? "bg-white border text-gray-700" : "bg-green-600 text-white"
                 }`}
               >
-                {ctx.actionCompleted ? "처리결과 입력 수정" : "처리결과 입력 마감"}
+                {ctx.actionCompleted ? "조치결과 입력 수정" : "조치결과 입력 마감"}
               </button>
             )}
           </div>
@@ -231,43 +252,47 @@ export default function BranchClient({
       </header>
 
       <main className="px-4 md:px-6 py-4">
-        {ctx.submissionHqClosed ? (
-          <p className="text-base text-gray-600 bg-gray-100 border rounded-lg p-3 mb-3">
-            본사가 제작물 전송을 마감했습니다. 더 이상 등록/수정이 불가합니다.
-          </p>
-        ) : ctx.submissionRegionClosed ? (
-          <p className="text-base text-gray-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
-            지역본부에서 제작물 전송을 마감했습니다. 새 제작물은 추가할 수 없습니다.
-          </p>
-        ) : ctx.submissionCompleted ? (
-          <p className="text-base text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
-            제작물 전송이 마감 처리되었습니다. 더 등록할 내용이 있으면 위의 &quot;제작물 전송 수정&quot; 버튼을 눌러주세요.
-          </p>
-        ) : (
-          <p className="text-base text-gray-600 mb-3">
-            매장 내 제작물 사진을 아래 빈 칸의 버튼을 눌러 등록해주세요. 등록을 마치면 &quot;제작물 전송 마감&quot; 버튼을 눌러주세요.
-          </p>
+        {!hasActionItem && (
+          <>
+            {ctx.submissionHqClosed ? (
+              <p className="text-base text-gray-600 bg-gray-100 border rounded-lg p-3 mb-3">
+                본사가 제작물 전송을 마감했습니다. 더 이상 등록/수정이 불가합니다.
+              </p>
+            ) : ctx.submissionRegionClosed ? (
+              <p className="text-base text-gray-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
+                지역본부에서 제작물 전송을 마감했습니다. 새 제작물은 추가할 수 없습니다.
+              </p>
+            ) : ctx.submissionCompleted ? (
+              <p className="text-base text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+                제작물 전송이 마감 처리되었습니다. 더 등록할 내용이 있으면 위의 &quot;제작물 전송 수정&quot; 버튼을 눌러주세요.
+              </p>
+            ) : (
+              <p className="text-base text-gray-600 mb-3">
+                매장 내 제작물 사진을 아래 빈 칸의 버튼을 눌러 등록해주세요. 등록을 마치면 &quot;제작물 전송 마감&quot; 버튼을 눌러주세요.
+              </p>
+            )}
+          </>
         )}
 
-        {/* 조치가 필요한 지침이 배정된 건이 하나도 없으면(= 처리결과 입력
+        {/* 조치가 필요한 지침이 배정된 건이 하나도 없으면(= 조치결과 입력
             자체가 이 지점에 해당 없음) 안내문을 보여주지 않는다. */}
         {hasActionItem && (
           <>
             {ctx.actionHqClosed ? (
               <p className="text-base text-gray-600 bg-gray-100 border rounded-lg p-3 mb-3">
-                본사가 처리결과 입력을 마감했습니다. 더 이상 조치결과 사진을 올릴 수 없습니다.
+                본사가 조치결과 입력을 마감했습니다. 더 이상 조치결과 사진을 올릴 수 없습니다.
               </p>
             ) : ctx.actionRegionClosed ? (
               <p className="text-base text-gray-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
-                지역본부에서 처리결과 입력을 마감했습니다. 더 이상 조치결과 사진을 올릴 수 없습니다.
+                지역본부에서 조치결과 입력을 마감했습니다. 더 이상 조치결과 사진을 올릴 수 없습니다.
               </p>
             ) : ctx.actionCompleted ? (
               <p className="text-base text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
-                처리결과 입력이 마감 처리되었습니다. 더 올릴 내용이 있으면 위의 &quot;처리결과 입력 수정&quot; 버튼을 눌러주세요.
+                조치결과 입력이 마감 처리되었습니다. 더 올릴 내용이 있으면 위의 &quot;조치결과 입력 수정&quot; 버튼을 눌러주세요.
               </p>
             ) : (
               <p className="text-base text-gray-600 mb-3">
-                조치가 필요한 항목에 조치결과 사진을 올려주세요. 올리기를 마치면 &quot;처리결과 입력 마감&quot; 버튼을 눌러주세요.
+                조치가 필요한 항목에 조치결과 사진을 올려주세요. 올리기를 마치면 &quot;조치결과 입력 마감&quot; 버튼을 눌러주세요.
               </p>
             )}
           </>
@@ -301,8 +326,8 @@ export default function BranchClient({
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">거점명</th>
                 <th className="text-left px-4 py-3 font-semibold border-r">제작물 사진</th>
                 <th className="text-left px-4 py-3 font-semibold border-r">비고</th>
-                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">처리 지침</th>
-                <th className="text-left px-4 py-3 font-semibold border-r">처리 결과</th>
+                <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">조치 지침</th>
+                <th className="text-left px-4 py-3 font-semibold border-r">조치 결과</th>
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap border-r">상태</th>
                 <th className="text-left px-4 py-3 font-semibold whitespace-nowrap"></th>
               </tr>
@@ -409,7 +434,13 @@ function NoteInput({
   );
 }
 
-function DirectiveDisplay({ directiveCode }: { directiveCode: Item["directiveCode"] }) {
+function DirectiveDisplay({
+  directiveCode,
+  directiveComment,
+}: {
+  directiveCode: Item["directiveCode"];
+  directiveComment: Item["directiveComment"];
+}) {
   return (
     <div>
       <p
@@ -417,10 +448,13 @@ function DirectiveDisplay({ directiveCode }: { directiveCode: Item["directiveCod
           directiveCode ? (directiveCode.requiresAction ? "text-red-700" : "text-green-700") : "text-gray-400"
         }`}
       >
-        처리 지침: {directiveCode ? directiveCode.label : <span className="font-normal">-</span>}
+        조치 지침: {directiveCode ? directiveCode.label : <span className="font-normal">-</span>}
       </p>
       {directiveCode?.description && (
         <p className="text-sm text-gray-700 mt-0.5">{directiveCode.description}</p>
+      )}
+      {directiveComment && (
+        <p className="text-base font-bold text-red-600 mt-1">{directiveComment}</p>
       )}
     </div>
   );
@@ -459,7 +493,7 @@ function ItemCard({
     <div className="bg-white rounded-lg border p-3 space-y-2">
       <div className="flex justify-between items-center">
         <StateBadge item={item} />
-        {!fullyLocked && (
+        {!fullyLocked && !item.directiveCode && (
           <button onClick={onDelete} className="text-sm text-red-600">
             삭제
           </button>
@@ -473,10 +507,10 @@ function ItemCard({
         <NoteInput value={item.note} onPatch={onPatch} disabled={fullyLocked} />
       </div>
 
-      <DirectiveDisplay directiveCode={item.directiveCode} />
+      <DirectiveDisplay directiveCode={item.directiveCode} directiveComment={item.directiveComment} />
 
       <div>
-        <p className="text-sm text-gray-500 mb-1">조치결과(처리결과) 사진</p>
+        <p className="text-sm text-gray-500 mb-1">조치결과(조치결과) 사진</p>
         {item.actionPhotoPath ? (
           <>
             <PhotoThumb path={item.actionPhotoPath} />
@@ -556,7 +590,7 @@ function ItemRow({
         <NoteInput value={item.note} onPatch={onPatch} disabled={fullyLocked} className="min-w-[10rem]" />
       </td>
       <td className="px-4 py-4 border-r">
-        <DirectiveDisplay directiveCode={item.directiveCode} />
+        <DirectiveDisplay directiveCode={item.directiveCode} directiveComment={item.directiveComment} />
       </td>
       <td className="px-4 py-4 border-r">
         {item.actionPhotoPath ? (
@@ -580,7 +614,7 @@ function ItemRow({
         <StateBadge item={item} />
       </td>
       <td className="px-4 py-4 whitespace-nowrap">
-        {!fullyLocked && (
+        {!fullyLocked && !item.directiveCode && (
           <button onClick={onDelete} className="text-sm text-red-600">
             삭제
           </button>
