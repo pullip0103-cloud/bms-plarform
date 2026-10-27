@@ -175,6 +175,108 @@ function addStepSlide(pptx, { stepNo, title, screenshotPath, instructionText, ca
   }
 }
 
+// 지점/대리점용 모바일 스크린샷(세로 390:844 비율)에 맞춘 스텝 슬라이드.
+// addStepSlide와 같은 톤(제목/번호뱃지/콜아웃)을 유지하되, 이미지 박스를
+// 좁고 긴 세로형으로 바꾸고 사진을 왼쪽, 설명을 오른쪽에 넓게 배치한다.
+function addMobileStepSlide(pptx, { stepNo, title, screenshotPath, instructionText, calloutText }) {
+  const slide = pptx.addSlide();
+  slide.addText(title, {
+    x: 0.5, y: 0.3, w: 12.3, h: 0.6, fontFace: FONT_BOLD, fontSize: 24, color: DARK,
+  });
+
+  const imgX = 0.6, imgY = 1.0, imgW = 3.6, imgH = 6.0;
+  slide.addShape(pptx.ShapeType.rect, {
+    x: imgX - 0.03, y: imgY - 0.03, w: imgW + 0.06, h: imgH + 0.06,
+    fill: { color: "FFFFFF" }, line: { color: "DDDDDD", width: 1 },
+  });
+  slide.addImage({
+    path: screenshotPath, x: imgX, y: imgY, w: imgW, h: imgH,
+    sizing: { type: "contain", w: imgW, h: imgH },
+  });
+
+  const rightX = 4.8, rightW = 8.0;
+  slide.addShape(pptx.ShapeType.ellipse, {
+    x: rightX, y: 1.1, w: 0.7, h: 0.7,
+    fill: { color: DARK }, line: { type: "none" },
+  });
+  slide.addText(String(stepNo), {
+    x: rightX, y: 1.1, w: 0.7, h: 0.7, align: "center", valign: "middle",
+    fontFace: FONT_BOLD, fontSize: 22, color: "FFFFFF",
+  });
+
+  slide.addText(instructionText, {
+    x: rightX, y: 2.0, w: rightW, h: 3.0,
+    fontFace: FONT_REGULAR, fontSize: 18, color: DARK, lineSpacing: 26,
+  });
+
+  if (calloutText) {
+    slide.addShape(pptx.ShapeType.roundRect, {
+      x: rightX, y: 5.2, w: rightW, h: 1.5,
+      fill: { color: "FFF4F2" }, line: { color: HIGHLIGHT_RED, width: 1.5 },
+    });
+    slide.addText(calloutText, {
+      x: rightX + 0.2, y: 5.3, w: rightW - 0.4, h: 1.3,
+      fontFace: FONT_REGULAR, fontSize: 13, color: KIA_ORANGE, lineSpacing: 18, valign: "middle",
+    });
+  }
+}
+
+// "사진 등록하는 두 가지 방법" — 스크린샷 없는 순수 설명 슬라이드. 지점/
+// 대리점용 매뉴얼에서 오버뷰 뒤, 첫 스텝 전에 삽입한다.
+function addTwoWaysSlide(pptx) {
+  const slide = pptx.addSlide();
+  slide.addText("사진 등록하는 두 가지 방법", {
+    x: 0.5, y: 0.4, w: 12.3, h: 0.6, fontFace: FONT_BOLD, fontSize: 26, color: DARK,
+  });
+
+  const boxW = 5.6, boxH = 4.3, gap = 0.5, startX = 0.9, y = 1.5;
+  const ways = [
+    {
+      heading: "방법 ① 그 자리에서 촬영",
+      body: "매장을 돌면서 제작물을 하나씩 찍어서 바로 등록해요.\n\n\"사진 촬영\" 버튼 → 찍기 → 등록, 반복하면 돼요.",
+    },
+    {
+      heading: "방법 ② 미리 찍어두고 한번에",
+      body: "휴대폰 카메라로 매장 안 제작물을 전부 먼저 찍어두세요.\n\n그 다음 \"갤러리에서 선택\" 버튼으로 여러 장을 한꺼번에 골라 한번에 등록! 비고(설명)는 나중에 표에서 사진마다 따로 채우면 돼요.",
+    },
+  ];
+  ways.forEach((w, i) => {
+    const x = startX + i * (boxW + gap);
+    slide.addShape(pptx.ShapeType.roundRect, {
+      x, y, w: boxW, h: boxH,
+      fill: { color: i === 0 ? "FFF4F2" : "F0F7FF" },
+      line: { color: i === 0 ? KIA_ORANGE : "2563EB", width: 2 },
+    });
+    slide.addText(w.heading, {
+      x: x + 0.3, y: y + 0.3, w: boxW - 0.6, h: 0.6,
+      fontFace: FONT_BOLD, fontSize: 18, color: i === 0 ? KIA_ORANGE : "1D4ED8",
+    });
+    slide.addText(w.body, {
+      x: x + 0.3, y: y + 1.0, w: boxW - 0.6, h: boxH - 1.3,
+      fontFace: FONT_REGULAR, fontSize: 14, color: DARK, lineSpacing: 22,
+    });
+  });
+
+  slide.addText("둘 다 결과는 똑같아요 — 편한 방법으로 하세요.", {
+    x: 0.9, y: y + boxH + 0.3, w: boxW * 2 + gap, h: 0.5, align: "center",
+    fontFace: FONT_BOLD, fontSize: 16, color: GRAY,
+  });
+}
+
+// "제작물 삭제하기" 안내 — 3개 매뉴얼 전부에 역할별 문구로 추가. 지점용은
+// 모바일 레이아웃(addMobileStepSlide), 지역본부/본사용은 데스크탑
+// 레이아웃(addStepSlide)을 그대로 재사용한다.
+function addDeleteInfoSlide(pptx, { mobile, screenshotPath, instructionText }) {
+  const fn = mobile ? addMobileStepSlide : addStepSlide;
+  fn(pptx, {
+    stepNo: "✕",
+    title: "제작물 삭제하기",
+    screenshotPath,
+    instructionText,
+    calloutText: null,
+  });
+}
+
 function addLockCascadeSlide(pptx, { heading, rules }) {
   const slide = pptx.addSlide();
   slide.addText(heading, {
@@ -252,17 +354,38 @@ function addClosingSlide(pptx, { contactText }) {
   });
 }
 
-function buildManual({ manualTitle, subtitle, diagramRole, overviewBullets, steps, lockCascade, includeDirectiveTable, outFile }) {
+function buildManual({
+  manualTitle,
+  subtitle,
+  diagramRole,
+  overviewBullets,
+  mobileSteps = false,
+  includeTwoWays = false,
+  steps,
+  deleteInfo,
+  lockCascade,
+  includeDirectiveTable,
+  outFile,
+}) {
   const pptx = newDeck();
+  const stepFn = mobileSteps ? addMobileStepSlide : addStepSlide;
   addTitleSlide(pptx, { manualTitle, subtitle });
   addOverviewSlide(pptx, { bodyLines: overviewBullets, diagramRole });
+  if (includeTwoWays) addTwoWaysSlide(pptx);
   for (const s of steps) {
-    addStepSlide(pptx, {
+    stepFn(pptx, {
       stepNo: s.stepNo,
       title: s.title,
       screenshotPath: shot(diagramRole, s.file),
       instructionText: s.instruction,
       calloutText: s.callout,
+    });
+  }
+  if (deleteInfo) {
+    addDeleteInfoSlide(pptx, {
+      mobile: mobileSteps,
+      screenshotPath: shot(diagramRole, deleteInfo.file),
+      instructionText: deleteInfo.instruction,
     });
   }
   addLockCascadeSlide(pptx, lockCascade);
@@ -276,35 +399,46 @@ function buildManual({ manualTitle, subtitle, diagramRole, overviewBullets, step
 const branchSteps = [
   { stepNo: 1, file: "01_region_select.png", title: "링크로 들어가기", instruction: "① 받은 링크를 누르면 이 화면이 보여요. 내가 \"지점\"인지 \"대리점\"인지 눌러주세요.", callout: "빨간 테두리 버튼을 누르세요." },
   { stepNo: 2, file: "02_branch_search.png", title: "내 지점/대리점 찾기", instruction: "② 검색창에 매장 이름을 쓰면 빠르게 찾을 수 있어요. 목록에서 내 매장을 눌러주세요.", callout: "검색하거나 목록에서 바로 선택하세요." },
-  { stepNo: 3, file: "03_branch_home.png", title: "작업 화면 살펴보기", instruction: "이 표에서 모든 작업을 해요. 사진, 비고, 처리 지침, 처리 결과, 상태가 한 줄에 다 보여요.", callout: null },
-  { stepNo: 4, file: "04_add_item_button.png", title: "사진 등록하기 ①", instruction: "③ 표 맨 아래 \"+ 등록\" 버튼을 누르면 새 제작물을 등록할 수 있어요.", callout: "+ 등록 버튼을 누르세요." },
-  { stepNo: 5, file: "05_new_item_modal_photo.png", title: "사진 등록하기 ②", instruction: "④ \"사진 촬영 또는 갤러리에서 선택\"을 눌러 매장 안 제작물 사진을 올려주세요. 여러 장도 한번에 가능해요.", callout: "사진 선택 버튼을 누르세요." },
-  { stepNo: 6, file: "06_new_item_modal_submit.png", title: "사진 등록하기 ③", instruction: "⑤ 사진을 고른 뒤 \"등록\" 버튼을 누르면 올라가요.", callout: "등록 버튼을 누르세요." },
-  { stepNo: 7, file: "07_item_added.png", title: "등록 확인하기", instruction: "등록이 끝나면 표에 새 사진이 바로 보여요. 등록이 잘 됐는지 확인해보세요.", callout: null },
-  { stepNo: 8, file: "08_submission_close_button.png", title: "제작물 전송 마감하기", instruction: "⑥ 사진을 다 올렸다면 \"제작물 전송 마감\" 버튼을 눌러주세요. 이렇게 해야 지역본부가 내가 다 끝낸 걸 알 수 있어요.", callout: "제작물 전송 마감 버튼을 누르세요." },
-  { stepNo: 9, file: "09_submission_closed_self.png", title: "실수로 마감했다면?", instruction: "마감한 뒤에도 \"제작물 전송 수정\" 버튼을 누르면 다시 고칠 수 있어요. 단, 지역본부나 본사가 마감하기 전까지만 가능해요.", callout: null },
-  { stepNo: 10, file: "10_region_closed_badge.png", title: "지역본부가 마감하면", instruction: "버튼이 사라지고 회색 글씨 \"지역본부 제작물 전송 마감됨\"으로 바뀌면, 지역본부가 이미 확인을 마쳤다는 뜻이에요. 이제 저는 더 못 고쳐요.", callout: null },
-  { stepNo: 11, file: "11_hq_closed_badge.png", title: "본사가 마감하면", instruction: "회색 글씨 \"본사 제작물 전송 마감됨\"이 보이면, 본사까지 확인을 끝낸 거예요. 더는 등록도 수정도 할 수 없어요.", callout: null },
-  { stepNo: 12, file: "12_directive_pending.png", title: "처리 지침이 도착했어요", instruction: "본사가 어떤 제작물을 어떻게 할지 \"처리 지침\"을 정해주면, 조치가 필요한 항목은 주황색 \"조치대기\" 뱃지로 표시돼요.", callout: null },
-  { stepNo: 13, file: "13_action_upload_button.png", title: "조치결과 올리기 ①", instruction: "⑦ \"조치결과 올리기\" 버튼을 눌러서, 지침대로 처리한 뒤의 사진을 올려주세요.", callout: "조치결과 올리기 버튼을 누르세요." },
-  { stepNo: 14, file: "14_action_modal_photo.png", title: "조치결과 올리기 ②", instruction: "사진을 촬영하거나 갤러리에서 골라주세요.", callout: "사진 선택 버튼을 누르세요." },
-  { stepNo: 15, file: "15_action_modal_submit.png", title: "조치결과 올리기 ③", instruction: "\"등록\" 버튼을 눌러 올려주세요.", callout: "등록 버튼을 누르세요." },
-  { stepNo: 16, file: "16_action_done_badge.png", title: "조치완료!", instruction: "초록색 \"조치완료\" 뱃지로 바뀌면 그 항목은 끝난 거예요.", callout: null },
-  { stepNo: 17, file: "17_action_close_button.png", title: "처리결과 입력 마감하기", instruction: "⑧ 조치가 필요한 항목을 다 올렸다면 \"처리결과 입력 마감\" 버튼을 눌러주세요.", callout: "처리결과 입력 마감 버튼을 누르세요." },
-  { stepNo: 18, file: "18_action_region_closed_badge.png", title: "지역본부가 처리결과를 마감하면", instruction: "\"지역본부 처리결과 입력 마감됨\"으로 바뀌면 더 이상 조치결과 사진을 올릴 수 없어요.", callout: null },
-  { stepNo: 19, file: "19_action_hq_closed_badge.png", title: "본사가 처리결과까지 마감하면", instruction: "\"본사 처리결과 입력 마감됨\"이 보이면 이 라운드의 모든 작업이 끝난 거예요.", callout: null },
+  { stepNo: 3, file: "03_branch_home.png", title: "작업 화면 살펴보기", instruction: "모바일에서는 세로 카드 형태로 보여요. 카드마다 사진, 비고, 처리 지침, 처리 결과가 다 들어있고, 맨 아래 항상 \"새 제작물\" 카드가 있어요.", callout: null },
+  { stepNo: 4, file: "04_add_item_card.png", title: "사진 등록하기 ①", instruction: "③ 맨 아래 \"+ 사진으로 등록하기\" 카드를 누르면 새 제작물을 등록할 수 있어요.", callout: "이 카드를 누르세요." },
+  { stepNo: 5, file: "05_modal_two_buttons.png", title: "사진 등록하기 ②", instruction: "④ \"사진 촬영\"과 \"갤러리에서 선택\" 두 버튼 중 하나를 골라주세요. 다음 페이지에서 두 방법을 자세히 설명해요.", callout: "사진 선택 버튼을 누르세요." },
+  { stepNo: 6, file: "06_modal_camera_selected.png", title: "사진 등록하기 ③ — 방법① 촬영", instruction: "\"사진 촬영\"으로 1장을 찍으면 이렇게 선택됨이 보여요. \"등록\" 버튼을 누르면 바로 올라가요.", callout: "등록 버튼을 누르세요." },
+  { stepNo: 7, file: "07_item_added_single.png", title: "등록 확인하기", instruction: "등록이 끝나면 카드 목록에 새 사진이 바로 보여요. 등록이 잘 됐는지 확인해보세요.", callout: null },
+  { stepNo: 8, file: "08_modal_gallery_multiple.png", title: "사진 등록하기 — 방법② 여러장", instruction: "\"갤러리에서 선택\"으로 미리 찍어둔 여러 장을 한꺼번에 고르면, \"N장 선택됨\"이라고 보여요. 모두 같은 비고로 한번에 등록돼요.", callout: "여러 장을 골라보세요." },
+  { stepNo: 9, file: "09_items_added_multiple.png", title: "여러 장이 한번에 등록됐어요", instruction: "방법②로 올리면 여러 장이 한꺼번에 카드로 추가돼요. 비고는 아직 비어있는데, 나중에 하나씩 채우면 돼요.", callout: null },
+  { stepNo: 10, file: "10_note_edit_after.png", title: "나중에 비고 채우기", instruction: "⑤ 각 카드의 비고 칸을 눌러 직접 입력하면 바로 저장돼요. 방법②로 올린 사진들도 이렇게 하나씩 설명을 채워주세요.", callout: "비고 칸을 눌러 입력하세요." },
+  { stepNo: 11, file: "11_delete_button.png", title: "잘못 올렸다면 삭제하기", instruction: "카드 오른쪽 위 \"삭제\"를 누르면 그 제작물을 지울 수 있어요. 다음 페이지에서 삭제 규칙을 자세히 설명해요.", callout: "삭제 버튼을 누르세요." },
+  { stepNo: 12, file: "12_submission_close_button.png", title: "제작물 전송 마감하기", instruction: "⑥ 사진을 다 올렸다면 \"제작물 전송 마감\" 버튼을 눌러주세요. 이렇게 해야 지역본부가 내가 다 끝낸 걸 알 수 있어요.", callout: "제작물 전송 마감 버튼을 누르세요." },
+  { stepNo: 13, file: "13_submission_closed_self.png", title: "실수로 마감했다면?", instruction: "마감한 뒤에도 \"제작물 전송 수정\" 버튼을 누르면 다시 고칠 수 있어요. 단, 지역본부나 본사가 마감하기 전까지만 가능해요.", callout: null },
+  { stepNo: 14, file: "14_region_closed_badge.png", title: "지역본부가 마감하면", instruction: "회색 글씨 \"지역본부 제작물 전송 마감됨\"으로 바뀌면, 지역본부가 이미 확인을 마쳤다는 뜻이에요. 이제 저는 더 못 고쳐요.", callout: null },
+  { stepNo: 15, file: "15_hq_closed_badge.png", title: "본사가 마감하면", instruction: "회색 글씨 \"본사 제작물 전송 마감됨\"이 보이면, 본사까지 확인을 끝낸 거예요. 더는 등록도 수정도 할 수 없어요.", callout: null },
+  { stepNo: 16, file: "16_directive_pending.png", title: "처리 지침이 도착했어요", instruction: "본사가 어떤 제작물을 어떻게 할지 \"처리 지침\"을 정해주면, 조치가 필요한 항목은 주황색 \"조치대기\" 뱃지로 표시돼요.", callout: null },
+  { stepNo: 17, file: "17_action_upload_button.png", title: "조치결과 올리기 ①", instruction: "⑦ \"조치결과 사진 올리기\" 버튼을 눌러서, 지침대로 처리한 뒤의 사진을 올려주세요.", callout: "조치결과 올리기 버튼을 누르세요." },
+  { stepNo: 18, file: "18_action_modal_two_buttons.png", title: "조치결과 올리기 ②", instruction: "조치결과도 \"사진 촬영\"/\"갤러리에서 선택\" 두 버튼으로 똑같이 올릴 수 있어요. (조치결과는 1장만 올려요)", callout: "사진 선택 버튼을 누르세요." },
+  { stepNo: 19, file: "19_action_done_badge.png", title: "조치완료!", instruction: "초록색 \"조치완료\" 뱃지로 바뀌면 그 항목은 끝난 거예요.", callout: null },
+  { stepNo: 20, file: "20_action_close_button.png", title: "처리결과 입력 마감하기", instruction: "⑧ 조치가 필요한 항목을 다 올렸다면 \"처리결과 입력 마감\" 버튼을 눌러주세요.", callout: "처리결과 입력 마감 버튼을 누르세요." },
+  { stepNo: 21, file: "21_action_region_closed.png", title: "지역본부가 처리결과를 마감하면", instruction: "\"지역본부 처리결과 입력 마감됨\"으로 바뀌면 더 이상 조치결과 사진을 올릴 수 없어요.", callout: null },
+  { stepNo: 22, file: "22_action_hq_closed.png", title: "본사가 처리결과까지 마감하면", instruction: "\"본사 처리결과 입력 마감됨\"이 보이면 이 라운드의 모든 작업이 끝난 거예요.", callout: null },
+  { stepNo: 23, file: "23_refresh_button_blue.png", title: "화면이 자동으로 바뀌지 않아요", instruction: "지역본부나 본사가 마감/지침을 바꿔도 내 화면엔 바로 안 보여요. 위쪽 파란색 \"새로고침\" 버튼을 직접 눌러야 최신 내용이 보여요.", callout: "새로고침 버튼을 누르세요." },
 ];
 
 await buildManual({
   manualTitle: "지점/대리점용",
   subtitle: "제작물 사진 등록부터 조치결과 올리기까지",
   diagramRole: "branch",
+  mobileSteps: true,
+  includeTwoWays: true,
   overviewBullets: [
     "나(지점/대리점)는 매장 안 제작물 사진을 찍어서 올리는 역할이에요.",
     "내가 다 올리면 → 지역본부가 확인하고 → 본사가 최종 확인을 해요.",
     "본사가 \"처리 지침\"을 정해주면, 조치가 필요한 항목에는 조치결과 사진도 올려야 해요.",
+    "사진은 두 가지 방법으로 올릴 수 있어요(바로 다음 페이지 참고).",
   ],
   steps: branchSteps,
+  deleteInfo: {
+    file: "11_delete_button.png",
+    instruction: "잘못 찍었거나 올릴 필요 없는 사진은 삭제할 수 있어요.\n\n단, 제작물 전송을 마감한 뒤에는 삭제도 할 수 없어요(수정과 같은 규칙).",
+  },
   lockCascade: {
     heading: "잠금 규칙 — 나는 언제 못 고치나요?",
     rules: [
@@ -322,7 +456,7 @@ console.log("저장 완료: 지점·대리점용");
 
 const regionSteps = [
   { stepNo: 1, file: "01_overview.png", title: "내 지역본부 현황 화면", instruction: "링크로 들어오면 소속 지점/대리점 전체 현황이 한 표에 보여요.", callout: null },
-  { stepNo: 2, file: "02_filter_buttons.png", title: "전체/지점/대리점만 보기", instruction: "① \"전체\", \"지점\", \"대리점\" 버튼으로 원하는 것만 걸러볼 수 있어요.", callout: "필터 버튼을 눌러보세요." },
+  { stepNo: 2, file: "02_filter_buttons.png", title: "전체/지점/대리점만 보기", instruction: "① \"전체\", \"지점\", \"대리점\" 버튼으로 원하는 것만 걸러볼 수 있고, 옆의 드롭다운으로 특정 지점/대리점 한 곳만 골라볼 수도 있어요.", callout: "필터 버튼을 눌러보세요." },
   { stepNo: 3, file: "11_action_incomplete_warning.png", title: "아직 안 끝낸 곳 확인하기", instruction: "주황색 경고 박스는 아직 마감하지 않은 지점/대리점 이름을 알려줘요.", callout: null },
   { stepNo: 4, file: "04_note_inline_edit.png", title: "비고 직접 고치기", instruction: "② 표의 비고 칸을 눌러 바로 내용을 고칠 수 있어요. 지점 완료 여부와 관계없이 항상 가능해요(본사 마감 전까지).", callout: "비고 칸을 눌러 수정하세요." },
   { stepNo: 5, file: "05_photo_lightbox.png", title: "사진 크게 보기", instruction: "사진을 누르면 크게 확대돼서 잘 보여요.", callout: null },
@@ -346,9 +480,13 @@ await buildManual({
     "소속 지점/대리점 전원이 완료해야만 내가 마감할 수 있어요 — 한 곳이라도 안 하면 안 돼요.",
     "처리 지침을 보내거나 조치결과 사진을 직접 올리지는 않지만, 본사가 보낸 지침과 지점의 조치 진행 상황을 꼭 확인한 뒤 마감해야 해요.",
     "내가 마감하면 → 소속 지점/대리점은 더 이상 못 고쳐요. 본사가 마감하면 → 나도 못 고쳐요.",
-    "⚠ 화면이 자동으로 업데이트되지 않아요 — 지점이 새로 사진을 올려도 화면엔 바로 안 보여요. 화면 오른쪽 위 \"새로고침\" 버튼을 직접 눌러야 최신 내용이 보여요.",
+    "⚠ 화면이 자동으로 업데이트되지 않아요 — 지점이 새로 사진을 올려도 화면엔 바로 안 보여요. 화면 오른쪽 위 파란색 \"새로고침\" 버튼을 직접 눌러야 최신 내용이 보여요. 지점을 하나 골라 보는 중이어도 새로고침을 누르면 그 선택은 그대로 유지돼요.",
   ],
   steps: regionSteps,
+  deleteInfo: {
+    file: "17_delete_button.png",
+    instruction: "지점이 올린 제작물을 지역본부가 대신 지울 수도 있어요.\n\n단, 본사가 마감한 뒤에는 삭제할 수 없어요.",
+  },
   lockCascade: {
     heading: "잠금 규칙 — 나는 언제 못 고치나요?",
     rules: [
@@ -367,7 +505,7 @@ console.log("저장 완료: 지역본부용");
 const hqSteps = [
   { stepNo: 1, file: "12_admin_entry.png", title: "관리 설정 화면", instruction: "본사용 링크로 들어오면 이 \"관리 설정\" 화면이 보여요. \"지역본부별 마감 현황\"에서 모든 지역본부의 진행 상황을 한눈에 볼 수 있어요.", callout: null },
   { stepNo: 2, file: "13_admin_status_section.png", title: "지역본부 눌러서 들어가기", instruction: "확인하거나 작업할 지역본부 이름(파란 글씨)을 누르면 그 지역본부의 전체 현황 화면으로 들어가요.", callout: "지역본부 이름을 누르세요." },
-  { stepNo: 3, file: "02_region_board_buttons.png", title: "지역본부 화면 살펴보기", instruction: "들어오면 위쪽에 3개 버튼이 있어요: ①제작물 전송 마감 ②처리 지침 배포 ③처리결과 마감.", callout: "순서대로 눌러야 해요." },
+  { stepNo: 3, file: "02_region_board_buttons.png", title: "지역본부 화면 살펴보기", instruction: "들어오면 위쪽에 3개 버튼이 있어요: ①제작물 전송 마감 ②처리 지침 배포 ③처리결과 마감. 오른쪽 위에는 전체/지점/대리점 필터와 특정 지점 하나만 골라보는 드롭다운도 있어요.", callout: "순서대로 눌러야 해요." },
   { stepNo: 4, file: "03_directive_button_disabled_tooltip.png", title: "버튼 순서가 정해져 있어요", instruction: "\"처리 지침 배포\" 버튼은 \"제작물 전송 마감\"을 먼저 눌러야 활성화돼요. 아직 비활성(회색)이면 먼저 ①번부터 눌러주세요.", callout: null },
   { stepNo: 5, file: "04_submission_close_click.png", title: "① 제작물 전송 마감하기", instruction: "모든 제작물을 다 확인했으면 \"제작물 전송 마감\" 버튼을 누르세요.", callout: "제작물 전송 마감 버튼을 누르세요." },
   { stepNo: 6, file: "05_submission_closed_state.png", title: "마감된 모습", instruction: "버튼이 \"제작물 전송 마감 해제\"로 바뀌어요. 다시 누르면 언제든 풀 수 있어요.", callout: null },
@@ -388,9 +526,13 @@ await buildManual({
     "나(본사)는 전체 과정의 마지막 열쇠를 쥐고 있어요 — 내가 마감하면 아무도 더 못 고쳐요.",
     "순서는 항상 같아요: ①제작물 전송 마감 → ②처리 지침 배포 → ③처리결과 마감.",
     "지역본부 확인 여부와 관계없이, 나는 언제나 전체 지역본부의 모든 내용을 볼 수 있어요.",
-    "⚠ 화면이 자동으로 업데이트되지 않아요 — 지점/지역본부가 새로 내용을 올려도 화면엔 바로 안 보여요. 화면 오른쪽 위 \"새로고침\" 버튼을 직접 눌러야 최신 내용이 보여요.",
+    "⚠ 화면이 자동으로 업데이트되지 않아요 — 지점/지역본부가 새로 내용을 올려도 화면엔 바로 안 보여요. 화면 오른쪽 위 파란색 \"새로고침\" 버튼을 직접 눌러야 최신 내용이 보여요. 지점을 하나 골라 보는 중이어도 새로고침을 누르면 그 선택은 그대로 유지돼요.",
   ],
   steps: hqSteps,
+  deleteInfo: {
+    file: "15_delete_button.png",
+    instruction: "본사는 마감 여부와 무관하게 언제든 제작물을 삭제할 수 있어요.\n\n단, 지난 라운드(과거 기록)는 삭제할 수 없어요.",
+  },
   lockCascade: {
     heading: "잠금 규칙 — 내가 마감하면 무슨 일이 생기나요?",
     rules: [
