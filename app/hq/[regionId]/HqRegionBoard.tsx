@@ -26,6 +26,12 @@ export type DirectiveCodeOption = {
   requiresAction: boolean;
 };
 
+export type HqBranch = {
+  id: string;
+  name: string;
+  branchType: string;
+};
+
 export type HqLock = {
   submissionRegionClosed: boolean;
   actionRegionClosed: boolean;
@@ -40,28 +46,57 @@ export default function HqRegionBoard({
   regionId,
   regionName,
   initialItems,
+  branches: initialBranches,
   directiveCodes,
   initialLock,
 }: {
   regionId: string;
   regionName: string;
   initialItems: HqItem[];
+  branches: HqBranch[];
   directiveCodes: DirectiveCodeOption[];
   initialLock: HqLock;
 }) {
   // 자동 새로고침은 없다 — Firestore 읽기 할당량을 아끼기 위해 "새로고침"
   // 버튼을 눌러야만 다시 불러온다.
   const [items, setItems] = useState(initialItems);
+  const [branches, setBranches] = useState(initialBranches);
   const [lock, setLock] = useState(initialLock);
   const [busyProcess, setBusyProcess] = useState<"submission" | "action" | "directive" | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
   // 지점/대리점 구분 필터. "전체"가 기본값.
   const [branchTypeFilter, setBranchTypeFilter] = useState<BranchTypeFilter>("ALL");
+  // 전체 지점/대리점 보기(기본) / 특정 한 곳만 보기 — 지역본부용과 동일한 패턴.
+  const [selectedBranchId, setSelectedBranchId] = useState<string>("ALL");
+
+  const branchesForFilter =
+    branchTypeFilter === "ALL" ? branches : branches.filter((b) => b.branchType === branchTypeFilter);
 
   const visible = (
     branchTypeFilter === "ALL" ? items : items.filter((i) => i.branch?.branchType === branchTypeFilter)
   )
+    .filter((i) => selectedBranchId === "ALL" || i.branchId === selectedBranchId)
     .slice()
     .sort((a, b) => (a.branch?.name ?? "").localeCompare(b.branch?.name ?? "", "ko"));
+
+  // "새로고침": location.reload() 대신 데이터만 다시 받아온다 — 선택된
+  // 지점(selectedBranchId)/유형 필터(branchTypeFilter)가 리셋되지 않도록.
+  async function load() {
+    setRefreshing(true);
+    try {
+      const res = await fetch(`/api/hq/${regionId}`);
+      if (!res.ok) {
+        alert("새로고침에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
+      const data = await res.json();
+      setItems(data.items);
+      setBranches(data.branches);
+      setLock(data.lock);
+    } finally {
+      setRefreshing(false);
+    }
+  }
 
   // 이미 선택된 코드를 다시 누르면 지침을 해제한다(directiveCodeId: null).
   async function assignDirective(itemId: string, directiveCodeId: string) {
@@ -152,10 +187,11 @@ export default function HqRegionBoard({
             </div>
           </div>
           <button
-            onClick={() => location.reload()}
-            className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap`}
+            onClick={load}
+            disabled={refreshing}
+            className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap disabled:opacity-60`}
           >
-            새로고침
+            {refreshing ? "새로고침 중..." : "새로고침"}
           </button>
         </div>
 
@@ -193,16 +229,35 @@ export default function HqRegionBoard({
             {lock.actionHqClosed ? "처리결과 마감 해제" : "처리결과 마감"}
           </button>
 
-          <div className="flex rounded-lg border overflow-hidden text-sm font-medium ml-auto">
-            {(["ALL", "지점", "대리점"] as BranchTypeFilter[]).map((f) => (
-              <button
-                key={f}
-                onClick={() => setBranchTypeFilter(f)}
-                className={`px-3 py-1.5 ${branchTypeFilter === f ? "bg-gray-900 text-white" : "bg-white text-gray-600"}`}
-              >
-                {f === "ALL" ? "전체" : f}
-              </button>
-            ))}
+          <div className="flex items-center gap-2 ml-auto">
+            <div className="flex rounded-lg border overflow-hidden text-sm font-medium">
+              {(["ALL", "지점", "대리점"] as BranchTypeFilter[]).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => {
+                    setBranchTypeFilter(f);
+                    setSelectedBranchId("ALL");
+                  }}
+                  className={`px-3 py-1.5 ${branchTypeFilter === f ? "bg-gray-900 text-white" : "bg-white text-gray-600"}`}
+                >
+                  {f === "ALL" ? "전체" : f}
+                </button>
+              ))}
+            </div>
+            <select
+              value={selectedBranchId}
+              onChange={(e) => setSelectedBranchId(e.target.value)}
+              className="text-sm border rounded px-2 py-1.5"
+            >
+              <option value="ALL">
+                {branchTypeFilter === "ALL" ? "전체 지점/대리점" : `전체 ${branchTypeFilter}`}
+              </option>
+              {branchesForFilter.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.name} ({b.branchType})
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 

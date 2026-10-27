@@ -3,7 +3,7 @@ import { connection } from "next/server";
 import { resolveRegion } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { getRegionLockStatus } from "@/lib/regionLock";
-import HqRegionBoard, { type HqItem, type DirectiveCodeOption } from "./HqRegionBoard";
+import HqRegionBoard, { type HqItem, type DirectiveCodeOption, type HqBranch } from "./HqRegionBoard";
 
 export const instant = false;
 
@@ -55,12 +55,23 @@ export default async function HqRegionPage({
       })
     : [];
 
-  const [branchDocs, codeDocs] = await Promise.all([
+  const [branchDocs, codeDocs, activeBranchesSnap] = await Promise.all([
     Promise.all(Array.from(branchIds).map((id) => adminDb.collection("branches").doc(id).get())),
     Promise.all(Array.from(codeIds).map((id) => adminDb.collection("directiveCodes").doc(id).get())),
+    adminDb
+      .collection("branches")
+      .where("regionId", "==", regionId)
+      .where("isActive", "==", true)
+      .orderBy("name")
+      .get(),
   ]);
   const branchById = new Map(branchDocs.filter((d) => d.exists).map((d) => [d.id, d.data()!]));
   const codeById = new Map(codeDocs.filter((d) => d.exists).map((d) => [d.id, d.data()!]));
+  const branches: HqBranch[] = activeBranchesSnap.docs.map((d) => ({
+    id: d.id,
+    name: d.data().name as string,
+    branchType: d.data().branchType as string,
+  }));
 
   const items: HqItem[] = rawItems.map((item) => ({
     id: item.id,
@@ -115,6 +126,7 @@ export default async function HqRegionPage({
       regionId={regionId}
       regionName={region.name}
       initialItems={items}
+      branches={branches}
       directiveCodes={activeCodes}
       initialLock={lock}
     />

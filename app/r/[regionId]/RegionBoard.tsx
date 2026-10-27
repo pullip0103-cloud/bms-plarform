@@ -48,7 +48,7 @@ export default function RegionBoard({
   regionId,
   regionName,
   initialItems,
-  branches,
+  branches: initialBranches,
   activeRoundName,
   initialLock,
   rounds,
@@ -70,9 +70,11 @@ export default function RegionBoard({
   // 버튼을 눌러야만 다시 불러온다(수백 개 지점이 동시에 화면을 켜두는
   // 실 운영 규모를 고려한 설계 결정).
   const [items, setItems] = useState(initialItems);
+  const [branches, setBranches] = useState(initialBranches);
   const [lock, setLock] = useState(initialLock);
   const [submissionBusy, setSubmissionBusy] = useState(false);
   const [actionBusy, setActionBusy] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   // 전체 지점/대리점 보기(기본) / 특정 한 곳만 보기. 목록은 가나다순(서버에서
   // 이미 name 기준으로 정렬되어 내려온다).
   const [selectedBranchId, setSelectedBranchId] = useState<string>("ALL");
@@ -106,6 +108,27 @@ export default function RegionBoard({
       return branchName(a.branchId).localeCompare(branchName(b.branchId), "ko");
     });
   }, [byBranch, branches]);
+
+  // "새로고침": location.reload() 대신 데이터만 다시 받아온다 — 선택된
+  // 지점(selectedBranchId)/유형 필터(branchTypeFilter)가 리셋되지 않도록.
+  async function load() {
+    setRefreshing(true);
+    try {
+      const params = new URLSearchParams();
+      if (selectedRoundId) params.set("roundId", selectedRoundId);
+      const res = await fetch(`/api/region/${regionId}${params.toString() ? `?${params.toString()}` : ""}`);
+      if (!res.ok) {
+        alert("새로고침에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
+      const data = await res.json();
+      setItems(data.items);
+      setBranches(data.branches);
+      setLock(data.lock);
+    } finally {
+      setRefreshing(false);
+    }
+  }
 
   async function patchItem(itemId: string, body: Record<string, unknown>) {
     const res = await fetch(`/api/region/${regionId}/items/${itemId}`, {
@@ -191,10 +214,11 @@ export default function RegionBoard({
               ))}
             </select>
             <button
-              onClick={() => location.reload()}
-              className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap`}
+              onClick={load}
+              disabled={refreshing}
+              className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap disabled:opacity-60`}
             >
-              새로고침
+              {refreshing ? "새로고침 중..." : "새로고침"}
             </button>
           </div>
         </div>
