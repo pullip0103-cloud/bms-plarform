@@ -11,7 +11,8 @@
     "seed:branches": "dotenv -e .env.local -- node scripts/seedBranches.mjs",
     "seed:directives": "dotenv -e .env.local -- node scripts/seedDirectiveCodes.mjs",
     "build:linksppt": "dotenv -e .env.local -- node scripts/buildLinksPpt.mjs",
-    "build:manualsppt": "dotenv -e .env.local -- node scripts/buildManualsPpt.mjs"
+    "build:manualsppt": "dotenv -e .env.local -- node scripts/buildManualsPpt.mjs",
+    "build:roundpdf": "dotenv -e .env.local -- node scripts/buildRoundPdf.mjs"
   },
   "dependencies": {
     "browser-image-compression": "^2.0.2",
