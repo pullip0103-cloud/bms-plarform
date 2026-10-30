@@ -21,30 +21,34 @@ export default async function RoundArchivePage({
   if (!roundSnap.exists) notFound();
   const round = roundSnap.data()!;
 
-  const itemsSnap = await adminDb
-    .collection("items")
-    .where("roundId", "==", roundId)
-    .orderBy("createdAt", "desc")
-    .get();
-
+  // roundId 단독(또는 roundId+createdAt) 복합 인덱스가 없으므로, 이미 존재하는
+  // 인덱스로 거르는 대신 전체 컬렉션을 가져와 메모리에서 roundId로 필터한다 —
+  // 이 페이지는 "과거 라운드 1개" 전용 조회라 전체 지역본부를 한 화면에
+  // 보여줘야 해서 regionId 기준 인덱스로는 대체할 수 없다(기존 프로젝트
+  // 관례와 동일한 메모리 필터링 패턴, 2026-10-30).
+  const itemsSnapAll = await adminDb.collection("items").get();
   const branchIds = new Set<string>();
   const codeIds = new Set<string>();
-  const rawItems = itemsSnap.docs.map((d) => {
-    const data = d.data();
-    branchIds.add(data.branchId);
-    if (data.directiveCodeId) codeIds.add(data.directiveCodeId);
-    return { id: d.id, ...data } as Record<string, unknown> & {
-      id: string;
-      branchId: string;
-      regionId: string;
-      note: string | null;
-      photoPath: string;
-      actionPhotoPath: string | null;
-      actionNote: string | null;
-      directiveCodeId?: string;
-      directiveComment?: string | null;
-    };
-  });
+  const rawItems = itemsSnapAll.docs
+    .filter((d) => d.data().roundId === roundId)
+    .map((d) => {
+      const data = d.data();
+      branchIds.add(data.branchId);
+      if (data.directiveCodeId) codeIds.add(data.directiveCodeId);
+      return { id: d.id, ...data } as Record<string, unknown> & {
+        id: string;
+        branchId: string;
+        regionId: string;
+        note: string | null;
+        photoPath: string;
+        actionPhotoPath: string | null;
+        actionNote: string | null;
+        directiveCodeId?: string;
+        directiveComment?: string | null;
+        createdAt: { toMillis(): number };
+      };
+    })
+    .sort((a, b) => b.createdAt.toMillis() - a.createdAt.toMillis());
 
   const [branchDocs, codeDocs] = await Promise.all([
     Promise.all(Array.from(branchIds).map((id) => adminDb.collection("branches").doc(id).get())),

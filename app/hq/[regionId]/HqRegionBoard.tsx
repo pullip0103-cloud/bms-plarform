@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DERIVED_STATE_LABEL, DERIVED_STATE_BADGE_COLOR } from "@/lib/constants";
 import { deriveItemState } from "@/lib/itemProgress";
 import { TACTILE_BUTTON } from "@/lib/tactileButton";
@@ -41,6 +42,12 @@ export type HqLock = {
   directivePublished: boolean;
 };
 
+export type RoundOption = {
+  id: string;
+  name: string;
+  status: string;
+};
+
 type BranchTypeFilter = "ALL" | "지점" | "대리점";
 
 export default function HqRegionBoard({
@@ -50,6 +57,9 @@ export default function HqRegionBoard({
   branches: initialBranches,
   directiveCodes,
   initialLock,
+  rounds,
+  selectedRoundId,
+  isPastRound,
 }: {
   regionId: string;
   regionName: string;
@@ -57,7 +67,11 @@ export default function HqRegionBoard({
   branches: HqBranch[];
   directiveCodes: DirectiveCodeOption[];
   initialLock: HqLock;
+  rounds: RoundOption[];
+  selectedRoundId: string | null;
+  isPastRound: boolean;
 }) {
+  const router = useRouter();
   // 자동 새로고침은 없다 — Firestore 읽기 할당량을 아끼기 위해 "새로고침"
   // 버튼을 눌러야만 다시 불러온다.
   const [items, setItems] = useState(initialItems);
@@ -85,7 +99,9 @@ export default function HqRegionBoard({
   async function load() {
     setRefreshing(true);
     try {
-      const res = await fetch(`/api/hq/${regionId}`);
+      const params = new URLSearchParams();
+      if (selectedRoundId) params.set("roundId", selectedRoundId);
+      const res = await fetch(`/api/hq/${regionId}${params.toString() ? `?${params.toString()}` : ""}`);
       if (!res.ok) {
         alert("새로고침에 실패했습니다. 다시 시도해주세요.");
         return;
@@ -202,19 +218,42 @@ export default function HqRegionBoard({
               )}
             </div>
           </div>
-          <button
-            onClick={load}
-            disabled={refreshing}
-            className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap disabled:opacity-60`}
-          >
-            {refreshing ? "새로고침 중..." : "새로고침"}
-          </button>
+          <div className="flex items-center gap-2">
+            <select
+              value={selectedRoundId ?? ""}
+              onChange={(e) => {
+                const params = new URLSearchParams();
+                if (e.target.value) params.set("roundId", e.target.value);
+                router.push(`/hq/${regionId}${params.toString() ? `?${params.toString()}` : ""}`);
+              }}
+              className="text-sm border rounded px-2 py-1.5"
+            >
+              {rounds.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.name} {r.status !== "진행중" ? "(마감)" : ""}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={load}
+              disabled={refreshing}
+              className={`${TACTILE_BUTTON} text-sm bg-blue-600 text-white px-3 py-1.5 whitespace-nowrap disabled:opacity-60`}
+            >
+              {refreshing ? "새로고침 중..." : "새로고침"}
+            </button>
+          </div>
         </div>
+
+        {isPastRound && (
+          <p className="text-sm font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+            과거 라운드(읽기전용) — 조회만 가능하며 마감/지침 배포 버튼은 비활성화됩니다.
+          </p>
+        )}
 
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => toggleLock("submission")}
-            disabled={busyProcess === "submission"}
+            disabled={busyProcess === "submission" || isPastRound}
             className={`${TACTILE_BUTTON} px-4 py-2.5 text-sm whitespace-nowrap ${
               lock.submissionHqClosed ? "bg-gray-700 text-white" : "bg-red-50 text-red-700 border border-red-200"
             }`}
@@ -223,7 +262,7 @@ export default function HqRegionBoard({
           </button>
           <button
             onClick={() => toggleLock("directive")}
-            disabled={busyProcess === "directive" || !lock.submissionHqClosed}
+            disabled={busyProcess === "directive" || !lock.submissionHqClosed || isPastRound}
             title={!lock.submissionHqClosed ? "제작물 전송을 먼저 마감해야 배포할 수 있습니다" : undefined}
             className={`${TACTILE_BUTTON} px-4 py-2.5 text-sm whitespace-nowrap ${
               !lock.submissionHqClosed
@@ -237,7 +276,7 @@ export default function HqRegionBoard({
           </button>
           <button
             onClick={() => toggleLock("action")}
-            disabled={busyProcess === "action"}
+            disabled={busyProcess === "action" || isPastRound}
             className={`${TACTILE_BUTTON} px-4 py-2.5 text-sm whitespace-nowrap ${
               lock.actionHqClosed ? "bg-gray-700 text-white" : "bg-red-50 text-red-700 border border-red-200"
             }`}
@@ -315,6 +354,7 @@ export default function HqRegionBoard({
                   assignDirective={assignDirective}
                   onSaveComment={(comment) => saveDirectiveComment(item.id, comment)}
                   onDelete={() => deleteItem(item.id)}
+                  disabled={isPastRound}
                 />
               ))}
             </tbody>
@@ -332,6 +372,7 @@ function ItemTableRow({
   assignDirective,
   onSaveComment,
   onDelete,
+  disabled,
 }: {
   item: HqItem;
   directiveCodes: DirectiveCodeOption[];
@@ -339,6 +380,7 @@ function ItemTableRow({
   assignDirective: (itemId: string, directiveCodeId: string) => void;
   onSaveComment: (comment: string) => Promise<void>;
   onDelete: () => void;
+  disabled: boolean;
 }) {
   const state = deriveItemState(item);
   return (
@@ -372,8 +414,9 @@ function ItemTableRow({
               <button
                 key={c.id}
                 onClick={() => assignDirective(item.id, c.id)}
+                disabled={disabled}
                 title={c.description ?? undefined}
-                className={`text-xs font-semibold rounded px-2 py-1 border whitespace-nowrap ${
+                className={`text-xs font-semibold rounded px-2 py-1 border whitespace-nowrap disabled:opacity-50 ${
                   selected ? "ring-2 ring-offset-1" : ""
                 } ${
                   c.requiresAction
@@ -386,7 +429,7 @@ function ItemTableRow({
             );
           })}
         </div>
-        <DirectiveCommentInput value={item.directiveComment} onSave={onSaveComment} />
+        <DirectiveCommentInput value={item.directiveComment} onSave={onSaveComment} disabled={disabled} />
       </td>
       <td className="px-3 py-3">
         {item.actionPhotoPath ? (
@@ -408,9 +451,11 @@ function ItemTableRow({
         )}
       </td>
       <td className="px-3 py-3 whitespace-nowrap">
-        <button onClick={onDelete} className="text-xs text-red-600">
-          삭제
-        </button>
+        {!disabled && (
+          <button onClick={onDelete} className="text-xs text-red-600">
+            삭제
+          </button>
+        )}
       </td>
     </tr>
   );
@@ -422,9 +467,11 @@ function ItemTableRow({
 function DirectiveCommentInput({
   value,
   onSave,
+  disabled,
 }: {
   value: string | null;
   onSave: (comment: string) => Promise<void>;
+  disabled: boolean;
 }) {
   const [text, setText] = useState(value ?? "");
   useEffect(() => {
@@ -435,12 +482,13 @@ function DirectiveCommentInput({
   return (
     <input
       value={text}
+      disabled={disabled}
       onChange={(e) => setText(e.target.value)}
       onBlur={() => {
         if (text !== (value ?? "")) onSave(text);
       }}
       placeholder="현장에 전달할 코멘트 (선택)"
-      className="mt-2 w-full border rounded px-2 py-1 text-xs"
+      className="mt-2 w-full border rounded px-2 py-1 text-xs disabled:bg-gray-50 disabled:text-gray-400"
     />
   );
 }

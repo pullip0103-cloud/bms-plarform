@@ -6,23 +6,35 @@ import { getRegionLockStatus } from "@/lib/regionLock";
 // "새로고침" 버튼이 호출하는 데이터 전용 엔드포인트. app/hq/[regionId]/page.tsx의
 // 조회 로직을 그대로 옮긴 것(지점 선택 드롭다운을 위해 branches도 함께 내려준다) —
 // 새로고침 시 location.reload() 대신 이걸 fetch해서 selectedBranchId를 날리지 않는다.
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ regionId: string }> }) {
+// roundId 쿼리파라미터로 과거 라운드도 조회 가능하다(2026-10-30, 지점/지역본부용과
+// 동일한 원칙).
+export async function GET(req: NextRequest, { params }: { params: Promise<{ regionId: string }> }) {
   const { regionId } = await params;
+  const requestedRoundId = req.nextUrl.searchParams.get("roundId") ?? undefined;
   const region = await resolveRegion(regionId);
   if (!region) {
     return NextResponse.json({ error: "INVALID_REGION" }, { status: 404 });
   }
 
-  const activeRoundSnap = await adminDb.collection("rounds").where("status", "==", "진행중").limit(1).get();
-  const activeRoundId = activeRoundSnap.empty ? null : activeRoundSnap.docs[0].id;
+  const roundsSnap = await adminDb.collection("rounds").orderBy("createdAt", "desc").get();
+  const rounds = roundsSnap.docs.map((d) => ({
+    id: d.id,
+    name: d.data().name as string,
+    status: d.data().status as string,
+  }));
+  const selectedRound =
+    (requestedRoundId && rounds.find((r) => r.id === requestedRoundId)) ||
+    rounds.find((r) => r.status === "진행중") ||
+    null;
+  const selectedRoundId = selectedRound?.id ?? null;
 
   const itemsSnapAll = await adminDb
     .collection("items")
     .where("regionId", "==", regionId)
     .orderBy("createdAt", "desc")
     .get();
-  const itemsSnap = activeRoundId
-    ? { docs: itemsSnapAll.docs.filter((d) => d.data().roundId === activeRoundId) }
+  const itemsSnap = selectedRoundId
+    ? { docs: itemsSnapAll.docs.filter((d) => d.data().roundId === selectedRoundId) }
     : null;
 
   const branchIds = new Set<string>();
@@ -95,17 +107,17 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ reg
     actionHqClosed: false,
     directivePublished: false,
   };
-  if (activeRoundId) {
+  if (selectedRoundId) {
     const codesSnap = await adminDb
       .collection("directiveCodes")
-      .where("roundId", "==", activeRoundId)
+      .where("roundId", "==", selectedRoundId)
       .orderBy("orderNo", "asc")
       .get();
     activeCodes = codesSnap.docs.map((d) => {
       const data = d.data();
       return { id: d.id, label: data.label, description: data.description ?? null, requiresAction: data.requiresAction };
     });
-    const fullLock = await getRegionLockStatus(activeRoundId, regionId);
+    const fullLock = await getRegionLockStatus(selectedRoundId, regionId);
     lock = {
       submissionRegionClosed: fullLock.submissionRegionClosed,
       actionRegionClosed: fullLock.actionRegionClosed,

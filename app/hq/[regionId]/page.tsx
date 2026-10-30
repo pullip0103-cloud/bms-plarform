@@ -3,25 +3,45 @@ import { connection } from "next/server";
 import { resolveRegion } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { getRegionLockStatus } from "@/lib/regionLock";
-import HqRegionBoard, { type HqItem, type DirectiveCodeOption, type HqBranch } from "./HqRegionBoard";
+import HqRegionBoard, {
+  type HqItem,
+  type DirectiveCodeOption,
+  type HqBranch,
+  type RoundOption,
+} from "./HqRegionBoard";
 
 export const instant = false;
 
 export default async function HqRegionPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ regionId: string }>;
+  searchParams: Promise<{ roundId?: string }>;
 }) {
   await connection();
   const { regionId } = await params;
+  const { roundId: requestedRoundId } = await searchParams;
   const region = await resolveRegion(regionId);
   if (!region) notFound();
 
-  // 본사 화면은 항상 "현재 진행중 라운드"만 본다 — 과거 라운드 항목이 이
-  // 화면에 영구히 섞여 보이지 않도록 roundId로도 필터링한다(과거 전체는
-  // /hq/admin/rounds/[roundId]에서 조회).
-  const activeRoundSnap = await adminDb.collection("rounds").where("status", "==", "진행중").limit(1).get();
-  const activeRoundId = activeRoundSnap.empty ? null : activeRoundSnap.docs[0].id;
+  // 지역본부용(/r)과 동일하게, roundId가 지정되면 그 라운드를 조회하고
+  // (과거 라운드 포함) 지정되지 않으면 "진행중" 라운드를 기본으로 본다.
+  // 과거에는 본사용 화면이 항상 "진행중" 라운드만 봤는데, 과거 라운드도
+  // 지점/지역본부용처럼 조회 가능해야 한다는 요구사항으로 추가(2026-10-30).
+  const roundsSnap = await adminDb.collection("rounds").orderBy("createdAt", "desc").get();
+  const rounds: RoundOption[] = roundsSnap.docs.map((d) => ({
+    id: d.id,
+    name: d.data().name as string,
+    status: d.data().status as string,
+  }));
+
+  const selectedRound =
+    (requestedRoundId && rounds.find((r) => r.id === requestedRoundId)) ||
+    rounds.find((r) => r.status === "진행중") ||
+    null;
+  const isPastRound = selectedRound ? selectedRound.status !== "진행중" : false;
+  const selectedRoundId = selectedRound?.id ?? null;
 
   // regionId만으로 조회한 뒤 roundId는 메모리에서 거른다 — regionId+roundId
   // 복합 인덱스가 없어도 되게끔(Firestore 콘솔에서 인덱스를 새로 만들
@@ -31,8 +51,8 @@ export default async function HqRegionPage({
     .where("regionId", "==", regionId)
     .orderBy("createdAt", "desc")
     .get();
-  const itemsSnap = activeRoundId
-    ? { docs: itemsSnapAll.docs.filter((d) => d.data().roundId === activeRoundId) }
+  const itemsSnap = selectedRoundId
+    ? { docs: itemsSnapAll.docs.filter((d) => d.data().roundId === selectedRoundId) }
     : null;
 
   const branchIds = new Set<string>();
@@ -103,17 +123,17 @@ export default async function HqRegionPage({
     actionHqClosed: false,
     directivePublished: false,
   };
-  if (activeRoundId) {
+  if (selectedRoundId) {
     const codesSnap = await adminDb
       .collection("directiveCodes")
-      .where("roundId", "==", activeRoundId)
+      .where("roundId", "==", selectedRoundId)
       .orderBy("orderNo", "asc")
       .get();
     activeCodes = codesSnap.docs.map((d) => {
       const data = d.data();
       return { id: d.id, label: data.label, description: data.description ?? null, requiresAction: data.requiresAction };
     });
-    const fullLock = await getRegionLockStatus(activeRoundId, regionId);
+    const fullLock = await getRegionLockStatus(selectedRoundId, regionId);
     lock = {
       submissionRegionClosed: fullLock.submissionRegionClosed,
       actionRegionClosed: fullLock.actionRegionClosed,
@@ -131,6 +151,9 @@ export default async function HqRegionPage({
       branches={branches}
       directiveCodes={activeCodes}
       initialLock={lock}
+      rounds={rounds}
+      selectedRoundId={selectedRoundId}
+      isPastRound={isPastRound}
     />
   );
 }
