@@ -10,9 +10,12 @@
     "seed:regions": "dotenv -e .env.local -- node scripts/seedRegions.mjs",
     "seed:branches": "dotenv -e .env.local -- node scripts/seedBranches.mjs",
     "seed:directives": "dotenv -e .env.local -- node scripts/seedDirectiveCodes.mjs",
+    "seed:demoregion": "dotenv -e .env.local -- node scripts/seedDemoRegion.mjs",
+    "remove:demoregion": "dotenv -e .env.local -- node scripts/removeDemoRegion.mjs",
     "build:linksppt": "dotenv -e .env.local -- node scripts/buildLinksPpt.mjs",
     "build:manualsppt": "dotenv -e .env.local -- node scripts/buildManualsPpt.mjs",
-    "build:roundpdf": "dotenv -e .env.local -- node scripts/buildRoundPdf.mjs"
+    "build:roundpdf": "dotenv -e .env.local -- node scripts/buildRoundPdf.mjs",
+    "edit:syncserver": "node scripts/editStateServer.mjs"
   },
   "dependencies": {
     "browser-image-compression": "^2.0.2",
