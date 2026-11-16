@@ -612,9 +612,11 @@ function RegionLinksSection({ regions }: { regions: Region[] }) {
     <section className="bg-white border rounded-lg p-4 space-y-3">
       <h2 className="font-bold">지역본부별 공유 링크</h2>
       <p className="text-sm text-gray-500">
-        지역본부마다 아래 두 링크를 각각 전달해주세요. 지점/대리점용 링크로 들어오면 해당
+        지역본부마다 아래 세 링크를 각각 전달해주세요. 지점/대리점용 링크로 들어오면 해당
         지역본부 소속 지점/대리점 목록이, 지역본부용 링크로 들어오면 해당 지역본부 전체
-        현황과 &quot;전체 제출&quot; 버튼이 보입니다. 로그인은 필요 없으며, 링크 자체가 접근 권한입니다.
+        현황과 &quot;전체 제출&quot; 버튼이, 본사용 링크로 들어오면 해당 지역본부의 전체
+        현황을 본사 권한(조치 지침 배포 등)으로 볼 수 있습니다. 로그인은 필요 없으며, 링크
+        자체가 접근 권한입니다.
       </p>
       <input
         value={baseUrl}
@@ -632,6 +634,7 @@ function RegionLinksSection({ regions }: { regions: Region[] }) {
               <th className="text-left px-3 py-2">지역본부</th>
               <th className="text-left px-3 py-2">지점/대리점용 링크</th>
               <th className="text-left px-3 py-2">지역본부용 링크</th>
+              <th className="text-left px-3 py-2">본사용 링크</th>
             </tr>
           </thead>
           <tbody>
@@ -646,6 +649,11 @@ function RegionLinksSection({ regions }: { regions: Region[] }) {
                 <td className="px-3 py-2">
                   <a href={regionLinkFor(r.id)} target="_blank" className="text-blue-600 underline break-all">
                     {regionLinkFor(r.id)}
+                  </a>
+                </td>
+                <td className="px-3 py-2">
+                  <a href={hqLinkFor(r.id)} target="_blank" className="text-blue-600 underline break-all">
+                    {hqLinkFor(r.id)}
                   </a>
                 </td>
               </tr>
