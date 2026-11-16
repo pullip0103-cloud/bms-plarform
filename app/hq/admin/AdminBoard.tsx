@@ -589,12 +589,16 @@ function RegionLinksSection({ regions }: { regions: Region[] }) {
   function regionLinkFor(regionId: string) {
     return `${base()}/r/${regionId}`;
   }
+  function hqLinkFor(regionId: string) {
+    return `${base()}/hq/${regionId}`;
+  }
 
   function downloadLinkList() {
     const lines = regions.map(
-      (r) => `${r.name}\t지점/대리점용: ${branchLinkFor(r.id)}\t지역본부용: ${regionLinkFor(r.id)}`
+      (r) =>
+        `${r.name}\t지점/대리점용: ${branchLinkFor(r.id)}\t지역본부용: ${regionLinkFor(r.id)}\t본사용: ${hqLinkFor(r.id)}`
     );
-    const content = "지역본부\t지점/대리점용 링크\t지역본부용 링크\n" + lines.join("\n");
+    const content = "지역본부\t지점/대리점용 링크\t지역본부용 링크\t본사용 링크\n" + lines.join("\n");
     const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");

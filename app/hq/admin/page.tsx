@@ -23,18 +23,22 @@ export default async function AdminPage() {
   const regions = regionsSnap.docs.map((d) => ({ id: d.id, name: d.data().name as string }));
   const regionNameById = new Map(regions.map((r) => [r.id, r.name]));
 
-  const branches: AdminBranch[] = branchesSnap.docs.map((d) => {
-    const data = d.data();
-    return {
-      id: d.id,
-      name: data.name,
-      branchType: data.branchType,
-      isActive: data.isActive,
-      regionId: data.regionId,
-      regionName: regionNameById.get(data.regionId) ?? "",
-      needsTypeReview: !!data.needsTypeReview,
-    };
-  });
+  // 삭제(isActive=false)된 지점/대리점은 "지점/대리점 관리" 목록에서 제외한다
+  // — 삭제 버튼을 눌러도 소프트삭제라 계속 보이는 것처럼 혼란을 주던 버그.
+  const branches: AdminBranch[] = branchesSnap.docs
+    .map((d) => {
+      const data = d.data();
+      return {
+        id: d.id,
+        name: data.name,
+        branchType: data.branchType,
+        isActive: data.isActive,
+        regionId: data.regionId,
+        regionName: regionNameById.get(data.regionId) ?? "",
+        needsTypeReview: !!data.needsTypeReview,
+      };
+    })
+    .filter((b) => b.isActive);
 
   const activeRound = rounds.find((r) => r.status === "진행중") ?? null;
   let codes: { id: string; orderNo: number; label: string; description: string | null; requiresAction: boolean }[] = [];
