@@ -2,16 +2,20 @@ import { connection } from "next/server";
 import { adminDb } from "@/lib/firebase/admin";
 import { getRegionLockStatus } from "@/lib/regionLock";
 import { getCompletedBranchIds } from "@/lib/branchLock";
+import { fetchAllActiveBranches } from "@/lib/activeBranches";
 import AdminBoard, { type AdminBranch, type RegionStatus } from "./AdminBoard";
 
 export const instant = false;
 
 export default async function AdminPage() {
   await connection();
-  const [roundsSnap, regionsSnap, branchesSnap] = await Promise.all([
+  // 지점/대리점용(/s)·지역본부용(/r)·본사용(/hq/{regionId})과 동일한
+  // 헬퍼(lib/activeBranches.ts)로 조회해, 네 화면이 항상 같은 기준(isActive==true)을
+  // 쓰게 한다 — 여기서만 필터를 깜빡해 삭제된 지점이 계속 보이던 버그가 있었다.
+  const [roundsSnap, regionsSnap, branchDocs] = await Promise.all([
     adminDb.collection("rounds").orderBy("createdAt", "desc").get(),
     adminDb.collection("regions").orderBy("name").get(),
-    adminDb.collection("branches").orderBy("name").get(),
+    fetchAllActiveBranches(),
   ]);
 
   // Firestore Timestamp(createdAt 등)는 클래스 인스턴스라 서버->클라이언트 컴포넌트로
@@ -23,22 +27,18 @@ export default async function AdminPage() {
   const regions = regionsSnap.docs.map((d) => ({ id: d.id, name: d.data().name as string }));
   const regionNameById = new Map(regions.map((r) => [r.id, r.name]));
 
-  // 삭제(isActive=false)된 지점/대리점은 "지점/대리점 관리" 목록에서 제외한다
-  // — 삭제 버튼을 눌러도 소프트삭제라 계속 보이는 것처럼 혼란을 주던 버그.
-  const branches: AdminBranch[] = branchesSnap.docs
-    .map((d) => {
-      const data = d.data();
-      return {
-        id: d.id,
-        name: data.name,
-        branchType: data.branchType,
-        isActive: data.isActive,
-        regionId: data.regionId,
-        regionName: regionNameById.get(data.regionId) ?? "",
-        needsTypeReview: !!data.needsTypeReview,
-      };
-    })
-    .filter((b) => b.isActive);
+  const branches: AdminBranch[] = branchDocs.map((d) => {
+    const data = d.data();
+    return {
+      id: d.id,
+      name: data.name,
+      branchType: data.branchType,
+      isActive: data.isActive,
+      regionId: data.regionId,
+      regionName: regionNameById.get(data.regionId) ?? "",
+      needsTypeReview: !!data.needsTypeReview,
+    };
+  });
 
   const activeRound = rounds.find((r) => r.status === "진행중") ?? null;
   let codes: { id: string; orderNo: number; label: string; description: string | null; requiresAction: boolean }[] = [];
@@ -61,11 +61,10 @@ export default async function AdminPage() {
       getCompletedBranchIds(activeRound.id, null, "submission"),
       getCompletedBranchIds(activeRound.id, null, "action"),
     ]);
-    const activeBranches = branches.filter((b) => b.isActive);
     regionStatuses = await Promise.all(
       regions.map(async (r) => {
         const lock = await getRegionLockStatus(activeRound.id, r.id);
-        const regionBranches = activeBranches
+        const regionBranches = branches
           .filter((b) => b.regionId === r.id)
           .map((b) => ({
             id: b.id,

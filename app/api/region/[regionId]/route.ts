@@ -3,6 +3,7 @@ import { resolveRegion } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { getRegionLockStatus } from "@/lib/regionLock";
 import { getCompletedBranchIds } from "@/lib/branchLock";
+import { activeBranchesByRegionQuery } from "@/lib/activeBranches";
 
 // "새로고침" 버튼이 호출하는 데이터 전용 엔드포인트. app/r/[regionId]/page.tsx의
 // 조회 로직을 그대로 옮긴 것 — 새로고침 시 location.reload() 대신 이걸 fetch해서
@@ -46,12 +47,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ regi
 
   const [itemsSnapAll, branchesSnap] = await Promise.all([
     adminDb.collection("items").where("regionId", "==", regionId).orderBy("createdAt", "desc").get(),
-    adminDb
-      .collection("branches")
-      .where("regionId", "==", regionId)
-      .where("isActive", "==", true)
-      .orderBy("name")
-      .get(),
+    activeBranchesByRegionQuery(regionId).get(),
   ]);
   const itemsSnap = selectedRound
     ? { docs: itemsSnapAll.docs.filter((d) => d.data().roundId === selectedRound.id) }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase/admin";
 import { resolveRegion } from "@/lib/authz";
 import { getRegionLockStatus } from "@/lib/regionLock";
+import { activeBranchesByRegionQuery } from "@/lib/activeBranches";
 
 // "새로고침" 버튼이 호출하는 데이터 전용 엔드포인트. app/hq/[regionId]/page.tsx의
 // 조회 로직을 그대로 옮긴 것(지점 선택 드롭다운을 위해 branches도 함께 내려준다) —
@@ -61,12 +62,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ regi
   const [branchDocs, codeDocs, activeBranchesSnap] = await Promise.all([
     Promise.all(Array.from(branchIds).map((id) => adminDb.collection("branches").doc(id).get())),
     Promise.all(Array.from(codeIds).map((id) => adminDb.collection("directiveCodes").doc(id).get())),
-    adminDb
-      .collection("branches")
-      .where("regionId", "==", regionId)
-      .where("isActive", "==", true)
-      .orderBy("name")
-      .get(),
+    activeBranchesByRegionQuery(regionId).get(),
   ]);
   const branchById = new Map(branchDocs.filter((d) => d.exists).map((d) => [d.id, d.data()!]));
   const codeById = new Map(codeDocs.filter((d) => d.exists).map((d) => [d.id, d.data()!]));

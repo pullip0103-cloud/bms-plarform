@@ -4,6 +4,7 @@ import { resolveRegion } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { getRegionLockStatus } from "@/lib/regionLock";
 import { getCompletedBranchIds } from "@/lib/branchLock";
+import { activeBranchesByRegionQuery } from "@/lib/activeBranches";
 import RegionBoard, { type RegionItem, type RegionBranch, type RoundOption } from "./RegionBoard";
 
 export const instant = false;
@@ -58,12 +59,7 @@ export default async function RegionPage({
   // 필요가 없음). 지역본부당 항목 수가 수백~수천 건 수준이라 괜찮다.
   const [itemsSnapAll, branchesSnap] = await Promise.all([
     adminDb.collection("items").where("regionId", "==", regionId).orderBy("createdAt", "desc").get(),
-    adminDb
-      .collection("branches")
-      .where("regionId", "==", regionId)
-      .where("isActive", "==", true)
-      .orderBy("name")
-      .get(),
+    activeBranchesByRegionQuery(regionId).get(),
   ]);
   const itemsSnap = selectedRound
     ? { docs: itemsSnapAll.docs.filter((d) => d.data().roundId === selectedRound.id) }

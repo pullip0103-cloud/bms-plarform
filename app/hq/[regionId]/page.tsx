@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import { resolveRegion } from "@/lib/authz";
 import { adminDb } from "@/lib/firebase/admin";
 import { getRegionLockStatus } from "@/lib/regionLock";
+import { activeBranchesByRegionQuery } from "@/lib/activeBranches";
 import HqRegionBoard, {
   type HqItem,
   type DirectiveCodeOption,
@@ -79,12 +80,7 @@ export default async function HqRegionPage({
   const [branchDocs, codeDocs, activeBranchesSnap] = await Promise.all([
     Promise.all(Array.from(branchIds).map((id) => adminDb.collection("branches").doc(id).get())),
     Promise.all(Array.from(codeIds).map((id) => adminDb.collection("directiveCodes").doc(id).get())),
-    adminDb
-      .collection("branches")
-      .where("regionId", "==", regionId)
-      .where("isActive", "==", true)
-      .orderBy("name")
-      .get(),
+    activeBranchesByRegionQuery(regionId).get(),
   ]);
   const branchById = new Map(branchDocs.filter((d) => d.exists).map((d) => [d.id, d.data()!]));
   const codeById = new Map(codeDocs.filter((d) => d.exists).map((d) => [d.id, d.data()!]));
