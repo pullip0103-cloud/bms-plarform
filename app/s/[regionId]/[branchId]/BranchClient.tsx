@@ -9,6 +9,8 @@ import { DERIVED_STATE_LABEL, DERIVED_STATE_BADGE_COLOR } from "@/lib/constants"
 import { deriveItemState } from "@/lib/itemProgress";
 import { TACTILE_BUTTON } from "@/lib/tactileButton";
 import ScreenBadge from "@/app/components/ScreenBadge";
+import CameraCapture from "@/app/components/CameraCapture";
+import { isKakaoInAppBrowser } from "@/lib/inAppBrowser";
 
 type Item = {
   id: string;
@@ -162,6 +164,11 @@ export default function BranchClient({
   return (
     <div className="min-h-screen bg-gray-50">
       <ScreenBadge label="지점/대리점용" />
+      {isKakaoInAppBrowser() && (
+        <p className="bg-amber-100 border-b border-amber-300 text-amber-900 text-sm font-medium text-center px-3 py-2">
+          카카오톡 안에서는 사진 촬영이 원활하지 않을 수 있습니다. 우측 상단 메뉴에서 &quot;다른 브라우저로 열기&quot;를 선택해주세요.
+        </p>
+      )}
       <header className="bg-white border-b px-4 md:px-6 py-4 sticky top-0 z-10 space-y-3">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -705,6 +712,10 @@ function NewItemForm({
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
+  const [showCamera, setShowCamera] = useState(false);
+  // getUserMedia가 실패한 기기/브라우저에서는 이후로 계속 기존 네이티브
+  // input(capture="environment") 방식으로 폴백한다 — 이게 핵심 안전장치다.
+  const [cameraUnavailable, setCameraUnavailable] = useState(false);
 
   async function submit() {
     if (files.length === 0) {
@@ -741,21 +752,31 @@ function NewItemForm({
         <div>
           <p className="text-base font-medium mb-1">사진</p>
           <div className="flex gap-2">
-            <label className="flex-1">
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                multiple
-                className="hidden"
-                onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
-              />
-              <span
-                className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
+            {cameraUnavailable ? (
+              <label className="flex-1">
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => setFiles((prev) => [...prev, ...Array.from(e.target.files ?? [])])}
+                />
+                <span
+                  className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
+                >
+                  사진 촬영
+                </span>
+              </label>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowCamera(true)}
+                className={`${TACTILE_BUTTON} flex-1 text-center bg-blue-600 text-white py-4 text-base`}
               >
                 사진 촬영
-              </span>
-            </label>
+              </button>
+            )}
             <label className="flex-1">
               <input
                 type="file"
@@ -771,6 +792,7 @@ function NewItemForm({
               </span>
             </label>
           </div>
+          <p className="text-sm text-gray-400 mt-1">선택 화면에서 &quot;내 파일&quot; 또는 &quot;갤러리&quot;를 선택해주세요</p>
           {files.length > 0 && (
             <p className="text-sm text-gray-500 mt-1">{files.length}장 선택됨</p>
           )}
@@ -780,6 +802,15 @@ function NewItemForm({
             </p>
           )}
         </div>
+
+        {showCamera && (
+          <CameraCapture
+            multiple
+            onCapture={(file) => setFiles((prev) => [...prev, file])}
+            onClose={() => setShowCamera(false)}
+            onUnavailable={() => setCameraUnavailable(true)}
+          />
+        )}
 
         <div>
           <p className="text-base font-medium mb-1">비고 (선택)</p>
@@ -826,6 +857,8 @@ function ActionPhotoForm({
   const [file, setFile] = useState<File | null>(null);
   const [actionNote, setActionNote] = useState("");
   const [busy, setBusy] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraUnavailable, setCameraUnavailable] = useState(false);
 
   async function submit() {
     if (!file) {
@@ -857,20 +890,30 @@ function ActionPhotoForm({
         <div>
           <p className="text-base font-medium mb-1">사진</p>
           <div className="flex gap-2">
-            <label className="flex-1">
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                className="hidden"
-                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-              />
-              <span
-                className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
+            {cameraUnavailable ? (
+              <label className="flex-1">
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  className="hidden"
+                  onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                />
+                <span
+                  className={`${TACTILE_BUTTON} inline-block w-full text-center bg-blue-600 text-white py-4 text-base`}
+                >
+                  사진 촬영
+                </span>
+              </label>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowCamera(true)}
+                className={`${TACTILE_BUTTON} flex-1 text-center bg-blue-600 text-white py-4 text-base`}
               >
                 사진 촬영
-              </span>
-            </label>
+              </button>
+            )}
             <label className="flex-1">
               <input
                 type="file"
@@ -885,8 +928,17 @@ function ActionPhotoForm({
               </span>
             </label>
           </div>
+          <p className="text-sm text-gray-400 mt-1">선택 화면에서 &quot;내 파일&quot; 또는 &quot;갤러리&quot;를 선택해주세요</p>
           {file && <p className="text-sm text-gray-500 mt-1">1장 선택됨</p>}
         </div>
+
+        {showCamera && (
+          <CameraCapture
+            onCapture={(f) => setFile(f)}
+            onClose={() => setShowCamera(false)}
+            onUnavailable={() => setCameraUnavailable(true)}
+          />
+        )}
 
         <div>
           <p className="text-base font-medium mb-1">비고 (선택)</p>
