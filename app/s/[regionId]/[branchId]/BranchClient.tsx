@@ -805,7 +805,6 @@ function NewItemForm({
 
         {showCamera && (
           <CameraCapture
-            multiple
             onCapture={(file) => setFiles((prev) => [...prev, file])}
             onClose={() => setShowCamera(false)}
             onUnavailable={() => setCameraUnavailable(true)}

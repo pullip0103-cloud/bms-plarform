@@ -18,17 +18,14 @@ export default function CameraCapture({
   onCapture,
   onClose,
   onUnavailable,
-  multiple = false,
 }: {
   onCapture: (file: File) => void;
   onClose: () => void;
   onUnavailable: () => void;
-  multiple?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const [ready, setReady] = useState(false);
-  const [justCaptured, setJustCaptured] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -89,12 +86,8 @@ export default function CameraCapture({
         if (!blob) return;
         const file = new File([blob], `capture-${Date.now()}.jpg`, { type: "image/jpeg" });
         onCapture(file);
-        if (multiple) {
-          setJustCaptured(true);
-        } else {
-          stopStream();
-          onClose();
-        }
+        stopStream();
+        onClose();
       },
       "image/jpeg",
       0.92
@@ -126,38 +119,18 @@ export default function CameraCapture({
           )}
         </div>
 
-        {justCaptured ? (
-          <div className="space-y-3">
-            <p className="text-base text-green-700 font-medium">사진이 추가되었습니다.</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setJustCaptured(false)}
-                className={`${TACTILE_BUTTON} flex-1 border bg-white py-3 text-base`}
-              >
-                계속 촬영
-              </button>
-              <button
-                onClick={handleClose}
-                className={`${TACTILE_BUTTON} flex-1 bg-blue-600 text-white py-3 text-base`}
-              >
-                완료
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="flex gap-2 pt-2">
-            <button onClick={handleClose} className={`${TACTILE_BUTTON} flex-1 border bg-white py-3 text-base`}>
-              취소
-            </button>
-            <button
-              onClick={handleCapture}
-              disabled={!ready}
-              className={`${TACTILE_BUTTON} flex-1 bg-blue-600 text-white py-3 text-base disabled:opacity-50`}
-            >
-              촬영
-            </button>
-          </div>
-        )}
+        <div className="flex gap-2 pt-2">
+          <button onClick={handleClose} className={`${TACTILE_BUTTON} flex-1 border bg-white py-3 text-base`}>
+            취소
+          </button>
+          <button
+            onClick={handleCapture}
+            disabled={!ready}
+            className={`${TACTILE_BUTTON} flex-1 bg-blue-600 text-white py-3 text-base disabled:opacity-50`}
+          >
+            촬영
+          </button>
+        </div>
       </div>
     </div>
   );
