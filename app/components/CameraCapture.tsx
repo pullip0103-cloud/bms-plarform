@@ -29,15 +29,23 @@ export default function CameraCapture({
 
   useEffect(() => {
     let active = true;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     async function start() {
       try {
         if (!navigator.mediaDevices?.getUserMedia) {
           throw new Error("getUserMedia unsupported");
         }
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
+        // 카카오톡 등 일부 인앱브라우저 WebView는 getUserMedia를 거부/에러
+        // 없이 그냥 영원히 응답하지 않는 경우가 있다("카메라를 켜는 중..."에서
+        // 멈춤). 이 경우를 실패로 간주하도록 타임아웃을 둔다.
+        const stream = await new Promise<MediaStream>((resolve, reject) => {
+          timeoutId = setTimeout(() => reject(new Error("getUserMedia timeout")), 6000);
+          navigator.mediaDevices
+            .getUserMedia({ video: { facingMode: "environment" } })
+            .then(resolve, reject);
         });
+        if (timeoutId) clearTimeout(timeoutId);
         if (!active) {
           stream.getTracks().forEach((t) => t.stop());
           return;
@@ -48,8 +56,10 @@ export default function CameraCapture({
         }
         setReady(true);
       } catch {
+        if (timeoutId) clearTimeout(timeoutId);
         if (!active) return;
-        // 미지원/권한거부/장치없음 등 모든 실패 케이스를 폴백으로 처리한다.
+        // 미지원/권한거부/장치없음/응답없음(타임아웃) 등 모든 실패 케이스를
+        // 폴백으로 처리한다.
         onUnavailable();
         onClose();
       }
@@ -59,6 +69,7 @@ export default function CameraCapture({
 
     return () => {
       active = false;
+      if (timeoutId) clearTimeout(timeoutId);
       streamRef.current?.getTracks().forEach((t) => t.stop());
       streamRef.current = null;
     };
