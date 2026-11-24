@@ -87,6 +87,12 @@ export default function RegionBoard({
   const incompleteAction = branches.filter((b) => !b.actionCompleted);
   const allSubmissionComplete = incompleteSubmission.length === 0;
   const allActionComplete = incompleteAction.length === 0;
+  // 미완료 목록을 지점/대리점으로 나눠 따로 보여준다 — 섞여 있으면 어느
+  // 유형이 몇 곳 남았는지 한눈에 파악하기 어렵기 때문.
+  const incompleteSubmissionBranches = incompleteSubmission.filter((b) => b.branchType === "지점");
+  const incompleteSubmissionDealers = incompleteSubmission.filter((b) => b.branchType === "대리점");
+  const incompleteActionBranches = incompleteAction.filter((b) => b.branchType === "지점");
+  const incompleteActionDealers = incompleteAction.filter((b) => b.branchType === "대리점");
   // 본사가 조치 지침을 배정하면(directiveCode가 보이면) 그때부터 조치결과
   // 입력 버튼/경고를 "추가로" 보여준다 — 전부 "유지"처럼 조치가 필요 없는
   // 지침이어도 소속 지점/대리점이 조치결과 입력을 마감할 수 있어야 하므로
@@ -293,24 +299,42 @@ export default function RegionBoard({
         )}
 
         {!isPastRound && !lock.submissionHqClosed && !lock.submissionRegionClosed && incompleteSubmission.length > 0 && (
-          <div className="border border-amber-200 bg-amber-50 rounded-lg p-3">
-            <p className="text-base font-medium text-amber-800 mb-1">
+          <div className="border border-amber-200 bg-amber-50 rounded-lg p-3 space-y-2">
+            <p className="text-base font-medium text-amber-800">
               아직 제작물 전송을 마감하지 않은 지점/대리점 ({incompleteSubmission.length}곳)
             </p>
-            <p className="text-sm text-amber-700">
-              {incompleteSubmission.map((b) => b.name).join(", ")}
-            </p>
+            {incompleteSubmissionBranches.length > 0 && (
+              <p className="text-sm text-amber-700">
+                <span className="font-medium">지점 ({incompleteSubmissionBranches.length}곳)</span>{" "}
+                {incompleteSubmissionBranches.map((b) => b.name).join(", ")}
+              </p>
+            )}
+            {incompleteSubmissionDealers.length > 0 && (
+              <p className="text-sm text-amber-700">
+                <span className="font-medium">대리점 ({incompleteSubmissionDealers.length}곳)</span>{" "}
+                {incompleteSubmissionDealers.map((b) => b.name).join(", ")}
+              </p>
+            )}
           </div>
         )}
 
         {!isPastRound && directiveStageStarted && !lock.actionHqClosed && !lock.actionRegionClosed && incompleteAction.length > 0 && (
-          <div className="border border-amber-200 bg-amber-50 rounded-lg p-3">
-            <p className="text-base font-medium text-amber-800 mb-1">
+          <div className="border border-amber-200 bg-amber-50 rounded-lg p-3 space-y-2">
+            <p className="text-base font-medium text-amber-800">
               아직 조치결과 입력을 마감하지 않은 지점/대리점 ({incompleteAction.length}곳)
             </p>
-            <p className="text-sm text-amber-700">
-              {incompleteAction.map((b) => b.name).join(", ")}
-            </p>
+            {incompleteActionBranches.length > 0 && (
+              <p className="text-sm text-amber-700">
+                <span className="font-medium">지점 ({incompleteActionBranches.length}곳)</span>{" "}
+                {incompleteActionBranches.map((b) => b.name).join(", ")}
+              </p>
+            )}
+            {incompleteActionDealers.length > 0 && (
+              <p className="text-sm text-amber-700">
+                <span className="font-medium">대리점 ({incompleteActionDealers.length}곳)</span>{" "}
+                {incompleteActionDealers.map((b) => b.name).join(", ")}
+              </p>
+            )}
           </div>
         )}
 
