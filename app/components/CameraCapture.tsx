@@ -14,6 +14,24 @@ import { TACTILE_BUTTON } from "@/lib/tactileButton";
  * 있으므로, 그 경우 `onUnavailable`을 호출해 부모가 기존 네이티브 input
  * 방식으로 즉시 폴백하도록 한다 — 이게 핵심 안전장치다.
  */
+
+// 촬영 1장마다 모달이 닫히고 등록 화면으로 돌아가는 구조라, 다음 사진을
+// 찍으려고 이 컴포넌트가 다시 마운트될 때마다 getUserMedia를 재호출하면
+// 카카오톡 등 일부 인앱브라우저가 매번 카메라 허용 팝업을 다시 띄운다.
+// 같은 등록 화면(부모 폼)이 열려있는 동안은 스트림을 캐시해 재사용하고,
+// 등록 화면 자체가 닫힐 때(releaseCameraStream)만 완전히 끈다.
+let cachedStream: MediaStream | null = null;
+
+export function releaseCameraStream() {
+  cachedStream?.getTracks().forEach((t) => t.stop());
+  cachedStream = null;
+}
+
+function isLive(stream: MediaStream | null): stream is MediaStream {
+  const track = stream?.getVideoTracks()[0];
+  return !!track && track.readyState === "live";
+}
+
 export default function CameraCapture({
   onCapture,
   onClose,
@@ -33,6 +51,18 @@ export default function CameraCapture({
 
     async function start() {
       try {
+        // 같은 등록 화면에서 이전에 열어둔 스트림이 아직 살아있으면 그대로
+        // 재사용한다 — 매 촬영마다 getUserMedia를 재호출하면 카카오톡 등
+        // 일부 인앱브라우저가 매번 카메라 허용 팝업을 다시 띄우기 때문.
+        if (isLive(cachedStream)) {
+          streamRef.current = cachedStream;
+          if (videoRef.current) {
+            videoRef.current.srcObject = cachedStream;
+          }
+          setReady(true);
+          return;
+        }
+
         if (!navigator.mediaDevices?.getUserMedia) {
           throw new Error("getUserMedia unsupported");
         }
@@ -50,6 +80,7 @@ export default function CameraCapture({
           stream.getTracks().forEach((t) => t.stop());
           return;
         }
+        cachedStream = stream;
         streamRef.current = stream;
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -70,16 +101,13 @@ export default function CameraCapture({
     return () => {
       active = false;
       if (timeoutId) clearTimeout(timeoutId);
-      streamRef.current?.getTracks().forEach((t) => t.stop());
+      // 스트림 자체는 여기서 끄지 않는다 — 같은 등록 화면에서 다음 촬영에
+      // 재사용하기 위해 cachedStream으로 유지한다. 등록 화면이 완전히 닫힐
+      // 때는 부모가 releaseCameraStream()을 호출해 끈다.
       streamRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- 마운트 시 1회만 카메라를 연다
   }, []);
-
-  function stopStream() {
-    streamRef.current?.getTracks().forEach((t) => t.stop());
-    streamRef.current = null;
-  }
 
   function handleCapture() {
     const video = videoRef.current;
@@ -97,7 +125,6 @@ export default function CameraCapture({
         if (!blob) return;
         const file = new File([blob], `capture-${Date.now()}.jpg`, { type: "image/jpeg" });
         onCapture(file);
-        stopStream();
         onClose();
       },
       "image/jpeg",
@@ -106,7 +133,6 @@ export default function CameraCapture({
   }
 
   function handleClose() {
-    stopStream();
     onClose();
   }
 

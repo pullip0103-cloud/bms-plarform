@@ -9,7 +9,7 @@ import { DERIVED_STATE_LABEL, DERIVED_STATE_BADGE_COLOR } from "@/lib/constants"
 import { deriveItemState } from "@/lib/itemProgress";
 import { TACTILE_BUTTON } from "@/lib/tactileButton";
 import ScreenBadge from "@/app/components/ScreenBadge";
-import CameraCapture from "@/app/components/CameraCapture";
+import CameraCapture, { releaseCameraStream } from "@/app/components/CameraCapture";
 import { isKakaoInAppBrowser } from "@/lib/inAppBrowser";
 
 type Item = {
@@ -166,7 +166,7 @@ export default function BranchClient({
       <ScreenBadge label="지점/대리점용" />
       {isKakaoInAppBrowser() && (
         <p className="bg-amber-100 border-b border-amber-300 text-amber-900 text-sm font-medium text-center px-3 py-2">
-          카카오톡 안에서는 사진 촬영이 원활하지 않을 수 있습니다. 우측 상단 메뉴에서 &quot;다른 브라우저로 열기&quot;를 선택해주세요.
+          카카오톡 안에서는 사진 촬영이 원활하지 않을 수 있습니다. 우측 상단 또는 우측 하단 메뉴에서 &quot;다른 브라우저로 열기&quot;를 선택해주세요.
         </p>
       )}
       <header className="bg-white border-b px-4 md:px-6 py-4 sticky top-0 z-10 space-y-3">
@@ -717,6 +717,11 @@ function NewItemForm({
   // input(capture="environment") 방식으로 폴백한다 — 이게 핵심 안전장치다.
   const [cameraUnavailable, setCameraUnavailable] = useState(false);
 
+  // 이 등록 화면이 완전히 닫힐 때(취소 또는 등록 완료)만 카메라 스트림을
+  // 끈다 — 화면이 열려있는 동안은 CameraCapture가 같은 스트림을 재사용해
+  // 매 촬영마다 권한 팝업이 다시 뜨지 않게 한다.
+  useEffect(() => releaseCameraStream, []);
+
   async function submit() {
     if (files.length === 0) {
       alert("사진을 먼저 촬영하거나 갤러리에서 선택해주세요.");
@@ -858,6 +863,8 @@ function ActionPhotoForm({
   const [busy, setBusy] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [cameraUnavailable, setCameraUnavailable] = useState(false);
+
+  useEffect(() => releaseCameraStream, []);
 
   async function submit() {
     if (!file) {
